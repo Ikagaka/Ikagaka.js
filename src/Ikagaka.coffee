@@ -1,5 +1,9 @@
-console.log "hoge"
-class Ikagaka
-	constructor: (element)->
-	load: (url, callback)->
-	unload: ->
+class this.Ikagaka
+	constructor: ->
+		@nameds = {}
+
+	addNamed: (id, named)->
+		@nameds[id] = named
+
+	named: (id)->
+		@nameds[id]

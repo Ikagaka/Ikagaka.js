@@ -10,6 +10,9 @@ Features
 
 Dependence
 ----------
+* https://github.com/jashkenas/coffee-script
+* https://github.com/edvakf/MMD.js
+* http://www6.atwiki.jp/vpvpwiki/pages/204.html
 
 License
 ----------
