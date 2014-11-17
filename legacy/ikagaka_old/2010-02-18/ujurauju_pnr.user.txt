@@ -1,0 +1,671 @@
+// ==UserScript==
+// @name           UJU-Ujura and Uju
+// @namespace      http://home.384.jp/evidence/lab/uju/
+// @description    User Javascript for Ukagaka - Ghost "Ujura and Uju"
+// @version        1.0.2
+// @include        http://*
+// @include        https://*
+// ==/UserScript==
+/**
+ * This script is based on SUKURI.
+ * @see http://www.sepia.dti.ne.jp/macrobiotica/
+ */
+(function(){
+var VERSION     = "1.0.2";
+var LAST_UPDATE = "2009.06.27";
+
+sukuriInit();
+
+/**
+ * Number of Charactor
+ */
+function getCharNum(){
+	return 2;
+}
+
+/**
+ * Interval of AITalk
+ */
+function getTalkInterval(){
+	return 30 * 1000;
+}
+
+/**
+ * Interval of Playing Sakura Script
+ */
+function getScriptInterval(){
+	return 80;
+}
+
+/**
+ * OnBoot
+ */
+function getTalkOnBoot(){
+	var talk = [
+		 "\\0\\s[0]&#12358;&#12376;&#12421;&#12425;&#12391;&#12377;&#12290;\\w8\\w8\\1\\s[10]&#12358;&#12376;&#12421;&#12358;&#12391;&#12377;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\1\\s[10]&#12527;&#12479;&#12471;&#12495; \\w8&#12468;&#12540;&#12473;&#12488; \\w8&#12454;&#12472;&#12517;&#12454;\\w8\\w8\\0\\s[0]&#12467;&#12531;&#12468;&#12488;&#12514;&#12520;&#12525;&#12471;&#12463;&#8230;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\0\\s[0]&#12362;&#21628;&#12403;&#12391;&#12375;&#12423;&#12358;&#12363;&#12372;&#20027;&#20154;&#12373;&#12414;&#12290;\\w8\\w8\\1\\s[10]&#20284;&#21512;&#12431;&#12394;&#12356;&#12475;&#12522;&#12501;&#12399;&#12420;&#12417;&#12394;&#12424;&#12290;\\w8\\w8\\0\\s[1]\\n&#12360;&#12540;&#12289;\\w8&#12363;&#12431;&#12356;&#12356;&#12376;&#12419;&#12435;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\1\\s[10]&#12416;&#8230;&#12289;\\w8" + document.title + "&#12364;&#22909;&#12365;&#12394;&#12398;&#12363;&#65311;\\w8\\w8\\0\\s[1]&#12393;&#12358;&#12384;&#12387;&#12390;&#12356;&#12356;&#12376;&#12419;&#12394;&#12356;&#8230;&#12290;\\w8\\w8\\w8\\w8\\e"
+	];
+	return talk[Math.floor(Math.random() * talk.length)];
+}
+
+/**
+ * OnAITalk
+ */
+function getTalkOnAITalk(){
+	var talk = [
+		 "\\0\\s[0]&#8230;\\w8&#8230;\\w8&#8230;\\w8&#65281;&#65281;\\w8\\w8\\1\\s[10]&#8230;&#12393;&#12358;&#12375;&#12383;&#12398;&#12290;\\w8\\w8\\0\\n\\s[1]&#12414;&#12400;&#12383;&#12365;&#12398;&#32244;&#32722;&#12290;\\w8\\w8\\1\\n&#8230;&#12385;&#12423;&#12387;&#12392;&#38627;&#12375;&#12356;&#12435;&#12384;&#12424;&#12394;&#8230;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\0\\s[0]&#12487;&#12473;&#12463;&#12488;&#12483;&#12503;&#12398;&#19990;&#30028;&#12395;&#12418;&#12508;&#12463;&#12383;&#12385;&#12398;&#20210;&#38291;&#12364;&#12356;&#12427;&#12425;&#12375;&#12424;&#12290;\\w8\\w8\\1\\s[10]&#12360;&#12540;&#12289;\\w8&#12354;&#12435;&#12394;&#29421;&#12356;&#25152;&#12395;&#26286;&#12425;&#12375;&#12390;&#12427;&#22900;&#12394;&#12435;&#12390;&#12356;&#12427;&#12431;&#12369;&#12394;&#12356;&#12424;&#12290;\\w8\\w8\\0\\n\\s[1]&#12381;&#12358;&#12363;&#12394;&#12353;&#8230;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\0\\s[0]&#8230;&#12508;&#12463;&#12383;&#12385;&#12289;\\w8&#12362;&#37034;&#39764;&#12376;&#12419;&#12394;&#12356;&#12391;&#12377;&#12363;&#65311;\\w8\\w8\\1\\s[11]&#12381;&#12398;&#12371;&#12392;&#12395;&#12399;&#35302;&#12428;&#12427;&#12394;&#65281;\\w8\\w8\\w8\\w8\\e"
+		,"\\0\\s[0]&#12508;&#12463;&#12383;&#12385;&#12399;&#12289;JavaScript&#12387;&#12390;&#12356;&#12358;&#35328;&#33865;&#12434;&#20351;&#12387;&#12390;&#21899;&#12387;&#12390;&#12427;&#12435;&#12384;&#12424;&#12290;\\w8\\w8\\1\\s[10]Web&#12502;&#12521;&#12454;&#12470;&#12540;&#12391;&#21205;&#20316;&#12377;&#12427;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;&#35328;&#35486;&#12394;&#12398;&#12373;&#12290;\\w8\\w8\\0\\c\\s[1]&#8230;&#12508;&#12463;&#12289;&#12503;&#12525;&#12464;&#12521;&#12511;&#12531;&#12464;&#12399;&#33510;&#25163;&#12384;&#12424;&#8230;&#12290;\\w8\\w8\\1\\c&#8230;&#12381;&#12398;&#12358;&#12385;&#35504;&#12363;&#12364;&#31777;&#21336;&#12395;&#20351;&#12360;&#12427;&#12424;&#12358;&#12395;&#12375;&#12390;&#12367;&#12428;&#12427;&#12424;&#12289;\\w8&#12365;&#12387;&#12392;&#8230;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\1\\s[10]JavaScript&#12398;&#25991;&#23383;&#21015;&#12391;&#12300;\\\\&#12301;&#12434;&#34920;&#12377;&#12395;&#12399;&#12289;\\w8&#12300;\\\\\\\\&#12301;&#12387;&#12390;&#65298;&#22238;&#26360;&#12363;&#12394;&#12356;&#12392;&#12356;&#12369;&#12394;&#12356;&#12435;&#12384;&#12290;\\w8\\w8\\0\\s[1]&#38754;&#20498;&#12384;&#12397;&#12290;\\w8\\w8\\w8\\w8\\e"
+	];
+	return talk[Math.floor(Math.random() * talk.length)];
+}
+
+/**
+ * OnMouseDoubleClick
+ */
+function getTalkOnMouseDoubleClick(reference){
+	var talk0 = [
+		 "\\0\\s[0]&#12394;&#12435;&#12391;&#12377;&#12363;&#65311;\\n\\q[&#20309;&#12363;&#35441;&#12375;&#12390;,talk]\\n\\q[&#32066;&#20102;,close]\\n\\q[&#20309;&#12391;&#12418;&#12394;&#12356;,Menu_CANCEL]\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\w8\\e"
+	];
+	var talk1 = [
+		 "\\1\\s[10]&#12388;&#12388;&#12367;&#12394;&#12425;&#12358;&#12376;&#12421;&#12425;&#12434;&#12388;&#12388;&#12365;&#12420;&#12290;\\w8\\w8\\w8\\w8\\e"
+		,"\\1\\s[10]&#12513;&#12491;&#12517;&#12540;&#12394;&#12425;&#12358;&#12376;&#12421;&#12358;&#12395;&#38972;&#12435;&#12391;&#12367;&#12384;&#12373;&#12356;&#12290;\\w8\\w8\\w8\\w8\\e"
+	];
+	switch (reference[3]) {
+		case 0:
+			return talk0[Math.floor(Math.random() * talk0.length)];
+		case 1:
+			return talk1[Math.floor(Math.random() * talk1.length)];
+		default:
+			return "\\e";
+	}
+}
+
+/**
+ * OnChoiceSelect
+ * @param array reference
+ */
+var getTalkOnChoiceSelect = function(reference){
+	switch (reference[0]) {
+		case "talk":
+			return getTalkOnAITalk();
+		case "close":
+			return "\\0\\s[1]&#12358;&#12435;&#8230;&#12290;\\w8\\w8\\n\\s[0]&#12376;&#12419;&#12354;&#12397;&#12540;&#12290;\\w8\\w8\\w8\\w8\\-";
+		case "Menu_CANCEL":
+		default:
+			return "\\e";
+	}
+}
+
+/**
+ * Definition of surfaces
+ * @param integer scope
+ * @param string key
+ * @return string
+ */
+function surfacesTxt(scope, key){
+	var surfacesTxtList = {
+		 "0": {
+		 	// default surface
+		 	 "defaultsurface": "0"
+			// <div>
+			,"width"         : "65"
+			,"height"        : "65"
+			,"position"      : "fixed"
+			,"top"           : "auto"
+			,"left"          : "auto"
+			,"bottom"        : "5px"
+			,"right"         : "5px"
+			// <p>
+			,"text-align"    : "right"
+			,"margin"        : "auto 55px auto auto"
+		}
+		,"1": {
+			// default surface
+			 "defaultsurface": "10"
+			// <div>
+			,"width"         : "65"
+			,"height"        : "65"
+			,"position"      : "fixed"
+			,"top"           : "auto"
+			,"left"          : "5px"
+			,"bottom"        : "5px"
+			,"right"         : "auto"
+			// <p>
+			,"text-align"    : "left"
+			,"margin"        : "auto auto auto 65px"
+		}
+	};
+	return surfacesTxtList[scope][key];
+}
+
+/**
+ * Definition of balloon
+ * @param integer scope
+ * @param string key
+ * @return string
+ */
+function balloonDescriptTxt(scope, key){
+	var balloonDescriptTxtList = {
+		 "0": {
+		 	// <div>
+			 "width"     : "192px"
+			,"height"    : "96px"
+			,"margin"    : "2px"
+			,"padding"   : "0px"
+			,"text-align": "left"
+			,"font-size" : "14px"
+			// <p>
+			,"pMargin"   : "22px"
+			,"pPosition" : "relative"
+			,"pTop"      : "12px"
+		}
+		,"1": {
+			// <div>
+			 "width"     : "192px"
+			,"height"    : "96px"
+			,"margin"    : "2px"
+			,"padding"   : "0px"
+			,"text-align": "left"
+			,"font-size" : "14px"
+			// <p>
+			,"pMargin"   : "22px"
+			,"pPosition" : "relative"
+			,"pTop"      : "12px"
+		}
+	};
+	return balloonDescriptTxtList[scope][key];
+}
+
+/**
+ * This function has to return unique id which is not used in the web page.
+ * @param integer scope
+ * @param string key
+ * @return string
+ */
+function getSukuriId(scope, key){
+	var SukuriIdList = {
+		 "SCOPE"     : "sukuri_scope"
+		,"SHELLBOX"  : "sukuri_shellbox"
+		,"SHELL"     : "sukuri_shell"
+		,"BALLOONBOX": "sukuri_balloonbox"
+		,"BALLOON"   : "sukuri_balloon"
+		,"IMAGE"     : "sukuri_image"
+		,"GLOBAL"    : "sukuri_global" 
+		,"SCRIPT"    : "sukuri_script"
+		,"TARGET"    : "sukuri_target"
+		,"MODE"      : "sukuri_mode"
+	};
+	return SukuriIdList[key] + scope;
+}
+
+/**
+ * This function is executed once loading web page.
+ */
+function sukuriInit(){
+	setField();
+	materialize();
+	setMainLoop();
+}
+
+/**
+ * Making div tags to store images or values
+ */
+function setField(){
+	createMain();
+	createBalloon();
+	createShell();
+	createGlobalVariableBox();
+}
+
+/**
+ * Creating window of scope
+ */
+function createMain(){
+	var e, i;
+	for (i = 0; i < getCharNum(); i++) {
+		e = document.createElement("div");
+		e.id = getSukuriId(i, "SCOPE");
+		e.style.position = surfacesTxt(i, "position");
+		e.style.top = surfacesTxt(i, "top");
+		e.style.left = surfacesTxt(i, "left");
+		e.style.bottom = surfacesTxt(i, "bottom");
+		e.style.right = surfacesTxt(i, "right");
+		document.body.appendChild(e);
+	}
+}
+
+/**
+ * create shell of scope
+ */
+function createShell(){
+	var e, p, i;
+	for (i = 0; i < getCharNum(); i++) {
+		// making div tag to store p tag
+		e = document.createElement("div");
+		e.id = getSukuriId(i, "SHELLBOX");
+		p = document.getElementById(getSukuriId(i, "SCOPE"));
+		p.appendChild(e);
+		// making p tag to store shell image
+		e = document.createElement("p");
+		e.id = getSukuriId(i, "SHELL");
+		e.style.textAlign = surfacesTxt(i, "text-align");
+		e.style.margin = surfacesTxt(i, "margin");
+		p = document.getElementById(getSukuriId(i, "SHELLBOX"));
+		p.appendChild(e);
+	}
+}
+
+/**
+ * create balloon of scope
+ */
+function createBalloon(){
+	var e, p, i;
+	for (i = 0; i < getCharNum(); i++) {
+		// making div tag to show balloon image in background
+		e = document.createElement("div");
+		e.id = getSukuriId(i, "BALLOONBOX");
+		e.style.width = balloonDescriptTxt(i, "width");
+		e.style.height = balloonDescriptTxt(i, "height");
+		e.style.margin = balloonDescriptTxt(i, "margin");
+		e.style.textAlign = balloonDescriptTxt(i, "text-align");
+		e.style.fontSize = balloonDescriptTxt(i, "font-size");
+		p = document.getElementById(getSukuriId(i, "SCOPE"));
+		p.appendChild(e);
+		// making p tag to show text charactor talking
+		e = document.createElement("p");
+		e.id = getSukuriId(i, "BALLOON");
+		e.style.margin = balloonDescriptTxt(i, "pMargin");
+		e.style.position = balloonDescriptTxt(i, "pPosition");
+		e.style.top      = balloonDescriptTxt(i, "pTop");
+		p = document.getElementById(getSukuriId(i, "BALLOONBOX"));
+		p.appendChild(e);
+	}
+}
+
+/**
+ * Making div tags to store global variables
+ */
+function createGlobalVariableBox(){
+	var e, i;
+	var dummyList = ["SCRIPT", "TARGET", "MODE"];
+	var p = document.createElement("div");
+	p.id = getSukuriId("", "GLOBAL");
+	document.body.appendChild(p);
+	for (i = 0; i < dummyList.length; i++) {
+		e = document.createElement("div");
+		e.id = getSukuriId("", dummyList[i]);
+		e.style.visibility = "hidden";
+		p.appendChild(e);
+	}
+}
+
+/**
+ * Materialize shell of scope
+ */
+function materialize(){
+	var e, p, i;
+	var f = Array(getCharNum());
+	for (i = 0; i < getCharNum(); i++) {
+		e = document.createElement("img");
+		e.src = getSurface(surfacesTxt(i, "defaultsurface"));
+		e.id = getSukuriId(i, "IMAGE");
+		e.width = surfacesTxt(i, "width");
+		e.height = surfacesTxt(i, "height");
+		eval('f[i] = function(){ setOnMouseDoubleClickEvent(Array("", "", "", ' + i + ')); };');
+		e.addEventListener("dblclick", f[i], false);
+		e.style.cursor = "pointer";
+		p = document.getElementById(getSukuriId(i, "SHELL"));
+		p.appendChild(e);
+	}
+}
+
+function unmaterialize(){
+	clearGlobalVariable();
+	var nodeClear = document.getElementById(getSukuriId("", "GLOBAL"));
+	if (nodeClear) {
+		nodeClear.parentNode.removeChild(nodeClear);
+	}
+	for (var i = 0; i < getCharNum(); i++) {
+		nodeClear = document.getElementById(getSukuriId(i, "SCOPE"));
+		if (nodeClear) {
+			nodeClear.parentNode.removeChild(nodeClear);
+		}
+	}
+}
+
+/**
+ * Setting loop of talk when booting
+ */
+function setMainLoop(){
+	clearGlobalVariable();
+	initPlayingSakuraScript(getTalkOnBoot());
+}
+
+/**
+ * Setting loop of talk next
+ */
+function startPlayingSakuraScript(){
+	clearGlobalVariable();
+	initPlayingSakuraScript(getTalkOnAITalk());
+}
+
+/**
+ * Setting OnChoiceSelect talk
+ * @param array reference
+ */
+var setOnChoiceSelectEvent =  function(reference){
+	var nextTalk = getTalkOnChoiceSelect(reference);
+	clearGlobalVariable();
+	initPlayingSakuraScript(nextTalk);
+};
+
+/**
+ * Executed when the charactor is doubleclicked
+ */
+var setOnMouseDoubleClickEvent = function(reference){
+	var nextTalk = getTalkOnMouseDoubleClick(reference);
+	clearGlobalVariable();
+	document.getElementById(getSukuriId("", "MODE")).innerHTML = "passive";
+	initPlayingSakuraScript(nextTalk);
+};
+
+/**
+ * Initializing global variables
+ */
+function clearGlobalVariable(){
+	var targetBalloonBox, targetBalloon;
+	var clearList = ["SCRIPT", "TARGET", "MODE"];
+	for (var i = 0; i < clearList.length; i++) {
+		var e = document.getElementById(getSukuriId("", clearList[i]));
+		if (e == null) {return;}
+		e.innerHTML = "";
+	}
+	for (var i = 0; i < getCharNum(); i++) {
+		targetBalloonBox = document.getElementById(getSukuriId(i, "BALLOONBOX"));
+		targetBalloonBox.style.backgroundImage = "none";
+		targetBalloon = document.getElementById(getSukuriId(i, "BALLOON"));
+		targetBalloon.innerHTML = "";
+	}
+	var nodeClear = document.getElementById("onchoiceselect_div")
+	if (nodeClear) {
+		nodeClear.parentNode.removeChild(nodeClear);
+	}
+	clearTimeout(playSakuraScript);
+	clearTimeout(startPlayingSakuraScript);
+}
+
+/**
+ * Preparation sakurasctipt to play
+ * @param string sakuraScript
+ */
+function initPlayingSakuraScript(sakuraScript) {
+	var scriptTarget = 0;
+	var e;
+	e = document.getElementById(getSukuriId("", "SCRIPT"))
+	if (e == null) {return;}
+	e.innerHTML = sakuraScript;
+	e = document.getElementById(getSukuriId("", "TARGET"))
+	if (e == null) {return;}
+	e.innerHTML = scriptTarget;
+	playSakuraScript();
+}
+
+/**
+ * SakuraScript Playing
+ */
+function playSakuraScript(){
+	var scriptInterval = getScriptInterval();
+	var scriptTargetElement = document.getElementById(getSukuriId("", "TARGET"));
+	if (scriptTargetElement == null) {return;}
+	var scriptTarget = scriptTargetElement.innerHTML;
+	if (scriptTarget == "") {return;}
+	var targetBalloonBox = document.getElementById(getSukuriId(scriptTarget, "BALLOONBOX"));
+	var targetBalloon = document.getElementById(getSukuriId(scriptTarget, "BALLOON"));
+	var scriptStringElement = document.getElementById(getSukuriId("", "SCRIPT"));
+	var scriptString = scriptStringElement.innerHTML;
+	var chr = scriptString.charAt(0);
+	// yenMode
+	while (chr == "\\") {
+		scriptString = scriptString.substring(1, scriptString.length);
+		chr = scriptString.charAt(0);
+		switch (chr) {
+			case "\\":
+				targetBalloon.innerHTML += "\\";
+				break;
+			case "0":
+			case "h":
+				setTarget(0);
+				break;
+			case "1":
+			case "u":
+				setTarget(1);
+				break;
+			case "n":
+				targetBalloon.innerHTML += "<br />";
+				break;
+			case "c":
+				targetBalloon.innerHTML = "";
+				break;
+			case "w":
+				scriptString = scriptString.substring(1, scriptString.length);
+				chr = scriptString.charAt(0);
+				if (getScriptInterval() < 50 * chr) {
+					scriptInterval = 50 * chr;
+				}
+				checkContinueOrStop();
+				return;
+			case "e":
+				stopSakuraScript();
+				return;
+			case "-":
+				unmaterialize();
+				return;
+			case "s":
+				if (scriptString.charAt(1) == "[") {
+					var splArray = scriptString.substring(2, scriptString.length).split("]", 1);
+					var surfaceNum = splArray[0];
+					if (isNumeric(surfaceNum)) {
+						surfaceElm = document.getElementById(getSukuriId(scriptTarget, "IMAGE"));
+						surfaceElm.src = getSurface(parseInt(surfaceNum));
+						scriptString = " " + scriptString.substring(surfaceNum.length + 3);
+					}
+				}
+				break;
+			case "q":
+				if (scriptString.charAt(1) == "[") {
+					var splArray = scriptString.substring(2, scriptString.length).split("]", 1);
+					var selectString = splArray[0];
+					var spl = selectString.split(",", 2);
+					var txt = spl[0];
+					var ref0 = spl[1];
+					var id = "onchoiceselect_" + ref0
+					var e = document.createElement("span");
+					e.id = id;
+					e.style.cursor = "pointer";
+					e.className = "onchoiceselect";
+					e.innerHTML = txt;
+					targetBalloon.appendChild(e);
+					var onChoiceSelectSpans = targetBalloon.getElementsByClassName("onchoiceselect");
+					if(!document.getElementById("onchoiceselect_div")){
+						makeEventNode("onchoiceselect_div");
+					}
+					var r0Div = document.createElement("div");
+					r0Div.className = "r0";
+					r0Div.style.visibility = "hidden";
+					r0Div.innerHTML = ref0;
+					var eventIdDiv = document.createElement("div");
+					eventIdDiv.style.visibility = "hidden";
+					eventIdDiv.id = "event_onchoiceselect_" + ref0;
+					eventIdDiv.appendChild(r0Div);
+					var pDiv = document.getElementById("onchoiceselect_div");
+					pDiv.appendChild(eventIdDiv);
+					var n = onChoiceSelectSpans.length;
+					var elm = new Array(n);
+					var setEventDiv = new Array(n);
+					var setBackGround = new Array(n);
+					var clearBackGround = new Array(n);
+					for (var i = 0; i < n; i++) {
+						elm[i] = onChoiceSelectSpans[i];
+						eval('var elm' + i + ' = elm[i];');
+						eval('setBackGround[i] = function(){ elm' + i + '.style.backgroundColor = "#FFFF3C"; };');
+						eval('clearBackGround[i] = function(){ elm' + i + '.style.backgroundColor = "transparent"; };');
+						eval('setEventDiv[i] = function(){ setOnChoiceSelectEvent(Array(elm' + i + '.id.substring(15))); };');
+						elm[i].addEventListener("click", setEventDiv[i], false);
+						elm[i].addEventListener("mouseover", setBackGround[i], false);
+						elm[i].addEventListener("mouseout", clearBackGround[i], false);
+					}
+					scriptString = " " + scriptString.substring(selectString.length + 3);
+				}
+				break;
+			default:
+				targetBalloon.innerHTML += "\\";
+				scriptString = " " + scriptString
+				break;
+		}//swith
+		scriptString = scriptString.substring(1, scriptString.length);
+		chr = scriptString.charAt(0);
+	}//while
+	targetBalloonBox.style.backgroundImage = "url(" + getBalloon(0) + ")";
+	targetBalloon.innerHTML += chr;
+	checkContinueOrStop();
+	/**
+	 * Cnanging scope
+	 * @param integer scope
+	 */
+	function setTarget(scope){
+		scriptTarget = scope;
+		scriptTargetElement.innerHTML = scope;
+		targetBalloon = document.getElementById(getSukuriId(scope, "BALLOON"));
+		targetBalloonBox = document.getElementById(getSukuriId(scope, "BALLOONBOX"));
+	}
+	/**
+	 * Checking remained SakuraScript to set timer for next playing
+	 */
+	function checkContinueOrStop(){
+		var rest = scriptString.substring(1, scriptString.length);
+		scriptStringElement.innerHTML = rest;
+		if (rest.length > 0) {
+			setTimeout(playSakuraScript, scriptInterval);
+		}
+		else {
+			stopSakuraScript();
+		}
+	}
+	/**
+	 * Stop playing SakuraScript and set timer for next talk
+	 */
+	function stopSakuraScript(){
+		clearGlobalVariable();
+		setTimeout(startPlayingSakuraScript, getTalkInterval());
+	}
+	/**
+	 * Numeric Check
+	 * @param string num
+	 * @return boolean
+	 */
+	function isNumeric(num){
+		return !((num == "") || (num.match(/[^0-9]/g)));
+	}
+	/**
+	 * Make a div to commit event with reference
+	 * @param string eventName
+	 */
+	function makeEventNode(eventName){
+		var eventDiv = document.createElement("div");
+		eventDiv.id = eventName;
+		eventDiv.style.visibility = "hidden";
+		document.body.appendChild(eventDiv);
+	}
+	/**
+	 * PassiveMode Check
+	 * @return boolean
+	 */
+	function isPassiveMode(){
+		return (document.getElementById(getSukuriId("", "MODE")).innerHTML == "passive");
+	}
+}
+
+/**
+ * Definition surfaces table
+ * "Nishikikai" http://members.at.infoseek.co.jp/nishikikai/
+ * You can encode images to base64 strings at following web page.
+ * @see http://www.kawa.net/works/js/data-scheme/base64.html
+ * @param integer num
+ */
+function getSurface(num){
+	var SurfacesList = {
+		 0 : 'data:image/png;base64,'+
+		'iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAMAAAC5KTl3AAAACVBMVEUA/wAAAJP///8KY4d+AAAA'+
+		'AXRSTlMAQObYZgAAAT9JREFUeJzt19EWwiAIBmDx/R+61Y4OEOEXTl3lXWt+/TBzW2v/URn0HmWg'+
+		'QlyTey8KvUviULsBLhyWRJbQD4gBCOHzEQfuNrLkoy8HEcgWIILm2YsAEqwJqpEgMYCbYMFmcaHQ'+
+		'mcBLI7QXjjAOp4RnjVzHI4FModkC8aHPVAVbgqhtImw5SGAR2CF5/XUoffr4YgHYErJ2J301jfnL'+
+		'MrQIXWuS8AB/1YoIOwBb+F6EDv37fAAJEQgxEQFxHWWBYiEgNoI86BJckFuiJKA2sGk6mBfCjKCr'+
+		'cEPwXzM6ojeBQHDGN4W507Dc9tX1tolN6biwAMcZkDa4AgS4nSxGaHCEYhHuhg0CJcG768DCdj4k'+
+		'hPtsFQgJ6I4VCBEgn5MyEZp6dM8A8gkuBbT5yqOIA0BQbH7uzY6XlAIeIzv9N+MFC5YMR/clzOAA'+
+		'AAAASUVORK5CYII='
+		,1 : 'data:image/png;base64,'+
+		'iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAMAAAC5KTl3AAAACVBMVEUA/wAAAJP///8KY4d+AAAA'+
+		'AXRSTlMAQObYZgAAAThJREFUeJzt19sOwiAMBmDK+z+0omwt0MNfMF6tF8aQ9VspSLCUJ86DiI6B'+
+		'I4KovmNfoC+wLXzqv4WNyTDQhPa9GYm29PzPZxO61QMCOIUFusYQoVbx1i4KVivZEcrVBx6ckkm8'+
+		'bBX4MU2Qw/xCSdD8plGYADlH8p6Vg3UNSQz94cdZUPJvQll5mgszANH+RRgLU6cw9GKJcUvagE1M'+
+		'gCP4xNQVk9DnofR1m4iA+AcYClERfh8xIQICgsRZsc5/2f12CVYlBArAciTaQFXhHEFZCZpyswLt'+
+		'1XCwI4Dt5AvK8ZoXIMATMOAngnlcgoJZxB9rsI8pfC2cLQUC3rY+BJBdFd63oq0NXNgcAr3xmQJ8'+
+		'Y7SIzPXXvQShhFpCQlCIJKAduRt/AY7yi/wTAK+hRpzkC2M3/YlMvADyOgxxRqoj4QAAAABJRU5E'+
+		'rkJggg=='
+		,10 : 'data:image/png;base64,'+
+		'iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAMAAAC5KTl3AAAACVBMVEUA/wCTAAD///8+ZK3ZAAAA'+
+		'AXRSTlMAQObYZgAAAU1JREFUeJzV19luAzEIBdDA/3902nq8gFkuoQ+tpSijkTnCxljJ6/WXB/WF'+
+		'NkFdgqhLUJv4CucW8Q0wd9IYAjeWMoAGQVP4mNgCf1YUOoSHKBpCKBJjrgA2gwtkCIyer0BA0wgE'+
+		'MA0vGCdiASDcBRiErfl7oAjnkES7KIg5TxFRJRWxppERn4RPYT5fQh4/iPVUKsMtGNsArWARorA0'+
+		'ruYwZfGSz6NBe9hTbYF0CqbiLkuWUt9HAPAswxKScdy/UsiP4fFZuR61xJpBVEX3FX4chVDsai3o'+
+		'vi6caVuop0CtBEIB729beL5TxbghRV/keRjCvqHQW+Iq5sMwtBNWCiuRNDoEwC69D3SRiAGEyIW8'+
+		'zSPAu29lfA64BhQ/57nxURX0z1iqhOsakDMCYAq0v2vx5y7+ADeShJ/EFtZbIPpy2LyNa8Iv/FVs'+
+		'Af9uvAGmsQ4ovzmZYgAAAABJRU5ErkJggg=='
+		,11 : 'data:image/png;base64,'+
+		'iVBORw0KGgoAAAANSUhEUgAAAEEAAABBCAMAAAC5KTl3AAAACVBMVEUA/wCTAAD///8+ZK3ZAAAA'+
+		'AXRSTlMAQObYZgAAAWVJREFUeJzt1styBCEIBdC+/P9HJ5OOPAVRV6mKm6nJNKcFhcrz/K9iAffC'+
+		'JQHcEgBdGt8CXe0DH+HKeIEbg4WX2Dcgwi/RVt4nNaCIlsEPk119IhP6Ra0Eat2xLFYZl8KaWAof'+
+		'41ZYEB0hJ6pT0HXIifIgBUC+i14NFpuYhZhvP1nkxGQTLi3IJqZE0lAEJ+SbyFqSZGCNUiZTIxW4'+
+		'GpC0plMjCJJ2rIuapFsCRYGM4JMgrpz5o/msBUwE9eMki/AQdObu1QjAow5Lpy0vM7+OI7FHUbWG'+
+		'28IQuvF8CXwd0Hs9jWOJKDi+ilavtALfyNZom5BypY8EuNssp3wkPKrhNgDT2NypZ0mEZJJG6Akg'+
+		'Cje7k4TP5XALqqAdIAo7payAluDnKwsUmmcHeNQIPwPGhFt3eQbIkKwJFIJUIjfKeFEygq9bBZh9'+
+		'zMO7/07q6w29FvHcnpBsdqLFiKsZ7KmjsL+7vgBH/Q8cfR4GFAAAAABJRU5ErkJggg=='
+	};
+	return SurfacesList[num];
+}
+
+/**
+ * Definition balloons table
+ * You can encode images to base64 strings at following web page.
+ * @see http://www.kawa.net/works/js/data-scheme/base64.html
+ * @param integer num
+ */
+function getBalloon(num){
+	var BalloonsList = {
+		"0" : 'data:image/png;base64,'+
+		'iVBORw0KGgoAAAANSUhEUgAAAMAAAABgCAMAAAB8Ho3bAAAACVBMVEUAAACfD/////8zuPpkAAAA'+
+		'AXRSTlMAQObYZgAAAXpJREFUeJzt2wEOgjAQRFHq/Q9tCEEo3UJbGmZ/ZS7gf9BEjThN/7Lw8Mjt'+
+		'fRW6+h4Gdf0yeP68PvGfB3cbIWzPKprzNfWWoaVfWZ8aqvvV8cuqBN7i15UavPaXCtzmzysQuO4v'+
+		'EDjvvxQ4r192IkD0nwi8H5912VME6c/eAkr+PEuAuf7zjHuA6rcErP70ENH6EwEdwOs/COgAYn8k'+
+		'oAOY/TvBCxAtBqhrWjYKgHqCfmdoDIC6pW0vQL0XoN4LUG+k9wEygHuGRvkwhz1Dg32hIQOggq2f'+
+		'D0AK9v18AFAQ9/MBOMGxn/8bGUtg9LMOkdUPugfm9d8A7gUhB6Dcgmw/RHDSz39iy73gst+5oKCf'+
+		'/9yoX0Fpf2xwggg19QeBA0Ko7uf/fyAh4P7BkQqeVhgvX9efQ4jWEO+J0JzvwnCvXm3oUa9S9Gzv'+
+		'Z1VWVQwPyArUXcXDAzICdVXN6P18gCFQF9WO3s8HTPT+WKBuaRoeMNH7N4G6o3lPAL5gE2GfYZ5S'+
+		'CQAAAABJRU5ErkJggg=='
+	};
+	return BalloonsList[num];
+}
+})();
+/**
+ * TODO
+ * 
+ * set alignment free
+ * SERIKO animation
+ * SakuraScript \_s, \_q, \_w[?]
+ * bug fix about "clearTimeout"
+ */

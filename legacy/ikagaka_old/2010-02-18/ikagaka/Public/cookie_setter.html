@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Cookie Setter</title>
+
+<script type="text/javascript" src="./json2.js"></script>
+<script type="text/javascript" src="./xssinterface.js"></script>
+
+<script type="text/javascript">
+// simulate bad web server performace / ping times
+window.setTimeout(function () {
+	XSSInterface.Cookie.setFromLocation()
+}, (Math.random() * 2000))
+</script>
+
+</head>
+<body></body>
+</html>

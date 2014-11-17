@@ -1,0 +1,300 @@
+﻿///////////////////////////////////// rickDOM ////////////////////////////////////////////
+/// True //////////////////////////////////////////////////////////////////////////////////
+
+function rickDOM(){
+// Ikagaka
+
+// HTML:html\body\Ikagaka
+ $(document.body)
+  .append(
+   $(document.createElement("div"))
+    .attr("id","Ikagaka")
+    .attr("class","ikagaka")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("top","0px")
+    .css("left","0px")
+    .css("z-index","0")
+    .width("100%")
+    .height("100%")
+  );
+}
+///////////////////////////////////// loadDiscript ////////////////////////////////////////////
+// Fault //////////////////////////////////////////////////////////////////////////////////
+function loadDiscript(){
+}
+///////////////////////////////////// loadShell ////////////////////////////////////////////
+/// True //////////////////////////////////////////////////////////////////////////////////
+function loadShell(){
+ aryShell = new Array();
+ //事前にファイルリスト読み込まないとね！特にsurface.txt
+  aryShell[0] = new Image();
+  aryShell[0].src = "./img/surface0.png";
+  aryShell[1] = new Image();
+  aryShell[1].src = "./img/surface1.png";
+  aryShell[2] = new Image();
+  aryShell[2].src = "./img/surface2.png";
+  aryShell[3] = new Image();
+  aryShell[3].src = "./img/surface3.png";
+  aryShell[4] = new Image();
+  aryShell[4].src = "./img/surface4.png";
+  aryShell[5] = new Image();
+  aryShell[5].src = "./img/surface5.png";
+  aryShell[6] = new Image();
+  aryShell[6].src = "./img/surface6.png";
+  aryShell[7] = new Image();
+  aryShell[7].src = "./img/surface7.png";
+  aryShell[8] = new Image();
+  aryShell[8].src = "./img/surface8.png";
+  aryShell[9] = new Image();
+  aryShell[9].src = "./img/surface9.png";
+  aryShell[10] = new Image();
+  aryShell[10].src = "./img/surface10.png";
+  aryShell[11] = new Image();
+  aryShell[11].src = "./img/surface10.png";
+  imgSakuraSurface = new Image();
+  imgSakuraSurface = aryShell[0];
+  imgKeroSurface = new Image();
+  imgKeroSurface = aryShell[10];
+}
+///////////////////////////////////// loadBalloon ////////////////////////////////////////////
+/// True //////////////////////////////////////////////////////////////////////////////////
+function loadBalloon(){
+ aryBalloon = new Array();
+  aryBalloon[0] = new Image();
+  aryBalloon[0].src = "./img/balloons0.png";
+  aryBalloon[1] = new Image();
+  aryBalloon[1].src = "./img/balloonk1.png";
+  imgSakuraBalloon = new Image();
+  imgSakuraBalloon = aryBalloon[0];
+  imgKeroBalloon = new Image();
+  imgKeroBalloon = aryBalloon[1];
+}
+///////////////////////////////////// loadGhost ////////////////////////////////////////////
+/// True //////////////////////////////////////////////////////////////////////////////////
+function loadGhost(){
+// Sakura
+// HTML:html\body\Ikagaka\Sakura
+ $("#Ikagaka")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","Sakura")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","535px")
+    .css("bottom","0px")
+    .css("z-index","10")
+    .width(imgSakuraSurface.width+"px")
+    .height(imgSakuraSurface.height+"px")
+  );
+// SakuraSurface
+// HTML:html\body\Ikagaka\Sakura\SakuraSurface
+ $("#Sakura")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","SakuraSurface")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","0px")
+    .css("bottom","0px")
+    .css("z-index","20")
+    .css("background-image","url("+imgSakuraSurface.src+")")
+    .css("filter","chroma(color=#0000ff)")
+    .width(imgSakuraSurface.width+"px")
+    .height(imgSakuraSurface.height+"px")
+    .dblclick(function(){OnMouseDoubleClick("ALL")})
+  );
+// SakuraCollision
+// HTML:html\body\Ikagaka\Sakura\SakuraSurface\SakuraCollision??
+ //ループ組みましょう←surface.txt読み込んでからの葉梨だろうがカス
+ $("#SakuraSurface")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","SakuraCollision0")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","29px")
+    .css("top","7px")
+    .css("z-index","40")
+    .css("cursor","pointer")
+    .width("97px")
+    .height("64px")
+    .dblclick(function(){OnMouseDoubleClick("Head")}) 
+  );
+ $("#SakuraSurface")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","SakuraCollision1")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","46px")
+    .css("top","67px")
+    .css("z-index","40")
+    .css("cursor","pointer")
+    .width("28px")
+    .height("39px")
+    .dblclick(function(){OnMouseDoubleClick("Face")}) 
+  );
+ $("#SakuraSurface")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","SakuraCollision2")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","52px")
+    .css("top","148px")
+    .css("z-index","40")
+    .css("cursor","pointer")
+    .width("97px")
+    .height("64px")
+    .dblclick(function(){OnMouseDoubleClick("Bust")}) 
+  );
+// SakuraBalloon
+// HTML:html\body\Ikagaka\Sakura\SakuraBalloon
+ $("#Sakura")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","SakuraBalloon")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left",0-imgSakuraBalloon.width+"px")
+    .css("bottom",imgSakuraSurface.height-imgSakuraBalloon.height+"px")
+    .css("z-index","20")
+//    .css("visibility","hidden")
+    .css("background-image","url("+imgSakuraBalloon.src+")")
+    .css("filter","chroma(color=#dccdab)")  //ToDo
+    .width(imgSakuraBalloon.width+"px")
+    .height(imgSakuraBalloon.height+"px")
+  );
+// SakuraTextbox
+// HTML:html\body\Ikagaka\Sakura\SakuraBalloon\SakuraTextbox
+/*
+ $("#SakuraBalloon")
+  .append(
+   $(document.createElement("textarea"))
+    .attr("id","SakuraTextbox")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("top","10px")
+    .css("left","10px")
+    .css("z-index","30")
+    .css("visibility","inherit")
+    .width(imgSakuraBalloon.width-30+"px")
+    .height(imgSakuraBalloon.height-20+"px")
+  );
+*/
+// Kero
+// HTML:html\body\Ikagaka\Kero
+ $("#Ikagaka")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","Kero")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","100px")
+    .css("bottom","0px")
+    .css("z-index","10")
+    .width(imgKeroSurface.width+"px")
+    .height(imgKeroSurface.height+"px")
+  );
+// KeroSurface
+// HTML:html\body\Ikagaka\Kero\KeroSurface
+ $("#Kero")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","KeroSurface")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("left","0px")
+    .css("bottom","0px")
+    .css("z-index","20")
+    .css("background-image","url("+imgKeroSurface.src+")")
+    .css("filter","chroma(color=#0000ff)")
+    .width(imgKeroSurface.width+"px")
+    .height(imgKeroSurface.height+"px")
+    .dblclick(function(){OnMouseDoubleClick()})
+  );
+// KeroCollision
+// HTML:html\body\Ikagaka\Kero\KeroSurface\KeroCollision??
+
+// KeroBalloon
+// HTML:html\body\Ikagaka\Kero\KeroBalloon
+ $("#Kero")
+  .append(
+   $(document.createElement("div"))
+    .attr("id","KeroBalloon")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("right",0-imgKeroBalloon.width+"px")
+    .css("bottom",imgKeroSurface.height-imgKeroBalloon.height+"px")
+    .css("z-index","20")
+//    .css("visibility","hidden")
+    .css("background-image","url("+imgKeroBalloon.src+")")
+    .css("filter","chroma(color=#dccdab)")  //ToDo
+    .width(imgKeroBalloon.width+"px")
+    .height(imgKeroBalloon.height+"px")
+  );
+// KeroTextbox
+// HTML:html\body\Ikagaka\Kero\KeroBalloon\KeroTextbox
+ $("#KeroBalloon")
+  .append(
+   $(document.createElement("textarea"))
+    .attr("id","KeroTextbox")
+    .css("margin","0px")
+    .css("padding","0px")
+    .css("border","0px")
+    .css("text-align","left")
+    .css("position","absolute")
+    .css("background-color","transparent")
+    .css("top","10px")
+    .css("right","10px")
+    .css("z-index","30")
+    .css("visibility","inherit")
+    .width(imgKeroBalloon.width-30+"px")
+    .height(imgKeroBalloon.height-20+"px")
+  );
+}

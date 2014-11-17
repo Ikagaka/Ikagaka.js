@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>如何か</title>
+<link rel="icon" href="./favicon.ico" type="image/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="./apple-touch-icon-precomposed.png">
+<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./jquery.event.dblTap.js"></script>
+<script type="text/javascript">
+$(function(){
+var img = new Image();
+img.src = nar.homeurl + nar.shell.master.surface[0].src;
+img.onload = function(){
+	base($("#named>.scope0>canvas")[0],imgTransparent(img));
+};
+
+runAnimation(nar.shell.master.surface[0].interval[0].pattern);
+
+});////////////
+var runAnimation = function(pattern){
+	var _pattern = pattern;
+	var j = 1;
+	var i;
+	for(i = 0; i < pattern.length; i += 1){
+		if(pattern[i][0] === -1){
+		}else{
+			var img = new Image();
+			img.src = nar.homeurl + nar.shell.master.surface[pattern[i][0]].src;
+			img.onload = function(){
+				j += 1;
+				if(j === _pattern.length){
+					var __pattern = _pattern;
+					for(i = 0; i < __pattern.length; i += 1){
+						$("#named>.scope0>canvas").queue(function(){
+							img.src = nar.homeurl + nar.shell.master.surface[__pattern[i][0]].src;
+							overlay($("#named>.scope0>canvas")[0],imgTransparent(img),__pattern[i][3],__pattern[i][4])
+							$(this).dequeue();
+						}).delay(_pattern[i][1]);//SERIKOのウエイト
+					}
+				}
+			};
+		}
+	}
+}
+var nar = {
+	"homeurl":"../exice_z/"
+	,"shell":{
+		"master":{
+			"surface":[
+				{
+					"src":"shell/master/surface0000.PNG"
+					,"collision":[
+						[0,80,62,143,95,"Head"]
+						,[91,111,139,142,"Face"]
+						,[89,181,140,216,"Bust"]
+						,[184,187,211,238,"LeftST"]
+					]
+					,"interval":[
+						{
+							"type":"sometimes"
+							,"pattern":[
+								[61,5,"overlay",85,100]
+								,[60,5,"overlay",85,100]
+								,[-1,6,"overlay",0,0]
+							]
+						}
+					]
+				}
+				,{
+					"src":"shell/master/surface0001.PNG"
+					,"collision":[
+						[94,73,156,106,"Head"]
+						,[102,110,154,141,"Face"]
+						,[109,176,146,212,"Bust"]
+						,[184,213,208,281,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0002.PNG"
+					,"collision":[
+						[73,68,122,102,"Head"]
+						,[82,106,129,145,"Face"]
+						,[99,161,149,202,"Bust"]
+						,[179,161,213,239,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0003.PNG"
+					,"collision":[
+						[85,104,134,138,"Head"]
+						,[89,144,138,174,"Face"]
+						,[107,191,149,221,"Bust"]
+						,[175,175,209,246,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0004.PNG"
+					,"collision":[
+						[86,97,156,128,"Head"]
+						,[108,136,157,168,"Face"]
+						,[117,187,154,221,"Bust"]
+						,[202,230,245,303,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0005.PNG"
+					,"collision":[
+						[95,67,157,103,"Head"]
+						,[104,116,158,143,"Face"]
+						,[106,174,155,209,"Bust"]
+						,[182,189,209,274,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0006.PNG"
+					,"collision":[
+						[95,67,157,103,"Head"]
+						,[104,116,158,143,"Face"]
+						,[106,174,155,209,"Bust"]
+						,[182,189,209,274,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0007.PNG"
+					,"collision":[
+						[86,61,144,101,"Head"]
+						,[90,107,146,145,"Face"]
+						,[87,178,140,200,"Bust"]
+						,[181,164,211,240,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0008.PNG"
+					,"collision":[
+						[0,80,62,143,95,"Head"]
+						,[91,111,139,142,"Face"]
+						,[89,181,140,216,"Bust"]
+						,[184,187,211,238,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0009.PNG"
+					,"collision":[
+						[0,80,62,143,95,"Head"]
+						,[91,111,139,142,"Face"]
+						,[89,181,140,216,"Bust"]
+						,[184,187,211,238,"LeftST"]
+					]
+				}
+				,{
+					"src":"shell/master/surface0010.PNG"
+				}
+				,{
+					"src":"shell/master/surface0011.PNG"
+				}
+				,{
+					"src":"shell/master/surface0012.PNG"
+				}
+				,{
+					"src":"shell/master/surface0013.PNG"
+				}
+				,{
+					"src":"shell/master/surface0014.PNG"
+				}
+				,{
+					"src":"shell/master/surface0015.PNG"
+					,"interval":[
+						{
+							"type":"runonce"
+							,"pattern":[
+								[16,20,"overlay",0,0]
+								,[16,14,"overlay",0,5]
+								,[16,12,"overlay",0,10]
+								,[16,10,"overlay",0,15]
+								,[16,8,"overlay",0,20]
+								,[16,5,"overlay",0,35]
+								,[16,5,"overlay",0,40]
+								,[16,5,"overlay",0,60]
+								,[16,5,"overlay",0,80]
+								,[16,5,"overlay",0,100]
+							]
+						}
+					]
+				}
+				,{
+					"src":"shell/master/surface0016.PNG"
+				}
+				,{"src":"shell/master/surface0017.PNG"}
+				,{"src":"shell/master/surface0018.PNG"}
+				,{"src":"shell/master/surface0019.PNG"}
+				,{"src":"shell/master/surface0020.PNG"}
+				,{"src":"shell/master/surface0021.PNG"}
+				,{"src":"shell/master/surface0022.PNG"}
+				,{"src":"shell/master/surface0023.PNG"}
+				,{"src":"shell/master/surface0024.PNG"}
+				,{"src":"shell/master/surface0025.PNG"}
+				,{"src":"shell/master/surface0026.PNG"}
+				,{"src":"shell/master/surface0027.PNG"}
+				,{"src":"shell/master/surface0028.PNG"}
+				,{"src":"shell/master/surface0029.PNG"}
+				,{"src":"shell/master/surface0030.PNG"}
+				,{"src":"shell/master/surface0031.PNG"}
+				,{"src":"shell/master/surface0032.PNG"}
+				,{"src":"shell/master/surface0033.PNG"}
+				,{"src":"shell/master/surface0034.PNG"}
+				,{"src":"shell/master/surface0035.PNG"}
+				,{"src":"shell/master/surface0036.PNG"}
+				,{"src":"shell/master/surface0037.PNG"}
+				,{"src":"shell/master/surface0038.PNG"}
+				,{"src":"shell/master/surface0039.PNG"}
+				,{"src":"shell/master/surface0040.PNG"}
+				,{"src":"shell/master/surface0041.PNG"}
+				,{"src":"shell/master/surface0042.PNG"}
+				,{"src":"shell/master/surface0043.PNG"}
+				,{"src":undefined}
+				,{"src":"shell/master/surface0045.PNG"}
+				,{"src":"shell/master/surface0046.PNG"}
+				,{"src":"shell/master/surface0047.PNG"}
+				,{"src":"shell/master/surface0048.PNG"}
+				,{"src":undefined}
+				,{"src":"shell/master/surface0050.PNG"}
+				,{"src":"shell/master/surface0051.PNG"}
+				,{"src":"shell/master/surface0052.PNG"}
+				,{"src":"shell/master/surface0053.PNG"}
+				,{"src":"shell/master/surface0054.PNG"}
+				,{"src":"shell/master/surface0055.PNG"}
+				,{"src":"shell/master/surface0056.PNG"}
+				,{"src":"shell/master/surface0057.PNG"}
+				,{"src":"shell/master/surface0058.PNG"}
+				,{"src":undefined}
+				,{"src":"shell/master/surface0060.PNG"}
+				,{"src":"shell/master/surface0061.PNG"}
+				,{"src":"shell/master/surface0062.PNG"}
+				,{"src":"shell/master/surface0063.PNG"}
+				,{"src":"shell/master/surface0064.PNG"}
+				,{"src":"shell/master/surface0065.PNG"}
+				,{"src":undefined}
+				,{"src":undefined}
+				,{"src":undefined}
+				,{"src":undefined}
+				,{"src":"shell/master/surface0070.PNG"}
+				,{"src":"shell/master/surface0071.PNG"}
+				,{"src":"shell/master/surface0072.PNG"}
+				,{"src":"shell/master/surface0073.PNG"}
+				,{"src":"shell/master/surface0074.PNG"}
+				,{"src":"shell/master/surface0075.PNG"}
+				,{"src":"shell/master/surface0076.PNG"}
+				,{"src":"shell/master/surface0077.PNG"}
+				,{"src":undefined}
+				,{"src":undefined}
+				,{"src":undefined}
+				,{"src":"shell/master/surface0081.PNG"}
+				,{"src":"shell/master/surface0082.PNG"}
+				,{"src":"shell/master/surface0083.PNG"}
+				,{"src":"shell/master/surface0084.PNG"}
+				,{"src":"shell/master/surface0085.PNG"}
+				,{"src":"shell/master/surface0086.PNG"}
+				,{"src":"shell/master/surface0087.PNG"}
+				,{"src":"shell/master/surface0088.PNG"}
+				,{"src":"shell/master/surface0089.PNG"}
+			]
+		}
+	}
+}
+var imgTransparent = function(img){//ImageObjectを入れるとその背景色を透明化したCanvasElementを返す
+	var canvas = $("<canvas></canvas>")
+		.attr("width",img.width)
+		.attr("height",img.height)[0];
+	var ctx = canvas.getContext('2d');
+	ctx.drawImage(img,0,0);
+	var imgdata = ctx.getImageData(0,0,img.width,img.height);
+	var r = imgdata.data[0];
+	var g = imgdata.data[1];
+	var b = imgdata.data[2];
+	for(var i = 0; i < imgdata.data.length; i++){
+		if(r === imgdata.data[i] && g === imgdata.data[i+1] && b === imgdata.data[i+2]) imgdata.data[i+3] = 0;
+		i += 3;
+	}
+	ctx.putImageData(imgdata,0,0);
+	return canvas;
+};
+var base = function(canvas,surface){//引数０のcanvasElementに引数１のcanvasElementを上書きする
+	$(canvas)
+		.attr("width",surface.width)
+		.attr("height",surface.height);
+	$(canvas.parentElement)
+		.width(surface.width)
+		.height(surface.height);
+	var ctx = canvas.getContext('2d');
+	ctx.drawImage(surface,0,0);
+};
+var overlay = function(canvas,surface,x,y){//引数０のcanvasElementに引数１のcanvasElementを指定位置に合成する
+	var ctx = canvas.getContext('2d');
+	ctx.globalCompositeOperation = "source-over";
+	if(typeof x === "undefined" && typeof y === "undefined"){
+		ctx.drawImage(surface,0,0);
+	}else{
+		ctx.drawImage(surface,x,y);
+	}
+};
+//画像のプリロード
+/*
+var ary = [];
+var i;
+for(i = 0; i < nar.shell.master.surface.length; i += 1){
+	if(typeof nar.shell.master.surface[i].src === "undefined"){
+	}else{
+		$("<img>").attr("src", nar.homeurl + nar.shell.master.surface[i].src);
+	}	
+}
+*/
+</script>
+<style>
+body{
+	background-color:#ff00ff;
+}
+#named *{
+	position:absolute;
+	border:0px solid black;
+	margin:0px;
+	padding:0px;
+}
+</style>
+</head>
+<body>
+<div id="named">
+	<div class="scope scope0">
+		<canvas></canvas>
+		<div class="collision"></div>
+		<div class="blimp">
+			<canvas></canvas>
+			<div></div>
+		</div>
+	</div>
+	<div class="scope scope1">
+		<canvas></canvas>
+		<div class="collision"></div>
+		<div class="blimp">
+			<canvas></canvas>
+			<div></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

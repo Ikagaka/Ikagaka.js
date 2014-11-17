@@ -1,0 +1,1581 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=700" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>如何か</title>
+<!--base href="http://files.dropbox.com/u/265158/" /-->
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+if (!Function.prototype.bind) {  
+  Function.prototype.bind = function (oThis) {  
+    if (typeof this !== "function") {  
+      // closest thing possible to the ECMAScript 5 internal IsCallable function  
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");  
+    }  
+  
+    var aArgs = Array.prototype.slice.call(arguments, 1),   
+        fToBind = this,   
+        fNOP = function () {},  
+        fBound = function () {  
+          return fToBind.apply(this instanceof fNOP  
+                                 ? this  
+                                 : oThis || window,  
+                               aArgs.concat(Array.prototype.slice.call(arguments)));  
+        };  
+  
+    fNOP.prototype = this.prototype;  
+    fBound.prototype = new fNOP();  
+  
+    return fBound;  
+  };  
+}  
+var exice_zJson = {
+  shell: {
+    master: {
+      surface: {
+        "0": {
+          "element": [["base", "./exice_z/shell/master/surface0000.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]],
+          "animation": [
+            {
+              "timing": "sometimes",
+              "pattern": [["overlay", 61, 5, 85, 100], ["overlay", 60, 5, 85, 100], ["overlay", -1, 5]]
+            }
+          ]
+        },
+        "1": {
+          "element": [["base", "./exice_z/shell/master/surface0001.png"]],
+          "collision": [[94, 73, 156, 106, "Head"], [102, 110, 154, 141, "Face"], [109, 176, 146, 212, "Bust"], [184, 213, 208, 281, "LeftST"]]
+        },
+        "2": {
+          "element": [["base", "./exice_z/shell/master/surface0002.png"]],
+          "collision": [[73, 68, 122, 102, "Head"], [82, 106, 129, 145, "Face"], [99, 161, 149, 202, "Bust"], [179, 161, 213, 239, "LeftST"]]
+        },
+        "3": {
+          "element": [["base", "./exice_z/shell/master/surface0003.png"]],
+          "collision": [[85, 104, 134, 138, "Head"], [89, 144, 138, 174, "Face"], [107, 191, 149, 221, "Bust"], [175, 175, 209, 246, "LeftST"]]
+        },
+        "4": {
+          "element": [["base", "./exice_z/shell/master/surface0004.png"]],
+          "collision": [[86, 97, 156, 128, "Head"], [108, 136, 157, 168, "Face"], [117, 187, 154, 221, "Bust"], [202, 230, 245, 303, "LeftST"]]
+        },
+        "5": {
+          "element": [["base", "./exice_z/shell/master/surface0005.png"]],
+          "collision": [[95, 67, 157, 103, "Head"], [104, 116, 158, 143, "Face"], [106, 174, 155, 209, "Bust"], [182, 189, 209, 274, "LeftST"]]
+        },
+        "6": {
+          "element": [["base", "./exice_z/shell/master/surface0006.png"]],
+          "collision": [[95, 67, 157, 103, "Head"], [104, 116, 158, 143, "Face"], [106, 174, 155, 209, "Bust"], [182, 189, 209, 274, "LeftST"]]
+        },
+        "7": {
+          "element": [["base", "./exice_z/shell/master/surface0007.png"]],
+          "collision": [[86, 61, 144, 101, "Head"], [90, 107, 146, 145, "Face"], [87, 178, 140, 200, "Bust"], [181, 164, 211, 240, "LeftST"]]
+        },
+        "8": {
+          "element": [["base", "./exice_z/shell/master/surface0008.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]]
+        },
+        "9": {
+          "element": [["base", "./exice_z/shell/master/surface0009.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]]
+        },
+        "10": {
+          "element": [["base", "./exice_z/shell/master/surface0010.png"]]
+        },
+        "11": {
+          "element": [["base", "./exice_z/shell/master/surface0011.png"]]
+        },
+        "12": {
+          "element": [["base", "./exice_z/shell/master/surface0012.png"]]
+        },
+        "13": {
+          "element": [["base", "./exice_z/shell/master/surface0013.png"]]
+        },
+        "14": {
+          "element": [["base", "./exice_z/shell/master/surface0014.png"]]
+        },
+        "15": {
+          "element": [["base", "./exice_z/shell/master/surface0015.png"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["overlay", 16, 20, 0, 0], ["overlay", 16, 14, 0, 5], ["overlay", 16, 12, 0, 10], ["overlay", 16, 10, 0, 15], ["overlay", 16, 8, 0, 20], ["overlay", 16, 5, 0, 35], ["overlay", 16, 5, 0, 40], ["overlay", 16, 5, 0, 60], ["overlay", 16, 5, 0, 80], ["overlay", 16, 5, 0, 100]]
+            }
+          ]
+        },
+        "16": {
+          "element": [["base", "./exice_z/shell/master/surface0016.png"]]
+        },
+        "17": {
+          "element": [["base", "./exice_z/shell/master/surface0017.png"]]
+        },
+        "18": {
+          "element": [["base", "./exice_z/shell/master/surface0018.png"]],
+          "collision": [[11, 0, 121, 185, "Brade1"]]
+        },
+        "19": {
+          "element": [["base", "./exice_z/shell/master/surface0019.png"]],
+          "collision": [[11, 0, 121, 185, "Brade1"]]
+        },
+        "20": {
+          "element": [["base", "./exice_z/shell/master/surface0020.png"]],
+          "collision": [[8, 133, 109, 350, "Brade0"]]
+        },
+        "21": {
+          "element": [["base", "./exice_z/shell/master/surface0021.png"]],
+          "collision": [[8, 133, 109, 350, "Brade0"]]
+        },
+        "22": {
+          "element": [["base", "./exice_z/shell/master/surface0022.png"]],
+          "collision": [[95, 67, 157, 103, "Head"], [104, 116, 158, 143, "Face"], [106, 174, 155, 209, "Bust"], [182, 189, 209, 274, "LeftST"]],
+          "animation": [
+            {
+              "timing": "sometimes",
+              "pattern": [["overlay", 63, 5, 100, 105], ["overlay", 62, 5, 100, 105], ["overlay", -1, 6]]
+            }
+          ]
+        },
+        "23": {
+          "element": [["base", "./exice_z/shell/master/surface0023.png"]],
+          "collision": [[91, 62, 148, 95, "Head"], [97, 103, 141, 143, "Face"], [90, 163, 138, 198, "Bust"], [165, 168, 195, 248, "LeftST"]],
+          "animation": [
+            {
+              "timing": "sometimes",
+              "pattern": [["overlay", 65, 5, 90, 100], ["overlay", 64, 5, 90, 100], ["overlay", -1, 6]]
+            }
+          ]
+        },
+        "24": {
+          "element": [["base", "./exice_z/shell/master/surface0024.png"]],
+          "collision": [[87, 64, 148, 100, "Head"], [95, 111, 141, 143, "Face"], [92, 161, 144, 203, "Bust"], [173, 157, 207, 238, "LeftST"]]
+        },
+        "25": {
+          "element": [["base", "./exice_z/shell/master/surface0025.png"]],
+          "collision": [[94, 73, 156, 106, "Head"], [102, 110, 154, 141, "Face"], [109, 176, 146, 212, "Bust"], [184, 213, 208, 281, "LeftST"]]
+        },
+        "26": {
+          "element": [["base", "./exice_z/shell/master/surface0026.png"]],
+          "collision": [[73, 68, 122, 102, "Head"], [82, 106, 129, 145, "Face"], [99, 161, 149, 202, "Bust"], [179, 161, 213, 239, "LeftST"]]
+        },
+        "27": {
+          "element": [["base", "./exice_z/shell/master/surface0027.png"]]
+        },
+        "28": {
+          "element": [["base", "./exice_z/shell/master/surface0028.png"]],
+          "collision": [[87, 64, 148, 100, "Head"], [95, 111, 141, 143, "Face"], [92, 161, 144, 203, "Bust"], [173, 157, 207, 238, "LeftST"]]
+        },
+        "29": {
+          "element": [["base", "./exice_z/shell/master/surface0029.png"]],
+          "collision": [[86, 61, 144, 101, "Head"], [90, 107, 146, 145, "Face"], [87, 178, 140, 200, "Bust"], [181, 164, 211, 240, "LeftST"]]
+        },
+        "30": {
+          "element": [["base", "./exice_z/shell/master/surface0030.png"]],
+          "collision": [[85, 79, 150, 105, "HeadEX"], [94, 110, 140, 138, "FaceEX"], [96, 168, 139, 191, "BustEX"], [154, 294, 177, 341, "LeftST"]]
+        },
+        "31": {
+          "element": [["base", "./exice_z/shell/master/surface0031.png"]],
+          "collision": [[85, 79, 150, 105, "HeadEX"], [94, 110, 140, 138, "FaceEX"], [96, 168, 139, 191, "BustEX"], [154, 294, 177, 341, "LeftST"]]
+        },
+        "32": {
+          "element": [["base", "./exice_z/shell/master/surface0032.png"]],
+          "collision": [[85, 79, 150, 105, "HeadEX"], [94, 110, 140, 138, "FaceEX"], [96, 168, 139, 191, "BustEX"], [154, 294, 177, 341, "LeftST"]]
+        },
+        "33": {
+          "element": [["base", "./exice_z/shell/master/surface0033.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]]
+        },
+        "34": {
+          "element": [["base", "./exice_z/shell/master/surface0034.png"]],
+          "collision": [[95, 67, 157, 103, "Head"], [104, 116, 158, 143, "Face"], [106, 174, 155, 209, "Bust"], [182, 189, 209, 274, "LeftST"]]
+        },
+        "35": {
+          "element": [["base", "./exice_z/shell/master/surface0035.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]]
+        },
+        "36": {
+          "element": [["base", "./exice_z/shell/master/surface0036.png"]],
+          "collision": [[98, 65, 155, 100, "Head"], [100, 110, 151, 141, "Face"], [97, 176, 151, 211, "Bust"], [190, 237, 216, 304, "LeftST"]],
+          "animation": [
+            {
+              "timing": "sometimes",
+              "pattern": [["overlay", 37, 8, 0, 230], ["overlay", 38, 8, 0, 230], ["overlay", 39, 8, 0, 230], ["overlay", 37, 8, 0, 230], ["overlay", 38, 8, 0, 230], ["overlay", 39, 8, 0, 230], ["overlay", -1, 8, 0, 0]]
+            }, {
+              "timing": "sometimes",
+              "pattern": [["overlay", 37, 6, 0, 230], ["overlay", 38, 6, 0, 230], ["overlay", 39, 6, 0, 230], ["overlay", 37, 6, 0, 230], ["overlay", 38, 6, 0, 230], ["overlay", 39, 6, 0, 230], ["overlay", -1, 6, 0, 0]]
+            }, {
+              "timing": "sometimes",
+              "pattern": [["overlay", 37, 8, 0, 230], ["overlay", 38, 8, 0, 230], ["overlay", 39, 8, 0, 230], ["overlay", 37, 8, 0, 230], ["overlay", 38, 8, 0, 230], ["overlay", 39, 8, 0, 230], ["overlay", -1, 8, 0, 0]]
+            }, {
+              "timing": "sometimes",
+              "pattern": [["overlay", 37, 10, 0, 230], ["overlay", 38, 10, 0, 230], ["overlay", 39, 10, 0, 230], ["overlay", 37, 10, 0, 230], ["overlay", 38, 10, 0, 230], ["overlay", 39, 10, 0, 230], ["overlay", -1, 10, 0, 0]]
+            }
+          ]
+        },
+        "37": {
+          "element": [["base", "./exice_z/shell/master/surface0037.png"]]
+        },
+        "38": {
+          "element": [["base", "./exice_z/shell/master/surface0038.png"]]
+        },
+        "39": {
+          "element": [["base", "./exice_z/shell/master/surface0039.png"]]
+        },
+        "40": {
+          "element": [["base", "./exice_z/shell/master/surface0040.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["overlay", 45, 8], ["overlay", 46, 8], ["overlay", 47, 8], ["overlay", 48, 8]]
+            }
+          ]
+        },
+        "41": {
+          "element": [["base", "./exice_z/shell/master/surface0041.png"]],
+          "collision": [[80, 62, 143, 95, "Head"], [91, 111, 139, 142, "Face"], [89, 181, 140, 216, "Bust"], [184, 187, 211, 238, "LeftST"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["overlay", 48, 8], ["overlay", 47, 8], ["overlay", 46, 8], ["overlay", 45, 8], ["overlay", 43, 8], ["overlay", -1, 8]]
+            }
+          ]
+        },
+        "42": {
+          "element": [["base", "./exice_z/shell/master/surface0042.png"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["base", 81, 8], ["base", 82, 8], ["base", 83, 8], ["base", 84, 8], ["base", 85, 8], ["base", 86, 8], ["base", 87, 8], ["base", 88, 8], ["base", 89, 8], ["base", 43, 8]]
+            }
+          ]
+        },
+        "43": {
+          "element": [["base", "./exice_z/shell/master/surface0043.png"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["base", 89, 8], ["base", 88, 8], ["base", 87, 8], ["base", 86, 8], ["base", 85, 8], ["base", 84, 8], ["base", 83, 8], ["base", 82, 8], ["base", 81, 8], ["base", 42, 8]]
+            }
+          ]
+        },
+        "45": {
+          "element": [["base", "./exice_z/shell/master/surface0045.png"]]
+        },
+        "46": {
+          "element": [["base", "./exice_z/shell/master/surface0046.png"]]
+        },
+        "47": {
+          "element": [["base", "./exice_z/shell/master/surface0047.png"]]
+        },
+        "48": {
+          "element": [["base", "./exice_z/shell/master/surface0048.png"]]
+        },
+        "50": {
+          "element": [["base", "./exice_z/shell/master/surface0050.png"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["base", 52, 6], ["base", 53, 6], ["base", 54, 6], ["base", 55, 6], ["base", 56, 6], ["base", 57, 6], ["base", 58, 6], ["base", 51, 6]]
+            }
+          ]
+        },
+        "51": {
+          "element": [["base", "./exice_z/shell/master/surface0051.png"]],
+          "animation": [
+            {
+              "timing": "runonce",
+              "pattern": [["base", 58, 6], ["base", 57, 6], ["base", 56, 6], ["base", 55, 6], ["base", 54, 6], ["base", 53, 6], ["base", 52, 6], ["base", 50, 6]]
+            }
+          ]
+        },
+        "52": {
+          "element": [["base", "./exice_z/shell/master/surface0052.png"]]
+        },
+        "53": {
+          "element": [["base", "./exice_z/shell/master/surface0053.png"]]
+        },
+        "54": {
+          "element": [["base", "./exice_z/shell/master/surface0054.png"]]
+        },
+        "55": {
+          "element": [["base", "./exice_z/shell/master/surface0055.png"]]
+        },
+        "56": {
+          "element": [["base", "./exice_z/shell/master/surface0056.png"]]
+        },
+        "57": {
+          "element": [["base", "./exice_z/shell/master/surface0057.png"]]
+        },
+        "58": {
+          "element": [["base", "./exice_z/shell/master/surface0058.png"]]
+        },
+        "60": {
+          "element": [["base", "./exice_z/shell/master/surface0060.png"]]
+        },
+        "61": {
+          "element": [["base", "./exice_z/shell/master/surface0061.png"]]
+        },
+        "62": {
+          "element": [["base", "./exice_z/shell/master/surface0062.png"]]
+        },
+        "63": {
+          "element": [["base", "./exice_z/shell/master/surface0063.png"]]
+        },
+        "64": {
+          "element": [["base", "./exice_z/shell/master/surface0064.png"]]
+        },
+        "65": {
+          "element": [["base", "./exice_z/shell/master/surface0065.png"]]
+        },
+        "70": {
+          "element": [["base", "./exice_z/shell/master/surface0070.png"]],
+          "collision": [[84, 103, 134, 136, "Head"], [88, 144, 132, 174, "Face"], [182, 191, 208, 251, "LeftST"]]
+        },
+        "71": {
+          "element": [["base", "./exice_z/shell/master/surface0071.png"]],
+          "collision": [[95, 67, 157, 103, "Head"], [104, 116, 158, 143, "Face"], [106, 174, 155, 209, "Bust"], [182, 189, 209, 274, "LeftST"]]
+        },
+        "72": {
+          "element": [["base", "./exice_z/shell/master/surface0072.png"]],
+          "collision": [[73, 68, 122, 102, "Head"], [82, 106, 129, 145, "Face"], [99, 161, 149, 202, "Bust"], [179, 161, 213, 239, "LeftST"]]
+        },
+        "73": {
+          "element": [["base", "./exice_z/shell/master/surface0073.png"]],
+          "collision": [[75, 70, 130, 106, "Head"], [90, 111, 132, 143, "Face"], [90, 188, 114, 216, "Bust"], [185, 169, 212, 251, "LeftST"]]
+        },
+        "74": {
+          "element": [["base", "./exice_z/shell/master/surface0074.png"]],
+          "collision": [[89, 81, 141, 113, "Head"], [99, 121, 142, 152, "Face"], [111, 162, 146, 201, "Bust"], [199, 139, 228, 221, "LeftST"]]
+        },
+        "75": {
+          "element": [["base", "./exice_z/shell/master/surface0075.png"]],
+          "collision": [[107, 103, 161, 136, "Head"], [113, 140, 157, 173, "Face"], [131, 193, 169, 213, "Bust"], [201, 177, 227, 241, "LeftST"]]
+        },
+        "76": {
+          "element": [["base", "./exice_z/shell/master/surface0076.png"]],
+          "collision": [[98, 65, 155, 100, "Head"], [100, 110, 151, 141, "Face"], [97, 176, 151, 211, "Bust"], [190, 237, 216, 304, "LeftST"]]
+        },
+        "77": {
+          "element": [["base", "./exice_z/shell/master/surface0077.png"]],
+          "collision": [[89, 81, 141, 113, "Head"], [99, 121, 142, 152, "Face"], [111, 162, 146, 201, "Bust"], [199, 139, 228, 221, "LeftST"]]
+        },
+        "81": {
+          "element": [["base", "./exice_z/shell/master/surface0081.png"]]
+        },
+        "82": {
+          "element": [["base", "./exice_z/shell/master/surface0082.png"]]
+        },
+        "83": {
+          "element": [["base", "./exice_z/shell/master/surface0083.png"]]
+        },
+        "84": {
+          "element": [["base", "./exice_z/shell/master/surface0084.png"]]
+        },
+        "85": {
+          "element": [["base", "./exice_z/shell/master/surface0085.png"]]
+        },
+        "86": {
+          "element": [["base", "./exice_z/shell/master/surface0086.png"]]
+        },
+        "87": {
+          "element": [["base", "./exice_z/shell/master/surface0087.png"]]
+        },
+        "88": {
+          "element": [["base", "./exice_z/shell/master/surface0088.png"]]
+        },
+        "89": {
+          "element": [["base", "./exice_z/shell/master/surface0089.png"]]
+        }
+      }
+    }
+  }
+};
+
+var hash2Array = function(hash) {
+  var ary, k, v, _fn;
+  ary = [];
+  _fn = function() {
+    return ary[k] = v;
+  };
+  for (k in hash) {
+    v = hash[k];
+    _fn(k, v);
+  }
+  return ary;
+};
+
+exice_zJson.shell.master.surface = hash2Array(exice_zJson.shell.master.surface);
+
+var ikagaka;
+
+ikagaka = (function() {
+  var Blimp, Named, Scope, Surface, always, composeElements, copy, doPreload, draw, drawCollisions, isArray, isCanvas, isFunction, isHit, isImage, isNumber, isObject, mouseEvent, namedAry, namedIndex, overlay, overlayfast, preload, preloadAndComposeElements, preloadElements, random, rarely, runonce, setCollisions, setElements, sometimes, transImg;
+  isFunction = function(fn) {
+    return Object.prototype.toString.apply(fn) === "[object Function]";
+  };
+  isArray = function(ary) {
+    return Object.prototype.toString.apply(ary) === "[object Array]";
+  };
+  isObject = function(o) {
+    return Object.prototype.toString.apply(o) === "[object Object]";
+  };
+  isImage = function(img) {
+    return Object.prototype.toString.apply(img) === "[object HTMLImageElement]";
+  };
+  isCanvas = function(cnv) {
+    return Object.prototype.toString.apply(cnv) === "[object HTMLCanvasElement]";
+  };
+  isNumber = function(n) {
+    return isFinite(Number(n));
+  };
+  transImg = (function() {
+    return function(img, callback) {
+      var b, canvas, ctx, g, i, imgdata, r, _ref;
+      canvas = $("<canvas />").attr({
+        "width": img.width,
+        "height": img.height
+      })[0];
+      ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+      try {
+        imgdata = ctx.getImageData(0, 0, img.width, img.height);
+        if (imgdata.data[3] === 0) {
+          setTimeout(function() {
+            ctx.putImageData(imgdata, 0, 0);
+            return callback(canvas);
+          });
+        } else {
+          i = 0;
+          _ref = [imgdata.data[0], imgdata.data[1], imgdata.data[2]], r = _ref[0], g = _ref[1], b = _ref[2];
+          while (i < imgdata.data.length) {
+            if (r === imgdata.data[i] && g === imgdata.data[i + 1] && b === imgdata.data[i + 2]) {
+              imgdata.data[i + 3] = 0;
+            }
+            i += 4;
+          }
+          setTimeout(function() {
+            ctx.putImageData(imgdata, 0, 0);
+            return callback(canvas);
+          });
+        }
+      } catch (e) {
+        setTimeout(function() {
+          return callback(canvas);
+        });
+      }
+      return canvas;
+    };
+  })();
+  copy = function(parent) {
+    var child, ctx;
+    child = $("<canvas />").attr({
+      "width": parent.width,
+      "height": parent.height
+    })[0];
+    ctx = child.getContext('2d');
+    ctx.drawImage(parent, 0, 0);
+    return child;
+  };
+  overlayfast = function(target, canvas, x, y) {
+    var ctx;
+    if (x == null) {
+      x = 0;
+    }
+    if (y == null) {
+      y = 0;
+    }
+    ctx = target.getContext('2d');
+    ctx.drawImage(canvas, x, y);
+    return target;
+  };
+  overlay = overlayfast;
+  draw = function(target, canvas) {
+    var ctx;
+    $(target).attr({
+      "width": canvas.width,
+      "height": canvas.height
+    });
+    if (target.parentNode != null) {
+      $(target.parentNode).width(canvas.width).height(canvas.height);
+    }
+    ctx = target.getContext('2d');
+    ctx.drawImage(canvas, 0, 0);
+    return target;
+  };
+  preload = (function() {
+    var urlImgHash;
+    urlImgHash = {};
+    return function(urlAry, callback) {
+      var i, imgAry;
+      i = 0;
+      imgAry = urlAry.map(function(url) {
+        var img, schema;
+        if (isCanvas(urlImgHash[url]) && urlImgHash[url].width !== 0) {
+          return urlImgHash[url];
+        }
+        i++;
+        img = new Image();
+        try {
+          schema = localStorage[url];
+        } catch (_error) {}
+        img.src = schema || url;
+        img.onload = img.onerror = function() {
+          i--;
+          transImg(img, function(canvas) {
+            urlImgHash[url] = canvas;
+            try {
+              if (localStorage[url] == null) {
+                return localStorage[url] = canvas.toDataURL();
+              }
+            } catch (_error) {}
+          });
+          if (i === 0) {
+            return typeof callback === "function" ? callback(imgAry) : void 0;
+          }
+        };
+        return img;
+      });
+      if (i === 0) {
+        setTimeout((function() {
+          return typeof callback === "function" ? callback(imgAry) : void 0;
+        }), 0);
+      }
+      return imgAry;
+    };
+  })();
+  doPreload = function(json) {
+    json.shell.master.surface.forEach(function(v) {
+      return preloadElements(v.element);
+    });
+  };
+  preloadElements = function(elementsAry, callback) {
+    var urlAry;
+    urlAry = elementsAry.map(function(v) {
+      return v[1];
+    });
+    return preload(urlAry, function(imgAry) {
+      var imagedElementsAry;
+      imagedElementsAry = elementsAry.map(function(v, i) {
+        return [v[0], imgAry[i], v[2], v[3]];
+      });
+      return typeof callback === "function" ? callback(imagedElementsAry) : void 0;
+    });
+  };
+  composeElements = function(imagedElementsAry, callback) {
+    var compose, i, target;
+    target = $("<canvas />")[0];
+    i = 0;
+    compose = function(target, ary) {
+      var img, type, x, y, _ref;
+      _ref = ary[i++], type = _ref[0], img = _ref[1], x = _ref[2], y = _ref[3];
+      return transImg(img, function(canvas) {
+        target = (function() {
+          switch (type) {
+            case "base":
+              return copy(canvas);
+            case "overlay":
+              return overlay(target, canvas, x, y);
+            case "overlayfast":
+              return overlayfast(target, canvas, x, y);
+          }
+        })();
+        if (ary[i] != null) {
+          return compose(target, ary);
+        } else {
+          return callback(target);
+        }
+      });
+    };
+    if (imagedElementsAry.length > 0) {
+      compose(target, imagedElementsAry);
+    }
+    return target;
+  };
+  preloadAndComposeElements = function(elementsAry, callback) {
+    return preloadElements(elementsAry, function(imagedElementsAry) {
+      return composeElements(imagedElementsAry, callback);
+    });
+  };
+  setElements = function(target, elementsAry, callback) {
+    if (elementsAry == null) {
+      setTimeout((function() {
+        return typeof callback === "function" ? callback(target) : void 0;
+      }));
+      return [];
+    }
+    return preloadAndComposeElements(elementsAry, function(canvas) {
+      return typeof callback === "function" ? callback(draw(target, canvas)) : void 0;
+    });
+  };
+  isHit = function(target, x, y) {
+    var ctx, imgdata;
+    ctx = target.getContext("2d");
+    try {
+      imgdata = ctx.getImageData(0, 0, x, y);
+      return imgdata.data[imgdata.data.length - 1] !== 0;
+    } catch (_error) {}
+    return true;
+  };
+  mouseEvent = function(id, e, target, collisionsAry, scopeId, handler) {
+    var event, hit, offsetX, offsetY;
+    offsetX = e.offsetX || e.originalEvent.layerX;
+    offsetY = e.offsetY || e.originalEvent.layerY;
+    if (isHit(target, offsetX, offsetY)) {
+      e.preventDefault();
+      event = {
+        "ID": id,
+        "Reference0": offsetX,
+        "Reference1": offsetY,
+        "Reference2": 0,
+        "Reference3": scopeId,
+        "Reference4": "",
+        "Reference5": 0
+      };
+      if (id === "OnMouseMove") {
+        delete event.Reference5;
+      }
+      hit = false;
+      if (collisionsAry != null) {
+        collisionsAry.forEach(function(v) {
+          var name, x, y, _x, _y;
+          x = v[0], y = v[1], _x = v[2], _y = v[3], name = v[4];
+          if (((x < offsetX && offsetX < _x) && (y < offsetY && offsetY < _y)) || ((_x < offsetX && offsetX < x) && (_y < offsetY && offsetY < y))) {
+            event.Reference4 = name;
+            return hit = true;
+          }
+        });
+      }
+      if (hit) {
+        $(target).css("cursor", "pointer");
+      } else {
+        $(target).css("cursor", "default");
+      }
+      handler(event);
+    }
+    return target;
+  };
+  setCollisions = function(target, collisionsAry, scopeId, handler) {
+    $(target).unbind().click(function(e) {
+      return mouseEvent("OnMouseClick", e, target, collisionsAry, scopeId, handler);
+    }).dblclick(function(e) {
+      return mouseEvent("OnMouseDoubleClick", e, target, collisionsAry, scopeId, handler);
+    }).mousedown(function(e) {}).mousemove(function(e) {
+      return mouseEvent("OnMouseMove", e, target, collisionsAry, scopeId, handler);
+    }).mouseup(function(e) {}).bind("touchstart", (function() {
+      var b;
+      b = false;
+      return function(e) {
+        if (b) {
+          mouseEvent("OnMouseDoubleClick", e, target, collisionsAry, scopeId, handler);
+          b = false;
+        } else {
+          b = true;
+        }
+        return setTimeout((function() {
+          return b = false;
+        }), 500);
+      };
+    })()).bind("touchmove", function(e) {
+      return mouseEvent("OnMouseMove", e, this, collisionsAry, scopeId, handler);
+    }).bind("touchend", function(e) {}).bind("touchcancel", function(e) {});
+    return target;
+  };
+  drawCollisions = function(target, collisionsAry) {
+    var ctx;
+    ctx = target.getContext("2d");
+    if (collisionsAry != null) {
+      collisionsAry.forEach(function(v) {
+        var name, x, y, _x, _y;
+        x = v[0], y = v[1], _x = v[2], _y = v[3], name = v[4];
+        ctx.strokeStyle = "rgb(200, 0, 0)";
+        return ctx.strokeRect(x, y, Math.abs(_x - x), Math.abs(_y - y));
+      });
+    }
+    return target;
+  };
+  sometimes = function(tidAry, fn) {
+    return random(tidAry, fn, 2);
+  };
+  rarely = function(tidAry, fn) {
+    return random(tidAry, fn, 4);
+  };
+  random = function(tidAry, fn, n) {
+    var ms;
+    ms = 1;
+    while (Math.round(Math.random() * 1000) > 1000 / n) {
+      ms++;
+    }
+    return tidAry.push(setTimeout(function() {
+      fn();
+      return random(tidAry, fn, n);
+    }, ms * 1000));
+  };
+  runonce = function(tidAry, fn) {
+    return tidAry.push(setTimeout(fn, 0));
+  };
+  always = function(tidAry, fn) {
+    return tidAry.push(setTimeout(function() {
+      fn();
+      return always(tidAry, fn);
+    }, 0));
+  };
+  Surface = (function() {
+
+    Surface.name = 'Surface';
+
+    function Surface(_, callback) {
+      var playAnimation, playingTidAryAry, raiseEvent, regExp, surfaceHash, target, timingTidAry, _ref,
+        _this = this;
+      this._ = _;
+      this._surfaceId = this._._curSurface;
+      this._surfaceAry = this._._._json.shell.master.surface;
+      this._surfaceHash = surfaceHash = this._surfaceAry[this._surfaceId];
+      this._timingTidAry = timingTidAry = [];
+      this._playingTidAryAry = playingTidAryAry = [];
+      this._playingPatternElementsAryAry = [];
+      target = this._._surfaceCanvas;
+      raiseEvent = this._._.raiseEvent.bind(this._._);
+      playAnimation = this.playAnimation.bind(this);
+      setElements(target, surfaceHash.element, function() {
+        if (_this._._._showCollision) {
+          drawCollisions(target, surfaceHash.collision);
+        }
+        return typeof callback === "function" ? callback() : void 0;
+      });
+      setCollisions(target, surfaceHash.collision, this._._scopeId, raiseEvent);
+      regExp = /(\w+)(?:,\s*(\d+))?/;
+      if ((_ref = surfaceHash.animation) != null) {
+        _ref.forEach(function(v, i) {
+          var n, timing, _ref1;
+          playingTidAryAry[i] = [];
+          _ref1 = regExp.exec(v.timing).slice(1), timing = _ref1[0], n = _ref1[1];
+          switch (timing) {
+            case "sometimes":
+              return sometimes(timingTidAry, function() {
+                return playAnimation(i);
+              });
+            case "rarely":
+              return rarely(timingTidAry, function() {
+                return playAnimation(i);
+              });
+            case "random":
+              return random(timingTidAry, (function() {
+                return playAnimation(i);
+              }), n);
+            case "runonce":
+              return runonce(timingTidAry, function() {
+                return playAnimation(i);
+              });
+            case "always":
+              return always(timingTidAry, function() {
+                return playAnimation(i);
+              });
+          }
+        });
+      }
+    }
+
+    Surface.prototype.playAnimation = function(n, callback) {
+      var elmAryAry, i, patternAry, playPattern, surfaceHash, target,
+        _this = this;
+      if (n != null) {
+        if (this._._._apiLogging) {
+          console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").animation(" + n + ")");
+        }
+        patternAry = this._surfaceHash.animation[n].pattern;
+        elmAryAry = this._playingPatternElementsAryAry;
+        target = this._._surfaceCanvas;
+        surfaceHash = this._surfaceHash;
+        i = 0;
+        playPattern = function() {
+          var delay, id, type, x, y, _ref;
+          _ref = patternAry[i++], type = _ref[0], id = _ref[1], delay = _ref[2], x = _ref[3], y = _ref[4];
+          if (x == null) {
+            x = 0;
+          }
+          if (y == null) {
+            y = 0;
+          }
+          if (_this._surfaceAry[id] != null) {
+            elmAryAry[n] = _this._surfaceAry[id].element.map(function(v) {
+              var url, _type, _x, _y;
+              _type = v[0], url = v[1], _x = v[2], _y = v[3];
+              if (_x == null) {
+                _x = 0;
+              }
+              if (_y == null) {
+                _y = 0;
+              }
+              return [type, url, _x + x, _y + y];
+            });
+          } else if (id === -1) {
+            elmAryAry[n] = [];
+          }
+          setElements(target, surfaceHash.element.concat(elmAryAry.reduce(function(tmp, v) {
+            return tmp.concat(v);
+          })), function() {
+            if (_this._._._showCollision) {
+              return drawCollisions(target, surfaceHash.collision);
+            }
+          });
+          if (patternAry[i] != null) {
+            return _this._playingTidAryAry[n].push(setTimeout(playPattern, delay * 10));
+          } else {
+            return setTimeout((function() {
+              return typeof callback === "function" ? callback() : void 0;
+            }), 0);
+          }
+        };
+        setTimeout(playPattern, 0);
+      }
+    };
+
+    Surface.prototype.stopAnimation = function(n) {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").stopAnimation()");
+      }
+      if (n != null) {
+        clearTimeout(this._playingTidAryAry[n]);
+        clearTimeout(this._timingTidAry[n]);
+      } else {
+        this._playingTidAryAry.forEach(function(v) {
+          return v != null ? v.forEach(function(v) {
+            return clearTimeout(v);
+          }) : void 0;
+        });
+        this._timingTidAry.forEach(function(v) {
+          return clearTimeout(v);
+        });
+      }
+    };
+
+    Surface.prototype.show = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").show()");
+      }
+      $(this._._surfaceCanvas).css({
+        visibility: "visible"
+      });
+    };
+
+    Surface.prototype.hide = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").hide()");
+      }
+      $(this._._surfaceCanvas).css({
+        visibility: "hidden"
+      });
+    };
+
+    Surface.prototype.unload = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").unload()");
+      }
+      $(this._._surfaceCanvas).unbind();
+      this.stopAnimation();
+    };
+
+    Surface.prototype.disappear = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").surface(" + this._surfaceId + ").disappear()");
+      }
+      this.unload();
+      $(this._._surfaceCanvas).attr({
+        width: 0,
+        height: 0
+      });
+    };
+
+    return Surface;
+
+  })();
+  Blimp = (function() {
+
+    Blimp.name = 'Blimp';
+
+    function Blimp(_, callback) {
+      var _this = this;
+      this._ = _;
+      this._blimpId = this._._curBlimp;
+      this._anchor = false;
+      preload(["./ssp/balloons0.png", "./ssp/balloons1.png", "./ssp/balloonk0.png", "./ssp/balloonk1.png"], function(ary) {
+        return transImg(ary[(_this._._scopeId === 0 ? 0 : 2)], function(canvas) {
+          var target;
+          target = draw(_this._._blimpCanvas, canvas);
+          $(_this._._textDiv).width(target.width - 30).height(target.height - 20);
+          return typeof callback === "function" ? callback() : void 0;
+        });
+      });
+    }
+
+    Blimp.prototype.show = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").show()");
+      }
+      $(this._._balloonDiv).css({
+        display: "block"
+      });
+    };
+
+    Blimp.prototype.hide = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").hide()");
+      }
+      $(this._._balloonDiv).css({
+        display: "none"
+      });
+    };
+
+    Blimp.prototype.talk = function(chr) {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").talk(\"" + chr + "\")");
+      }
+      this.show();
+      this._._textDiv.scrollTop = 999;
+      if (this._anchor) {
+        $(this._._textDiv).children(".anchor:last-child").append(chr);
+      } else {
+        $(this._._textDiv).append(chr);
+      }
+    };
+
+    Blimp.prototype.select = function(title, id) {
+      var _this = this;
+      if (title == null) {
+        title = "";
+      }
+      if (id == null) {
+        id = "";
+      }
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").select(\"" + title + "\",\"" + id + "\")");
+      }
+      return $(this._._textDiv).append("<span class='select' style='position:static;color:blue;'>" + title + "</a>").unbind().click(function(e) {
+        var event;
+        event = {
+          "ID": "OnChoiceSelect",
+          "Reference0": id
+        };
+        return _this._._.raiseEvent(event);
+      });
+    };
+
+    Blimp.prototype.anchor = function(id) {
+      var _this = this;
+      if (id == null) {
+        id = "";
+      }
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").anchor(\"" + id + "\")");
+      }
+      if (this._anchor) {
+        this._anchor = false;
+      } else {
+        this._anchor = true;
+        $(this._._textDiv).append("<span class='anchor' style='position:static;' />").unbind().click(function(e) {
+          var event;
+          event = {
+            "ID": "OnAnchorSelect",
+            "Reference0": id
+          };
+          return _this._._.raiseEvent(event);
+        });
+      }
+    };
+
+    Blimp.prototype.br = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").br()");
+      }
+      $(this._._textDiv).append("<br />");
+    };
+
+    Blimp.prototype.clear = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").clear()");
+      }
+      $(this._._textDiv).html("");
+    };
+
+    Blimp.prototype.unload = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").unload()");
+      }
+      this.clear();
+    };
+
+    Blimp.prototype.disappear = function() {
+      if (this._._._apiLogging) {
+        console.log("named(" + this._._._namedId + ").scope(" + this._._scopeId + ").blimp(" + this._blimpId + ").disappear()");
+      }
+      this.unload();
+      $(this._._blimpCanvas).attr({
+        width: 0,
+        height: 0
+      });
+      this._._blimpObj = void 0;
+    };
+
+    return Blimp;
+
+  })();
+  Scope = (function() {
+
+    Scope.name = 'Scope';
+
+    function Scope(_) {
+      var _this = this;
+      this._ = _;
+      this._scopeId = this._._curScope;
+      this._curSurface = 0;
+      this._curBlimp = 0;
+      this._surfaceCanvas = $("<canvas class=\"surface\" width=\"0\" height=\"0\" />")[0];
+      this._balloonDiv = $("<div class=\"balloon\" />")[0];
+      this._blimpCanvas = $("<canvas class=\"blimp\" width=\"0\" height=\"0\" />")[0];
+      this._textDiv = $("<div class=\"text\" style=\"margin:10px;margin-right:30px;overflow-y:scroll;white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word;\" />")[0];
+      this._scopeDiv = $("<div class=\"scope\" />").addClass("scope" + this._scopeId).css({
+        bottom: "0px",
+        right: (this._scopeId * 240) + "px"
+      }).append(this._surfaceCanvas).append($(this._balloonDiv).css({
+        top: "60px",
+        left: "-300px"
+      }).append(this._blimpCanvas).append(this._textDiv)).click(function() {
+        return _this.focus();
+      }).appendTo(this._._namedDiv);
+      this._surfaceObj = new Surface(this);
+      this._blimpObj = new Blimp(this);
+      this._surfaceObj.hide();
+      this._blimpObj.hide();
+    }
+
+    Scope.prototype.focus = function() {
+      $(this._scopeDiv).appendTo(this._._namedDiv);
+    };
+
+    Scope.prototype.surface = function(n, callback) {
+      var _ref;
+      if (n != null) {
+        if (n === -1) {
+          this._surfaceObj.hide();
+        } else if (this._._json.shell.master.surface[n] != null) {
+          if (isNumber(n)) {
+            this._curSurface = Number(n);
+          }
+          if ((_ref = this._surfaceObj) != null) {
+            _ref.unload();
+          }
+          this._surfaceObj = new Surface(this, callback);
+          this._surfaceObj.show();
+        }
+        if (this._._apiLogging) {
+          console.log("named(" + this._._namedId + ").scope(" + this._scopeId + ").surface(" + n + ")");
+        }
+      }
+      return this._surfaceObj;
+    };
+
+    Scope.prototype.blimp = function(n, callback) {
+      var _ref;
+      if (n != null) {
+        if (n === -1) {
+          this._blimpObj.hide();
+        } else if (isNumber(n)) {
+          this._curBlimp = Number(n);
+          if ((_ref = this._blimpObj) != null) {
+            _ref.unload();
+          }
+          this._blimpObj = new Blimp(this, callback);
+          this._blimpObj.show();
+        }
+        if (this._._apiLogging) {
+          console.log("named(" + this._._namedId + ").scope(" + this._scopeId + ").blimp(" + n + ")");
+        }
+      }
+      return this._blimpObj;
+    };
+
+    Scope.prototype.disappear = function() {
+      if (this._._apiLogging) {
+        console.log("named(" + this._._namedId + ").scope(" + this._scopeId + ").disappear()");
+      }
+      this._surfaceObj.disappear();
+      this._blimpObj.disappear();
+      $(this._scopeDiv).remove();
+      this._._scopeAry[this._scopeId] = void 0;
+    };
+
+    return Scope;
+
+  })();
+  namedIndex = 0;
+  namedAry = [];
+  Named = (function() {
+
+    Named.name = 'Named';
+
+    function Named(args) {
+      var callback,
+        _this = this;
+      this._json = args[0];
+      if (isObject(args[1])) {
+        this._apiLogging = args[1].apiLogging != null ? args[1].apiLogging : false;
+        this._eventLogging = args[1].eventLogging != null ? args[1].eventLogging : false;
+        this._secondChangeLogging = args[1].secondChangeLogging != null ? args[1].secondChangeLogging : false;
+        this._mouseMoveLogging = args[1].mouseMoveLogging != null ? args[1].mouseMoveLogging : false;
+        this._preload = args[1].preload != null ? args[1].preload : false;
+        this._showCollision = args[1].showCollision != null ? args[1].showCollision : false;
+      }
+      if (isFunction(args[args.length - 1])) {
+        callback = args[args.length - 1];
+      }
+      this._namedId = namedIndex;
+      namedAry[namedIndex++] = this;
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ")");
+      }
+      this._namedDiv = $("<div />").attr({
+        id: "named" + this._namedId
+      }).addClass("named").append($("<style scoped />").html("#named" + this._namedId + " *{position:absolute;border:none;margin:0px;padding:0px;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;} .anchor,.select{color:red;cursor:pointer;} .anchor:hover,.select:hover{background-color:violet;}")).appendTo("body")[0];
+      this._curScope = 0;
+      this._scopeAry = [];
+      this._scopeAry[this._curScope] = new Scope(this);
+      this._scriptTidAry = [];
+      this._talking = false;
+      this._eventHandlerHash = {};
+      if (this._preload) {
+        doPreload(this._json);
+      }
+      setTimeout((function() {
+        return callback != null ? callback.call(_this, _this) : void 0;
+      }), 0);
+    }
+
+    Named.prototype.scope = function(n) {
+      var _base, _name;
+      if (!isNumber(n)) {
+        return this._scopeAry[this._curScope];
+      }
+      this._curScope = Number(n);
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").scope(" + this._curScope + ")");
+      }
+      if ((_base = this._scopeAry)[_name = this._curScope] == null) {
+        _base[_name] = new Scope(this);
+      }
+      this._scopeAry[this._curScope].focus();
+      return this._scopeAry[this._curScope];
+    };
+
+    Named.prototype.playScript = function(script, callback) {
+      var callcc, isCallcc, playingScript, regExpHash, tidAry,
+        _this = this;
+      this.breakScript();
+      this._talking = true;
+      tidAry = this._scriptTidAry;
+      if (script == null) {
+        script = "";
+      }
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").playScript(\"" + script + "\")");
+      }
+      regExpHash = {
+        yy: /^\\\\/,
+        y0: /^\\0/,
+        y1: /^\\1/,
+        yp: /^\\p\[(\d+)\]/,
+        ys: /^\\s\[([^\]]+)\]/,
+        yb: /^\\b\[([^\]]+)\]/,
+        yi: /^\\i\[(\d+)\]/,
+        ywN: /^\\w(\d+)/,
+        y_w: /^\\_w\[(\d+)\]/,
+        yq: /^\\q\[([^\]]+)\]/,
+        y_aS: /^\\_a\[([^\]]+)\]/,
+        y_aE: /^\\_a/,
+        yc: /^\\c/,
+        yn: /^\\n/,
+        ynhalf: /^\\n\[half\]/,
+        ye: /^\\e/
+      };
+      isCallcc = false;
+      callcc = function(rescript, talkWait) {
+        isCallcc = true;
+        return function() {
+          isCallcc = false;
+          return tidAry.push(setTimeout(playingScript, talkWait, rescript));
+        };
+      };
+      playingScript = function(script) {
+        var chr, id, n, rescript, talkWait, title, _ref;
+        if (script.length === 0) {
+          _this._talking = false;
+          return tidAry.push(setTimeout((function() {
+            _this.breakScript();
+            return typeof callback === "function" ? callback(tidAry) : void 0;
+          }), 10000));
+        }
+        talkWait = 0;
+        switch (true) {
+          case regExpHash.y0.test(script):
+            rescript = script.substr(2);
+            _this.scope(0);
+            break;
+          case regExpHash.y1.test(script):
+            rescript = script.substr(2);
+            _this.scope(1);
+            break;
+          case regExpHash.yp.test(script):
+            n = Number(regExpHash.yp.exec(script)[1]);
+            rescript = script.replace(regExpHash.yp, "");
+            _this.scope(n);
+            break;
+          case regExpHash.ys.test(script):
+            n = Number(regExpHash.ys.exec(script)[1]);
+            rescript = script.replace(regExpHash.ys, "");
+            _this.scope().surface(n, callcc(rescript, talkWait));
+            break;
+          case regExpHash.yb.test(script):
+            n = Number(regExpHash.yb.exec(script)[1]);
+            rescript = script.replace(regExpHash.yb, "");
+            _this.scope().blimp(n, callcc(rescript, talkWait));
+            break;
+          case regExpHash.yi.test(script):
+            n = Number(regExpHash.yi.exec(script)[1]);
+            rescript = script.replace(regExpHash.yi, "");
+            _this.scope().surface().animation(n, callcc(rescript, talkWait));
+            break;
+          case regExpHash.ywN.test(script):
+            talkWait = Number(regExpHash.ywN.exec(script)[1] * 100);
+            rescript = script.substr(3);
+            if (_this._apiLogging) {
+              console.log("named(" + _this._namedId + ").wait(\"" + talkWait + "\")");
+            }
+            break;
+          case regExpHash.y_w.test(script):
+            talkWait = Number(regExpHash.y_w.exec(script)[1]);
+            rescript = script.replace(regExpHash.y_w, "");
+            if (_this._apiLogging) {
+              console.log("named(" + _this._namedId + ").wait(\"" + talkWait + "\")");
+            }
+            break;
+          case regExpHash.yq.test(script):
+            _ref = regExpHash.yq.exec(script)[1].split(",", 2), title = _ref[0], id = _ref[1];
+            rescript = script.replace(regExpHash.yq, "");
+            _this.scope().blimp().select(title, id);
+            break;
+          case regExpHash.y_aS.test(script):
+            id = regExpHash.y_aS.exec(script)[1];
+            rescript = script.replace(regExpHash.y_aS, "");
+            _this.scope().blimp().anchor(id);
+            break;
+          case regExpHash.y_aE.test(script):
+            rescript = script.substr(3);
+            _this.scope().blimp().anchor();
+            break;
+          case regExpHash.yc.test(script):
+            rescript = script.substr(2);
+            _this.scope().blimp().clear();
+            break;
+          case regExpHash.ynhalf.test(script):
+            rescript = script.substr(8);
+            _this.scope().blimp().br();
+            break;
+          case regExpHash.yn.test(script):
+            rescript = script.substr(2);
+            _this.scope().blimp().br();
+            break;
+          case regExpHash.ye.test(script):
+            rescript = "";
+            if (_this._apiLogging) {
+              console.log("named(" + _this.namedId + ").yen-e()");
+            }
+            break;
+          case regExpHash.yy.test(script):
+            rescript = script.substr(2);
+            _this.scope().blimp().talk("\\");
+            break;
+          default:
+            chr = script.substr(0, 1);
+            rescript = script.substr(1);
+            _this.scope().blimp().talk(chr);
+            talkWait = 80;
+        }
+        if (!isCallcc) {
+          return tidAry.push(setTimeout(playingScript, talkWait, rescript));
+        }
+      };
+      playingScript(script);
+    };
+
+    Named.prototype.breakScript = function() {
+      this._scriptTidAry.forEach(function(v) {
+        return clearTimeout(v);
+      });
+      this._scopeAry.forEach(function(v) {
+        return v.blimp(-1).clear();
+      });
+      this._talking = false;
+    };
+
+    Named.prototype.raiseEvent = function(e) {
+      var k, script, v, _base, _name,
+        _this = this;
+      if (this._apiLogging && ((e.ID === "OnSecondChange" ? this._secondChengeLogging : true) && (e.ID === "OnMouseMove" ? this._mouseMoveLogging : true))) {
+        console.log("named(" + this._namedId + ").raiseEvent(" + e.ID + ")");
+      }
+      if (this._eventLogging && ((e.ID === "OnSecondChange" ? this._secondChengeLogging : true) && (e.ID === "OnMouseMove" ? this._mouseMoveLogging : true))) {
+        console.log("--- Request ---");
+        console.log("GET SHIORI/3.0");
+        console.log("Charset: UTF-8");
+        for (k in e) {
+          v = e[k];
+          console.log("" + k + " :" + v);
+        }
+        console.log("--- Operation ---");
+      }
+      script = typeof this._shiori === "function" ? this._shiori(e) : void 0;
+      script = typeof (_base = this._eventHandlerHash)[_name = e.ID] === "function" ? _base[_name](e) : void 0;
+      if (this._eventLogging && ((e.ID === "OnSecondChange" ? this._secondChengeLogging : true) && (e.ID === "OnMouseMove" ? this._mouseMoveLogging : true))) {
+        if (script != null) {
+          console.log("status code : 200");
+          console.log("--- Response ---");
+          console.log("value=" + script);
+        } else {
+          console.log("status code : 204");
+          console.log("--- Response ---");
+        }
+        console.log("");
+      }
+      if ((script != null) && !this._talking) {
+        this.breakScript();
+        setTimeout((function() {
+          return _this.playScript(script);
+        }), 0);
+      }
+    };
+
+    Named.prototype.setShiori = function(handler) {
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").setShiori()");
+      }
+      this._shiori = handler;
+    };
+
+    Named.prototype.on = function(id, handler) {
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").on(\"" + id + "\")");
+      }
+      this._eventHandlerHash[id] = handler;
+    };
+
+    Named.prototype.materialize = function() {
+      var _this = this;
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").materialize()");
+      }
+      this._secondChangeTid = setInterval((function() {
+        return _this.raiseEvent({
+          "ID": "OnSecondChange",
+          "Reference0": 0,
+          "Reference1": 0,
+          "Reference2": 0,
+          "Reference3": 0
+        });
+      }), 1000);
+      setTimeout((function() {
+        return _this.raiseEvent({
+          ID: "OnBoot",
+          "Reference0": "master"
+        });
+      }), 0);
+    };
+
+    Named.prototype.vanish = function() {
+      if (this._apiLogging) {
+        console.log("named(" + this._namedId + ").vanish()");
+      }
+      this.breakScript();
+      clearTimeout(this._secondChangeTid);
+      this._scopeAry.forEach(function(v) {
+        return v.disappear();
+      });
+      $(this._namedDiv).remove();
+      namedAry[this._namedId] = void 0;
+    };
+
+    return Named;
+
+  })();
+  return {
+    "named": function(n) {
+      return namedAry[n];
+    },
+    "createNamed": function() {
+      return new Named(arguments);
+    }
+  };
+})();
+
+$(function() {
+  var choiceByAry, exice_z, i0BustDoubleClick, i0BustMove, i0FaceDoubleClick, i0HeadMove, iRandamTalk, t0BustMove, t0FaceMove, t0HeadEXMove, t0HeadMove, x0BustMove, x0FaceMove, x0HeadEXMove, x0HeadMove;
+  exice_z = ikagaka.createNamed(exice_zJson, {
+    apiLogging: true,
+    eventLogging: true,
+    showCollision: false
+  }, function(exice_z) {
+    return exice_z.materialize();
+  });
+  choiceByAry = function(ary) {
+    return ary[Math.round(Math.random() * (ary.length - 1))];
+  };
+  exice_z.on("OnBoot", function(e) {
+    return choiceByAry(["\\1\\s[10]\\0\\s[43]\\w8\\w6\\w6イクサイスゼロ…\\w3\\s[77]参上っ！\\w6\\_w[72]\\n\\n[half]\\_w[6]\\1元気の良い事で。\\_w[48]\\e", "\\1\\s[10]\\0\\s[20]…\\w3…\\w3。\\_w[18]\\w8\\w6\\n\\n[half]\\_w[6]\\1剣爺殿、\\_w[24]ゼロは何処ですかな？\\w4\\_w[60]\\n\\n[half]\\_w[6]\\0「眠いって言っといて」との事ですよ。\\_w[108]\\w6\\n\\n[half]\\_w[6]\\1…\\w3…\\w3。\\_w[18]\\w8\\n\\s[11]たわけ！出て来んかっ！\\w8\\_w[66]\\n\\n[half]\\_w[6]\\0\\c\\s[4]…\\w3うー…\\w3。\\_w[30]\\w4ヒドイな～。\\_w[36]\\e", "\\1\\s[10]\\0\\s[51]\\w6\\w6\\s[5]はい、\\_w[18]お呼びですかご主人様っ！\\w6\\_w[72]\\n\\n[half]\\_w[6]\\1似合わない事はするんじゃないぞ？\\w6\\_w[96]\\n\\n[half]\\_w[6]\\0\\s[7]むー。\\_w[18]\\e", "\\1\\s[10]\\0\\s[43]\\w8\\w8\\w8\\s[0]到着ー。\\_w[24]\\w6\\n\\s[5]ユーザーさん、\\_w[18]こんちわー。\\_w[36]\\e", "\\1\\s[10]\\1ワシ参上。\\_w[30]\\w4\\n\\n[half]\\_w[6]\\0\\s[4]本物の年寄りに言われても…\\w3。\\_w[84]\\w4\\n\\n[half]\\_w[6]\\1萌えたじゃろ？\\w4\\_w[42]\\n\\n[half]\\_w[6]\\0\\s[0]いいや。\\_w[24]崩え。\\_w[18]\\w4\\n\\n[half]\\_w[6]\\1何じゃそれは…\\w3。\\_w[48]\\e"]);
+  });
+  iRandamTalk = 10;
+  exice_z.on("OnSecondChange", function(e) {
+    if (iRandamTalk <= 0) {
+      while (Math.round(Math.random() * 500) > 1) {
+        iRandamTalk++;
+      }
+      return choiceByAry(["\\0\\s[0]\\1\\s[10]\\1ゼロさんや。\\_w[36]\\w6\\n\\n[half]\\_w[6]\\0何？\\w6\\_w[12]\\n\\n[half]\\_w[6]\\1暑くないのかの？\\w6\\_w[48]\\n\\n[half]\\_w[6]\\0うん、\\_w[18]暑くないよ。\\_w[36]\\w2寒くも無いね。\\_w[42]\\w6\\nこの服は着用者も快適に保ってくれるんだよ。\\_w[126]\\w6\\n\\n[half]\\_w[6]\\1ほほー。\\_w[24]\\w6\\n\\n[half]\\_w[6]\\0エアコンが寒いとか暑いとか言ってたら変でしょ？\\w6\\_w[138]\\n\\n[half]\\_w[6]\\1確かに商品イメージにはかかわるかな？\\_w[108]\\n\\_w[654]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0そういえば、\\_w[36]荻月ってどうして年寄り言葉で話すの？\\w6\\_w[108]\\n\\n[half]\\_w[6]\\1魂がジジイじゃからな。\\_w[66]\\w6\\n\\n[half]\\_w[6]\\0\\_a[【ジジイの魂】]【ジジイの魂】\\_a？\\_w[48]\\n\\_w[288]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0実は料理とか鉱石精製とか趣味だよ。\\_w[102]\\w6\\n\\n[half]\\_w[6]\\1壊滅的にヘタクソじゃが。\\_w[72]\\w6\\n\\n[half]\\_w[6]\\0\\s[7]うるさいなー。\\_w[42]\\n\\_w[246]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0伝説の武器なんて、\\_w[54]世界の数だけあるんだから。\\_w[78]\\w6\\n…\\w3私のところに一本ぐらいあってもいいよね？\\w8\\_w[126]\\n\\n[half]\\_w[6]\\1そんな事言われてものぉ。\\_w[72]\\w8\\n\\n[half]\\_w[6]\\0という訳で、\\_w[36]\\s[5]アロンダイトカムヒアー！\\w6\\_w[108]\\n…\\w3なんてね。\\_w[36]\\w8\\n\\n[half]\\_w[6]\\1…\\w3危ないからコイツだけには渡したくないっていう場合もあるわけで。\\_w[192]\\w8\\n\\n[half]\\_w[6]\\0\\s[0]…\\w3失礼、\\_w[24]今何て。\\_w[24]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0燃料が増える…\\w3？　\\_w[54]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0陶芸にいそしむ荻月。\\_w[60]\\w4\\n\\n[half]\\_w[6]\\1いそしみません。\\_w[48]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0銃を持った相手に、\\_w[54]\\n\\s[7]動くなッ！\\w4\\_w[30]\\n動かないと撃つぞッ！\\w4\\_w[60]\\n\\n\\s[0]…\\w3って言われたらどうする？\\w6\\_w[78]\\n\\n[half]\\_w[6]\\1…\\w3ま、\\_w[18]動くかのぅ。\\_w[36]\\w6\\n\\n[half]\\_w[6]\\0ほぅ。\\_w[18]そのココロは？\\w6\\_w[42]\\n\\n[half]\\_w[6]\\1「動くな」の方では撃つとは言っていないからの。\\_w[138]\\nそれに動いてれば避けられるかもしれんじゃろ。\\_w[132]\\w4\\n\\n[half]\\_w[6]\\0ははぁ。\\_w[24]考えたね。\\_w[30]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0わたしの着てるこの服は、\\_w[72]\\_a[【イクサイスユニット】]【イクサイスユニット】\\_aって言うんだ。\\_w[108]\\w6\\n着用者に空調機能を付与するよ。\\_w[90]\\w6\\nユニットを着用して、\\_w[60]空調機能を自分の能力として使える状態になっている人のことを\\_a[【イクサイス】]【イクサイス】\\_aと呼ぶよ。\\_w[246]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0今精霊銀でこけしを作るのが流行っているんだよ。\\_w[174]\\w6\\n\\n[half]\\_w[6]\\1ほぉ。\\_w[18]どのくらい流行っておるのじゃ？\\w6\\_w[90]\\n\\n[half]\\_w[6]\\0\\s[5]全米Ｎｏ.１ＨＩＴ！ぐらいかな？\\w6\\_w[93]\\n\\n[half]\\_w[6]\\1…\\w3説得力が微塵も無くなったぞ。\\_w[90]\\n\\_w[471]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0荻月って、\\_w[30]学術っぽく言うとどんな分類になるの？\\w6\\_w[108]\\n\\n[half]\\_w[6]\\1有機微小精密機械集合式霊子付与擬似生命体…\\w3ってところかのぉ。\\_w[180]\\w8\\n適当じゃが。\\_w[36]\\w6\\n\\n[half]\\_w[6]\\0\\s[4]意味不明デス。\\_w[42]\\w6\\n\\n[half]\\_w[6]\\1有機ナノマシン集合体に、\\_w[72]魂をくっつけた生物です、\\_w[72]って感じじゃな。\\_w[48]\\w8\\n魂付与は錬金術的なものに頼ってるらしいから、\\_w[132]かなり正体不明じゃと思うがな。\\_w[90]\\w8\\n\\n[half]\\_w[6]\\0\\s[0]ＡＩじゃなかったんだ？\\w6\\_w[66]\\n\\n[half]\\_w[6]\\1ああ。\\_w[18]他の\\_a[【サポートユニット】]【サポートユニット】\\_aの連中は皆ＡＩじゃがな。\\_w[144]\\w6\\nお前さんの珍妙な能力に付き合うのはＡＩじゃ大変らしいゾ。\\_w[168]\\w6\\n\\n[half]\\_w[6]\\0\\s[7]誰が珍妙だってー？\\w6\\_w[54]\\n\\_w[1356]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0県名を技名として叫ぶとき、\\_w[78]埼玉県が一番語呂が良いよね。\\_w[84]\\w4\\n埼玉拳ーって。\\_w[42]\\w4何でだろうね？\\w4\\_w[42]\\n\\n[half]\\_w[6]\\1さぁのぅ…\\w3。\\_w[36]\\w4\\n\\n[half]\\_w[6]\\0…\\w3砕玉拳…\\w3？\\w4\\_w[36]\\n\\n[half]\\_w[6]\\1…\\w3！\\_w[12]\\n\\s[13]何を言い出すんじゃ！はしたない！\\_w[96]\\n\\n[half]\\_w[6]\\0\\s[2]え？え？…\\w3なんで？\\_w[54]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0\\_a[【イクサイス】]【イクサイス】\\_aの持つ基本的な能力は、\\_w[108]「空調機能」と「身体強化」だよ。\\_w[96]\\w6\\n\\n「空調機能」は文字通りエアコンとしての機能で、\\_w[138]着用者およびその周りの人に快適な空間をもたらす事が可能になるよ。\\_w[192]\\w8\\n\\n「身体強化」は、\\_w[48]外界の危険から着用者の安全を守るためのもので、\\_w[138]着用者の運動神経や防御力を着ている間ずっと向上させ続けるよ。\\_w[180]\\w8\\n\\n[half]\\_w[6]\\1どのくらい強くなるんじゃったかな？\\w6\\_w[102]\\n\\n[half]\\_w[6]\\0運動神経は、\\_w[36]通常時１００の力を出せる人が１２０の力を出せるようになるくらい。\\_w[192]\\w8\\n防御力は、\\_w[30]車にはねられても一応死なないくらいかな。\\_w[120]\\w6\\n\\n[half]\\_w[6]\\1凄い事は凄いが…\\w3微妙なラインじゃな。\\_w[108]\\e", "\\0\\s[0]\\1\\s[10]\\0ただ、\\_w[18]私の着ているユニットは、\\_w[72]\\_a[【Ｚ式】]【Ｚ式】\\_aっていうプロトタイプなんだ。\\_w[108]\\w8\\n一般に出回ってる量産型とは若干性能が違うよ。\\_w[132]\\w8\\n\\n[half]\\_w[6]\\1アレで若干と仰りマスカ。\\_w[72]\\w6\\n\\n[half]\\_w[6]\\0\\s[9]…\\w3露骨に戦闘能力あるもんね。\\_w[84]\\w6\\n\\n[half]\\_w[6]\\1どちらかというと戦闘能力の方がメインで、\\_w[120]エアコンはオマケに見えるんじゃが…\\w3。\\_w[108]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0病院の空気がたまらなく好き。\\_w[84]消毒用アルコールの匂いも好き。\\_w[90]\\w6\\n\\n[half]\\_w[6]\\1微妙に危なっかしい趣味ですな。\\_w[90]\\w8\\n\\n[half]\\_w[6]\\0ほら、\\_w[18]私\\_a[【アルビノ】]【アルビノ】\\_aだし、\\_w[60]イクサイスになる前は外出できない体だったでしょ？\\w8\\_w[144]\\n検査を受けに病院に行くのは、\\_w[84]唯一昼間に外出する機会だったから特別な印象があるんだ。\\_w[162]\\w6\\n\\n[half]\\_w[6]\\1ふむ…\\w3。\\_w[24]\\w6\\n\\n[half]\\_w[6]\\0\\xちなみに。\\_w[30]\\w6\\n病院に行く際に、\\_w[48]後部座席に光が入らないようにした車に乗ってたんだけど…\\w3。\\_w[168]\\w8\\nこれも変な気分がするから好きだったよ。\\_w[114]\\w6\\n\\n[half]\\_w[6]\\1それは変な子でしたね。\\_w[66]\\w6\\n今でも変な子ですが。\\_w[60]\\w6\\n\\n[half]\\_w[6]\\0\\s[76]精密射撃！\\1\\s[17]うわああぁ――！\\_w[150]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0この前、\\_w[24]変わった事に誘われたよ。\\_w[72]\\w8\\n\\n[half]\\_w[6]\\1ホホゥ。\\_w[24]どんな？\\w6\\_w[24]\\n\\n[half]\\_w[6]\\0格好よくきめたお兄さんだったんだけど、\\_w[114]\\w6\\n「お嬢さん、\\_w[36]一緒にお茶でも育てませんか？」だって。\\_w[114]\\w8\\n\\n[half]\\_w[6]\\1…\\w3…\\w3。\\_w[18]\\w6\\n内容はともかく、\\_w[48]知らない人にほいほいついて行っちゃダメじゃぞ。\\_w[138]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0そ ん な ば か な っ ！\\w8\\_w[69]\\n…\\w3。\\_w[12]\\w8　\\_w[6]\\n…\\w3…\\w3。\\_w[18]\\w8\\n\\n[half]\\_w[6]\\1…\\w3？\\w8　\\_w[18]\\n\\n[half]\\_w[6]\\0\\s[9]七言絶句…\\w3なんて。\\_w[54]\\w6\\n\\n[half]\\_w[6]\\1４点。\\_w[18]\\n\\n[half]\\_w[6]\\0\\s[4]がーん…\\w3。\\_w[30]　\\_w[6]\\e", "\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0極端に暑い時期と極端に寒い時期が別々にあるから、\\_w[144]\\w4エアコンが苦労する事になるんだよ。\\_w[102]\\w6\\n気温、\\_w[18]一年中平均的ならイイのにね。\\_w[84]\\w8\\n\\n[half]\\_w[6]\\1氷雪気候とか熱帯雨林気候のようにか？\\w6\\_w[108]\\n\\n[half]\\_w[6]\\0\\s[4]いや、\\_w[18]そうじゃなくって…\\w3。\\_w[60]\\e"]);
+    } else {
+      iRandamTalk--;
+    }
+  });
+  i0BustDoubleClick = 0;
+  i0FaceDoubleClick = 0;
+  exice_z.on("OnMouseDoubleClick", function(e) {
+    var ary;
+    if (e.Reference3 === 0) {
+      if (e.Reference4 === "Head") {
+        return choiceByAry(["\\1\\s[10]\\0\\s[5]御用ですか？\\_w[36]\\n\\n\\q[風力調整,風力調整,風力調整,1]\\n\\q[イクサイス解説書,イクサイス解説書,イクサイス解説書,2]\\n\\q[自己紹介,自己紹介,自己紹介,3]\\n\\q[用語解説,用語解説,用語解説,4]\\n\\q[俺の名を言ってみろ！,俺の名を言ってみろ！,俺の名を言ってみろ！,5]\\n\\q[次のページ,次のページ,次のページ,6]\\n\\n\\q[呼んだだけ,呼んだだけ,呼んだだけ,7]\\e", "\\0\\s[0]\\1\\s[10]\\0メニューを開くよー。\\_w[60]\\n\\n\\q[風力調整,風力調整,風力調整,1]\\n\\q[イクサイス解説書,イクサイス解説書,イクサイス解説書,2]\\n\\q[自己紹介,自己紹介,自己紹介,3]\\n\\q[用語解説,用語解説,用語解説,4]\\n\\q[俺の名を言ってみろ！,俺の名を言ってみろ！,俺の名を言ってみろ！,5]\\n\\q[次のページ,次のページ,次のページ,6]\\n\\n\\q[呼んだだけ,呼んだだけ,呼んだだけ,7]\\e"]);
+      } else if (e.Reference4 === "HeadEX") {
+        return "\\1\\s[10]\\0\\s[32]…\\w3！！\\w8\\_w[18]\\nううぅ、\\_w[24]\\w4なんで叩くかな…\\w3。\\_w[54]\\w6\\n\\s[3]\\e";
+      } else if (e.Reference4 === "Face") {
+        ary = ["\\1\\s[10]\\0\\s[1]ぅ。\\_w[12]\\e", "\\1\\s[10]\\0\\s[2]痛いってー。\\_w[36]\\e", "\\1\\s[10]\\0\\s[3]肌を触られるの弱いんだよー。\\_w[84]\\e", "\\1\\s[10]\\0\\s[4]うぅー。\\_w[24]家電虐待だー。\\_w[42]\\w6\\n\\n[half]\\_w[6]\\1しれっと人権放棄するようなこと言わない。\\_w[120]\\w6\\n\\n[half]\\_w[6]\\0じゃ、\\_w[18]幼女虐待だー。\\_w[42]\\w6\\n\\n[half]\\_w[6]\\1「聞こえ」は恐ろしく悪くなったな…\\w3。\\_w[108]\\e"];
+        if (i0FaceDoubleClick === ary.length) {
+          i0FaceDoubleClick = 0;
+        }
+        return ary[i0FaceDoubleClick++];
+      } else if (e.Reference4 === "Bust") {
+        ary = ["\\0\\s[0]\\1\\s[10]\\0つついた…\\w3？\\_w[36]\\e", "\\0\\s[4]…\\w3つついたね？\\w8\\_w[42]\\n…\\w3二回もつついたね？\\w8\\_w[60]\\n\\s[7]主任にもつつかれたこと無いのにっ！\\w8\\_w[102]\\n\\n[half]\\_w[6]\\1\\s[12]そんな叔父、\\_w[36]問題です！\\_w[30]\\e", "\\1\\s[10]\\0\\s[7]～～～～～…\\w3！\\w6\\_w[42]\\n\\n[half]\\_w[6]\\1その服…\\w3\\w4衝撃には強いんじゃが。\\_w[90]\\w4\\n触られるだけなら感触はそのまま伝わるらしいぞ。\\_w[138]\\w8\\n\\n[half]\\_w[6]\\0余計な事言わないの！\\_w[60]\\e", "\\1\\s[10]\\0\\s[4]そろそろ身の危険を感じて良いですか。\\_w[108]\\e", "\\0\\s[73]ユーザーさん、\\_w[18]成敗ッ！\\w6\\_w[24]\\n\\n[half]\\_w[6]\\1\\s[17]巻き込まれ！\\_w[36]\\e"];
+        if (i0BustDoubleClick === ary.length) {
+          i0BustDoubleClick = 0;
+        }
+        return ary[i0BustDoubleClick++];
+      } else if (e.Reference4 === "LeftST") {
+        return "\\0\\s[0]\\1\\s[10]\\0更新履歴だよ。\\_w[42]\\n\\n2005/12/27   報告を受けた誤記誤字脱字等を修正。\\_w[141]\\n　　　　　　 サイト移転につきＵＲＬの変更も。\\_w[135]\\n　　　　　　 ネットワーク更新をひとまず解除。\\_w[135]\\n2003/6/23　　バグを少し修正。\\_w[87]\\n2003/6/22　　ゴースト「イクサイス・\\w3ゼロ・\\w3」\\_w[129]\\n　　　　　　 正式版リリース。\\_w[87]\\e";
+      } else {
+        return choiceByAry([]);
+      }
+    } else if (e.Reference3 === 1) {
+      return choiceByAry(["\\0\\s[0]\\1\\s[13]そのツボはっ！\\_w[42]\\e", "\\1\\s[15]あらやだ！\\_w[30]\\n\\n[half]\\_w[6]\\0\\s[26]…\\w3？！\\_w[18]\\e", "\\0\\s[0]\\1\\s[11]キシャー！\\_w[30]\\e", "\\0\\s[0]\\1\\s[12]ワシに触れると…\\w3\\w4爆発しますぞ？\\w4\\_w[90]\\n\\n[half]\\_w[6]\\0そんな事言う人機雷です。\\_w[72]\\w4\\n\\n[half]\\_w[6]\\1\\s[14]ベタネタかつお寒いですね。\\_w[78]\\w4\\n\\n[half]\\_w[6]\\0冷房だからいんだよ。\\_w[60]\\e", "\\0\\s[0]\\1\\s[17]ウボァー！\\_w[30]\\e"]);
+    } else {
+      return choiceByAry([]);
+    }
+  });
+  i0HeadMove = 0;
+  x0HeadMove = 0;
+  t0HeadMove = 0;
+  t0HeadEXMove = 0;
+  x0HeadEXMove = 0;
+  x0FaceMove = 0;
+  t0FaceMove = 0;
+  i0BustMove = 0;
+  x0BustMove = 0;
+  t0BustMove = 0;
+  exice_z.on("OnMouseMove", function(e) {
+    var ary;
+    if (e.Reference3 === 0) {
+      if (e.Reference4 === "Head") {
+        x0HeadMove++;
+        clearTimeout(t0HeadMove);
+        t0HeadMove = setTimeout((function() {
+          return x0HeadMove = 0;
+        }), 5000);
+        if (x0HeadMove > 100) {
+          x0HeadMove = 0;
+          ary = ["\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0なでられてる？\\_w[42]\\e", "\\1\\s[10]\\0\\s[5]帽子が邪魔で良くわからないな…\\w3。\\_w[96]\\e", "\\1\\s[10]\\0\\s[1]…\\w3。\\_w[12]\\e", "\\1\\s[10]\\0\\s[5]そうだ、\\_w[24]ちょっと帽子とるから…\\w3ね？\\s[30]\\_w[78]\\e"];
+          if (i0HeadMove === ary.length) {
+            i0HeadMove = 0;
+          }
+          return ary[i0HeadMove++];
+        }
+      } else if (e.Reference4 === "HeadEX") {
+        x0HeadEXMove++;
+        clearTimeout(t0HeadEXMove);
+        t0HeadEXMove = setTimeout((function() {
+          return x0HeadEXMove = 0;
+        }), 5000);
+        if (x0HeadEXMove > 100) {
+          x0HeadEXMove = 0;
+          return choiceByAry(["\\1\\s[10]\\0\\s[31]えへへっ。\\_w[30]\\n\\n[half]\\_w[6]\\1猫みたいなヤツじゃなー。\\_w[72]\\e", "\\1\\s[10]\\0\\s[31]えへへ…\\w3。\\_w[30]\\n\\n[half]\\_w[6]\\1こうしてるとカワイイんじゃがのぉ…\\w3。\\_w[108]\\n\\n[half]\\_w[6]\\0…\\w3今は聞き流してあげる。\\_w[72]\\e"]);
+        }
+      } else if (e.Reference4 === "Face") {
+        x0FaceMove++;
+        clearTimeout(t0FaceMove);
+        t0FaceMove = setTimeout((function() {
+          return x0FaceMove = 0;
+        }), 5000);
+        if (x0FaceMove > 100) {
+          x0FaceMove = 0;
+          return "\\1\\s[10]\\0\\s[3]うう、\\_w[18]顔筋なぞらないでよー。\\_w[66]\\e";
+        }
+      } else if (e.Reference4 === "Bust") {
+        x0BustMove++;
+        clearTimeout(t0BustMove);
+        t0BustMove = setTimeout((function() {
+          return x0BustMove = 0;
+        }), 5000);
+        if (x0BustMove > 100) {
+          x0BustMove = 0;
+          ary = ["\\0\\s[0]\\1\\s[10]\\1\\n[half]\\_w[6]\\0…\\w3…\\w3。\\_w[18]\\e", "\\0\\s[0]\\1\\s[10]\\0も\\_w[6]\\n\\n[half]\\_w[6]\\1揉むほど無いですぞ。\\_w[60]\\n\\n[half]\\_w[6]\\0\\s[4]先に言わないでー。\\_w[54]\\e", "\\1\\s[10]\\0\\s[4]それでも揉むんだね…\\w3。\\_w[66]\\e", "\\1\\s[10]\\0\\s[4]\\n\\1少しは何か感じるか？\\_w[60]\\n\\n[half]\\_w[6]\\0黙れー。\\_w[24]\\n\\n[half]\\_w[6]\\1\\s[17]び！\\_w[12]\\e", "\\0\\s[0]\\0身にかかる火の粉は…\\w3、\\_w[66]\\n\\s[70]振り払わなければなりますまい！\\_w[90]\\n\\n[half]\\_w[6]\\1\\s[14]ノエル！\\_w[24]\\e"];
+          if (i0BustMove === ary.length) {
+            i0BustMove = 0;
+          }
+          return ary[i0BustMove++];
+        }
+      } else if (e.Reference4 === "LeftST") {
+
+      } else {
+        return choiceByAry([]);
+      }
+    } else if (e.Reference3 === 1) {
+
+    } else {
+      return choiceByAry([]);
+    }
+  });
+  exice_z.on("OnAnchorSelect", function(e) {
+    if (e.Reference0 === "【イクサイス】") {
+      return "\\1\\s[10]\\0\\s[0]「イクサイス」。\\_w[48]\\n\\n私みたいな、\\_w[36]「イクサイスユニット」に身を包んだ人のことを指す言葉だよ。\\_w[174]\\w6\\n警察官の制服を着ているから「お巡りさん」くらいのニュアンスかな。\\_w[192]\\w6\\nイクサイスは身体能力が若干生身の人より高く、\\_w[132]\\w6自分自身の能力としてエアコンの機能を使用できるのが特徴だね。\\_w[180]\\w6\\n\\n[half]\\_w[6]\\1さる家電メーカーの目玉商品なんじゃよ。\\_w[114]\\n\\n[half]\\_w[6]\\0\\n関連用語\\_a[【イクサイスユニット】]【イクサイスユニット】\\_a\\_w[90]\\e";
+    } else if (e.Reference0 === "【Ｚ式】") {
+      return "\\0\\s[0]\\1\\s[10]\\0「Ｚ式」。\\_w[30]\\n\\n\\s[0]Ｚ式イクサイスユニット。\\_w[72]\\w6試作型の中では最後発だね。\\_w[78]\\w8\\nサポートユニットは、\\_w[60]隣にいる荻月。\\_w[42]\\n\\n[half]\\_w[6]\\1ゼロがイクサイスになった頃には既に、\\_w[108]量産型が生産ラインに乗っておったから、\\_w[114]厳密には試作型とは呼べんかも知れんのじゃが。\\_w[132]\\w6\\n\\n[half]\\_w[6]\\0\\s[9]明らかに浮いてる機能とかあるしね。\\_w[102]\\w6\\n\\n\\s[0]エアコンとしてみた場合は、\\_w[78]冷房機能が過剰に特化されているかな。\\_w[108]\\w8\\nでも、\\_w[18]コンセプトには「戦闘能力の特化」があると思う…\\w3。\\_w[144]\\w6\\n\\n[half]\\_w[6]\\1近頃何かと物騒とはいえ…\\w3過剰防衛よなぁ。\\_w[120]\\w6\\n\\n[half]\\_w[6]\\0剣と魔法の世界に行っても、\\_w[78]充分に戦う事が出来る能力があるもんねぇ。\\_w[120]\\n\\x\\s[0]Ｚ式の固有装備はこんな感じ。\\_w[84]\\w6\\n固有機能の、\\_w[36]ＵＶカットこと「偏光操作」。\\_w[84]\\w6\\nアイスソード「ボレアリス」。\\_w[84]\\w6\\n氷銃「サザンクロス」。\\_w[66]\\w6\\n一番の特徴は、\\_w[42]動力源の「コア」かな？\\_w[66]\\n\\n[half]\\_w[6]\\1ま、\\_w[12]そんな所じゃろうな。\\_w[60]\\n\\n[half]\\_w[6]\\0\\n\\n関連用語\\_a[【ボレアリス】]【ボレアリス】\\_a\\_a[【サザンクロス】]【サザンクロス】\\_a\\_a[【コア】]【コア】\\_a\\_w[138]\\e";
+    } else if (e.Reference0 === "[【アルビノ】") {
+      return "\\1\\s[10]\\0\\s[0]「アルビノ」。\\_w[42]\\n\\n「白子」とか「白皮症」とか呼ばれているね。\\_w[126]\\w8\\n先天的に体にメラニン色素が足りない症状で、\\_w[126]肌や髪は白く、\\_w[42]目は赤くなるよ。\\_w[48]\\w8\\n目だけとか、\\_w[36]肌だけといった限定的なアルビノもあるんだって。\\_w[138]\\w8\\n視力が低く、\\_w[36]紫外線に非常に弱いという弱点を持っているよ。\\_w[132]\\w6\\n後者は、\\_w[24]特に慎重に対策をとる必要があるみたいだね。\\_w[126]\\w8\\nちなみに、\\_w[30]私は眼に若干色素が残ってるから、\\_w[96]視力は悪くないよ。\\_w[54]\\w8\\n\\n[half]\\_w[6]\\1なるほどのぅ。\\_w[42]\\w6\\n\\n[half]\\_w[6]\\0\\xちなみに、\\_w[30]以前の私はすぐ病気で死にそうになってたけど。\\_w[132]\\w6\\nこれは、\\_w[24]アルビノだけじゃなくて極度に病弱なことの影響が大きかったね。\\_w[180]\\w8\\n私の場合、\\_w[30]免疫力も結構弱かったらしくって。\\_w[96]\\w6\\n\\n[half]\\_w[6]\\1むぅ…\\w3。\\_w[24]\\w6\\n\\n[half]\\_w[6]\\0\\s[5]あ、\\_w[12]でもイクサイスユニットの庇護下とはいえ、\\_w[120]外出を繰り返す事で徐々に免疫が付いて来てるらしいよ～。\\_w[162]\\w8\\n\\n[half]\\_w[6]\\1む。\\_w[12]過剰な外歩きは無駄ではなかったという事なのか。\\_w[138]\\w6\\n\\n[half]\\_w[6]\\0うん。\\_w[18]\\w6\\nだから、\\_w[24]そんなに私の外出を止めなくていいよ。\\_w[108]\\w6\\n\\n[half]\\_w[6]\\1そういうわけにもいかんじゃろ。\\_w[90]\\n\\n[half]\\_w[6]\\0\\s[4]ケチー。\\_w[24]\\e";
+    } else if (e.Reference0 === "【イクサイスユニット】") {
+      return "\\1\\s[10]\\0\\s[0]「イクサイスユニット」。\\_w[72]\\n\\n本来は、\\_w[24]イクサイスの人が着ている服と、\\_w[90]一緒に行動するサポートユニットのセットを指す言葉だよ。\\_w[162]\\w8\\nでも、\\_w[18]人が着ている側…\\w3本体ユニットだけを指して使うことが多いかな。\\_w[180]\\w6\\n\\n[half]\\_w[6]\\1本体ユニットとは、\\_w[54]ゼロらが着ているあの服。\\_w[72]\\w6\\n着用者の体を守り、\\_w[54]また、\\_w[18]空調の能力を付与するものじゃ。\\_w[90]\\w6\\n\\n[half]\\_w[6]\\0サポートユニットとは荻月達みたいに、\\_w[108]イクサイスと共に行動し、\\_w[72]その補助をするものだよ。\\_w[72]\\n\\n関連用語\\_a[【サポートユニット】]【サポートユニット】\\_a\\_w[84]\\e";
+    } else if (e.Reference0 === "【ジジイの魂】") {
+      return "\\1\\s[10]\\0\\s[0]「ジジイの魂」。\\_w[48]\\n\\n普通サポートユニットの頭脳にはＡＩが使われているんだけど、\\_w[174]荻月は違うって言っていたよね。\\_w[90]\\w8\\n\\n[half]\\_w[6]\\1そうじゃよ。\\_w[36]\\w8\\n\\n[half]\\_w[6]\\0ジジイの魂っていたけど…\\w3どういうものなのか教えてくれる？\\w8\\_w[168]\\n\\n[half]\\_w[6]\\1うむ。\\_w[18]\\w6\\nといっても、\\_w[36]文字通りにジジイの魂を引っ張ってきて、\\_w[114]このボディに宿してあるだけなんじゃが。\\_w[114]\\w8\\n\\n[half]\\_w[6]\\0\\x\\s[9]…\\w3一体どういう仕組みになってるの？\\w8\\_w[102]\\n科学的に説明がつくようなものには見えないんだけど…\\w3。\\_w[156]\\w8\\n\\n[half]\\_w[6]\\1確かに「科学」とは少し違うかのぉ。\\_w[102]\\w6\\n魔術的な要素を含んでおるからな。\\_w[96]\\w8\\n水希が知人の魔術師に協力させて作ったらしいが…\\w3。\\_w[144]\\w8\\n\\n[half]\\_w[6]\\0それってもう魔術じゃないの？\\w8\\_w[84]\\n\\n[half]\\_w[6]\\1いや、\\_w[18]魂魄付与の術式を設計図に置き換えて、\\_w[108]集積回路に焼き付けているらしい。\\_w[96]\\w8\\n紙一重で科学と言えなくもない。\\_w[90]\\w8\\n\\n[half]\\_w[6]\\0\\s[3]なんだかややこしくなってきたね…\\w3。\\_w[102]\\w8\\n\\n[half]\\_w[6]\\1複雑に考えなくても良いぞ。\\_w[78]\\w6\\n単に、\\_w[18]このボディにジジイが取り憑いとるってだけじゃ。\\_w[138]\\n\\n[half]\\_w[6]\\0それでジジイの魂…\\w3か。\\_w[66]\\w6\\n\\x\\s[0]で、\\_w[12]その取り付いてる魂…\\w3犠牲者は誰なの？\\w8\\_w[108]\\n\\n[half]\\_w[6]\\1別に誰かを殺して魂を奪ったとか、\\_w[96]そういうわけではないぞ。\\_w[72]\\w8\\nすでに死んでいた人間の魂を再利用したものじゃ。\\_w[138]\\w8\\n\\n[half]\\_w[6]\\0そうなんだ…\\w3。\\_w[42]\\w8\\nで、\\_w[12]前世？は誰だったか自分で分かるの？\\w6\\_w[102]\\n\\n[half]\\_w[6]\\1ウム。\\_w[18]\\w6\\n前世は、\\_w[24]明治に生まれ、\\_w[42]昭和を途中まで生きた日本人じゃ。\\_w[96]\\w8\\n一応、\\_w[18]水希の祖父に当たる人間じゃよ。\\_w[90]\\w8\\n\\n[half]\\_w[6]\\0\\s[3]え。\\_w[12]…\\w3ということは…\\w3。\\_w[54]\\w6\\n\\n[half]\\_w[6]\\1そう。\\_w[18]お前の曾御祖父さんになるのぉ。\\_w[90]\\w6\\nほら、\\_w[18]先祖を敬いなされ。\\_w[54]\\w8\\n\\n[half]\\_w[6]\\0\\s[4]えー。\\_w[18]荻月を～？\\w8\\_w[30]\\n\\n[half]\\_w[6]\\1\\s[12]何故嫌そうにする…\\w3。\\_w[60]\\e";
+    } else if (e.Reference0 === "【サポートユニット】") {
+      return "\\1\\s[10]\\0\\s[0]「サポートユニット」。\\_w[66]\\n\\n常にイクサイスと行動を共にし、\\_w[90]その行動のサポートを行いつつ、\\_w[90]非常時に備えるもの…\\w3だっけ？\\w6\\_w[84]\\n\\n[half]\\_w[6]\\1うむ。\\_w[18]大体そんなところじゃよ。\\_w[72]\\w6\\nちなみに非常時とは、\\_w[60]本体ユニット着用者…\\w3イクサイスがその能力を悪用しようとしたときや、\\_w[198]故障による暴走などが起きた時のことを指すんじゃ。\\_w[144]\\w8\\n一応本体ユニットの機能を緊急停止させるコードが組み込まれとる。\\_w[186]\\w8\\n\\n[half]\\_w[6]\\0\\x補助って言うのは、\\_w[54]具体的にどのような事をさすのかな？\\w6\\_w[102]\\n\\n[half]\\_w[6]\\1一般的には取説の代わりとか、\\_w[84]チューニングやメンテナンスじゃな。\\_w[102]\\w8\\n\\n[half]\\_w[6]\\0なるほど。\\_w[30]\\w6メンテナンスは確かに普通の人には難しいもんね。\\_w[138]\\w8\\n\\n[half]\\_w[6]\\1見た目は服でも精密機械じゃからな。\\_w[102]\\w6\\n\\n[half]\\_w[6]\\0\\x\\s[0]他には変わった機能はあるの？\\w6\\_w[84]\\n\\n[half]\\_w[6]\\1うむ。\\_w[18]\\w6お前さんも良く使ってる、\\_w[72]ストレージ機能じゃな。\\_w[66]\\w6\\n\\n[half]\\_w[6]\\0荻月の中に物をしまっておけるアレだね。\\_w[114]\\w6\\n\\n[half]\\_w[6]\\1正しくはワシの中ではないぞ。\\_w[84]\\w6\\nサポートユニットを通じて、\\_w[78]対象物を所定の空間に転送する機能じゃ。\\_w[114]\\w8\\nよって、\\_w[24]許容量や保存能力はその場所次第。\\_w[96]\\w6\\n常温の場所を指定して、\\_w[66]生ものを入れて放置すればもちろん腐る。\\_w[114]\\w8\\n\\n[half]\\_w[6]\\0\\s[2]そうだったのか…\\w3知らなかった…\\w3。\\_w[96]\\w6\\n\\x\\s[0]…\\w3あれ。\\_w[24]\\w6荻月の指定場所って何処なの？\\w6\\_w[84]\\n私は場所を指定した覚えは無いんだけど。\\_w[114]\\w6\\n\\n[half]\\_w[6]\\1試作型は、\\_w[30]研究所の倉庫に設定されとるよ。\\_w[90]\\w6\\n量産型はデフォルト未設定じゃがな。\\_w[102]\\w6\\n\\n[half]\\_w[6]\\0どうりで結構物が入るわけだー。\\_w[90]\\w6\\n\\n[half]\\_w[6]\\1\\s[12]でもたまには整理せぇよ？\\_w[72]\\n\\n[half]\\_w[6]\\0\\x\\s[0]\\n\\n[half]\\_w[6]\\1\\s[10]ちなみに、\\_w[30]Ｚ式サポートのワシには、\\_w[72]若干他の連中と違う所がある。\\_w[84]\\w6\\n\\n[half]\\_w[6]\\0ん。\\_w[12]そうなの？\\w6\\_w[30]\\n\\n[half]\\_w[6]\\1お前さんの能力に合わせた特別機能じゃよ。\\_w[120]\\w6\\n具体的には、\\_w[36]「補助電源」と「サイキックキャンセラ」。\\_w[120]\\w6\\n前者は、\\_w[24]動力を着用者に依存しないＺ式ユニット対策。\\_w[126]\\w6\\nまさかのエネルギー切れの際に、\\_w[90]稼動電力を補充するものじゃ。\\_w[84]\\w6\\n\\n[half]\\_w[6]\\0そっか。\\_w[24]私の場合、\\_w[30]ユニットの電源落ちたらピンチだもんね。\\_w[114]\\w6\\n\\n[half]\\_w[6]\\1そういう事。\\_w[36]\\w6\\n後者は、\\_w[24]お前さんの超能力よる干渉を防ぐものじゃよ。\\_w[126]\\w6\\n使う機会は無いじゃろうけどな。\\_w[90]\\e";
+    }
+  });
+  exice_z.on("OnChoiceSelect", function(e) {
+    return "\\0\\s[28]「実装中・・・。」だそうです。";
+  });
+  return $('#sakurafield').submit(function() {
+    return ikagaka.named(0).playScript($('#sakurascript').val());
+  });
+});
+</script>
+</head>
+<body>
+<form action="#sakurafield" id="sakurafield" style="margin:20px;margin-top:60px">
+	<label>Send: <input id="sakurascript" value="" type="text" /></label><input type="submit" />
+</form>
+</body>
+</html>

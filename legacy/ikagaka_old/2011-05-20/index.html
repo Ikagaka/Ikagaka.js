@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>如何か</title>
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="./ecoco9.js"></script>
+<script>
+/*
+a = ecoco.loadSurfacesBody("\n\
+animation0.interval,never\n\
+animation0.pattern0,overlay,1001,50,118,78\n\
+animation0.pattern1,overlay,1000,50,118,78\n\
+animation0.pattern2,overlay,-1\n\
+\n\
+animation1.interval,never\n\
+animation1.pattern0,overlay,1001,50,118,78\n\
+animation1.pattern1,overlay,1000,200,118,78\n\
+animation1.pattern2,overlay,-1\n\
+\n\
+animation2.interval,sometimes\n\
+animation2.pattern0,alternativestart,(0,1)\n\
+");
+*/
+reg = /^animation(\d+?)\.pattern(\d+?),(.+?),(?:\(((?:(?:-?\d+?),?))\))$/gm;
+str = "animation2.pattern0,alternativestart,(0,1)";
+a = str.match(reg);
+console.log(a);
+$("body").append(JSON.stringify(a));
+</script>
+</body>
+</html>

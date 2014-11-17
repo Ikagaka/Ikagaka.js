@@ -1,0 +1,294 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>hoge</title>
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script src="./coffee-script.js"></script>
+<script type="text/coffeescript">
+
+class Named
+	constructor:->
+		@scope= do ->
+			scopeAry = []
+			curScope = 0
+			scopeAry[curScope] = new Scope
+			return (num)->
+				unless isFinite Number num then return  scopeAry[curScope]
+				curScope = Number num
+				scopeAry[curScope] ?= new Scope
+				return scopeAry[curScope]
+	
+	playScript: (script)->
+		console.log "Named.playScript(\"#{script}\")"
+		taskAry = []
+		tidAry = []
+		talkWait = 80
+		map =
+			yy: /^\\\\/
+			yp: /^\\p\[(\d+)\]/
+			ys: /^\\s\[([^\]]+)\]/
+			yi: /^\\i\[(\d+)\]/
+			y_w: /^\\_w\[(\d+)\]/
+			yn: /^\\n/
+			ye: /^\\e/
+		while script
+			switch true
+				when map.yp.test script
+					taskAry.push do ->
+						num = Number map.yp.exec(script)[1]
+						->
+							console.log "scope(#{num})"
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.yp,""
+				when map.ys.test script
+					taskAry.push do ->
+						str = map.ys.exec(script)[1]
+						->
+							console.log "scope().surface(\"#{str}\")"
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.ys,""
+				when map.yi.test script
+					taskAry.push do ->
+						num = Number map.yi.exec(script)[1]
+						->
+							console.log "scope().surface().animate(#{num})"
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.yi,""
+				when map.y_w.test script
+					taskAry.push do ->
+						num = Number map.y_w.exec(script)[1]
+						->
+							console.log "wait(\"#{num}\")"
+							tidAry.push setTimeout taskAry.shift(),num
+					script = script.replace map.y_w,""
+				when map.yn.test script
+					taskAry.push -> 
+						console.log "\\n"
+						tidAry.push setTimeout taskAry.shift(),0
+					script = script.substr 2
+				when map.ye.test script
+					taskAry.push ->
+						console.log "\\e"
+						tidAry.push setTimeout taskAry.shift(),0
+					script = ""
+				when map.yy.test script
+					taskAry.push ->
+						console.log "scope().talk(\"\\\")"
+						tidAry.push setTimeout taskAry.shift(),talkWait
+					script = script.substr 2
+				else
+					taskAry.push do ->
+						chr = script.substr 0,1
+						->
+							console.log "scope().talk(\"#{chr}\")"
+							tidAry.push setTimeout taskAry.shift(),talkWait
+					script = script.substr 1
+		taskAry.push -> tidAry.push setTimeout (-> console.log "script break."),10000
+		setTimeout taskAry.shift(),0
+		return
+surface =
+	"0":
+		"element":[
+			["base","./exice_z/shell/master/surface0000.png"]]
+		"collision":[
+			[80,62,143,95,"Head"]
+			[91,111,139,142,"Face"]
+			[89,181,140,216,"Bust"]
+			[184,187,211,238,"LeftST"]]
+		"animation":
+			"timing":"sometimes"
+			"pattern":[
+				["overlay",61,5,85,100]
+				["overlay",60,5,85,100]
+				["overlay",-1,5]]
+	"10":
+		"element":[
+			["base","./exice_z/shell/master/surface0010.png"]]
+	"22":
+		"element":[
+			["base","./exice_z/shell/master/surface0022.png"]]
+		"collision":[
+			[95,67,157,103,"Head"]
+			[104,116,158,143,"Face"]
+			[106,174,155,209,"Bust"]
+			[182,189,209,274,"LeftST"]]
+		"animation":[
+			[	"sometimes"
+				["overlay",63,5,100,105]
+				["overlay",62,5,100,105]
+				["overlay",-1,6]]]
+	"23":
+		"element":[
+			["base","./exice_z/shell/master/surface0023.png"]]
+		"collision":[
+			[91,62,148,95,"Head"]
+			[97,103,141,143,"Face"]
+			[90,163,138,198,"Bust"]
+			[165,168,195,248,"LeftST"]]
+		"animation":
+			"timing":"sometimes"
+			"pattern":[
+				["overlay",65,5,90,100]
+				["overlay",64,5,90,100]
+				["overlay",-1,6]]
+	"60":
+		"element":[
+			["base","./exice_z/shell/master/surface0060.png"]]
+	"61":
+		"element":[
+			["base","./exice_z/shell/master/surface0061.png"]]
+	"62":
+		"element":[
+			["base","./exice_z/shell/master/surface0062.png"]]
+	"63":
+		"element":[
+			["base","./exice_z/shell/master/surface0063.png"]]
+	"64":
+		"element":[
+			["base","./exice_z/shell/master/surface0064.png"]]
+	"65":
+		"element":[
+			["base","./exice_z/shell/master/surface0065.png"]]
+class Scope
+	hash2Array = (hash)->
+		ary=[]
+		(-> ary[k]=v) k,v for k,v of hash
+		ary
+	choiceLoad = (hash)->
+		ary = []
+		((k,v)->
+			if isFinite Number k
+				json["shell"]["master"]["surface"][k]["element"].map (v)->
+					ary.push "#{json["homeurl"]}/shell/master/#{v[1]}"
+		) k,v for k,v of hash
+		ary
+	choiceImg = (num)->
+		ary = []
+		json["shell"]["master"]["surface"][num]["element"].map (v)->
+			ary.push "#{json["homeurl"]}/shell/master/#{v[1]}"
+		json["shell"]["master"]["surface"][num]["animation"].map (v)->
+			v.slice(1).map (v)->
+				if v[1] >= 0
+					ary.concat choiceImg v[1]
+		ary
+	preLoad = (srcHash,callback)->
+		i = 0
+		imgLoad = (key, val)->
+			img = new Image
+			img.src = val
+			i++
+			srcHash[key] = img
+			img.onload = img.onError= ->
+				i--
+				callback?(srcHash) if i is 0
+		imgLoad key, val for key, val of srcHash
+		return srcHash
+	preLoadElements = (elementsObj,callback)->
+		# [base,url,x,y] -> [base,imgObj,x,y]
+		callback elementsObj
+	composeElements = (elementsObj)->
+		canvas = $("<canvas />")
+		# [base,url,x,y]... -> canvas
+		return canvas
+	transImg = (img)->
+		canvas = $("<canvas />")
+			.attr("width", img.width)
+			.attr("height", img.height)[0]
+		ctx = canvas.getContext '2d'
+		ctx.drawImage img, 0, 0
+		imgdata = ctx.getImageData 0, 0, img.width, img.height
+		r = imgdata.data[0]
+		g = imgdata.data[1]
+		b = imgdata.data[2]
+		i = 0
+		while i < imgdata.data.length
+			imgdata.data[i+3] = 0 if r is imgdata.data[i] and g is imgdata.data[i+1] and b is imgdata.data[i+2]
+			i += 2
+		ctx.putImageData imgdata, 0, 0
+		return canvas
+	base = (img)->
+		return transImg.apply(this, arguments)
+	overlay = (canvas, img, x, y)->
+		return overlayfast.apply(this, arguments)
+	overlayfast = (canvas, img, x, y)->
+		ctx = canvas.getContext '2d'
+		ctx.drawImage transImg(img), x, y
+		return canvas
+	compose = (canvas, type, img, x, y)->
+		switch type
+			when "base" then return base img
+			when "overlay" then return overlay canvas, img, x, y
+			when "overlayfast" then return overlayfast canvas, img, x, y
+		return canvas
+	setSurface = (target,canvas)->
+		$(target).attr
+			width: canvas.width
+			height: canvas.height
+		$(target.parentElement)
+			.width(canvas.width)
+			.height(canvas.height)
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas, 0, 0
+		return target
+	setCollisions = (collisionsObj,canvas)->
+		return canvas
+	setAnimations = (animationsObj,callback)->
+		return callback()
+	isHit = (canvas,x,y)->
+		ctx = canvas.getContext "2d"
+		imgdata = ctx.getImageData 0,0,x,y
+		return imgdata.data[--imgdata.data.length] isnt 0
+	constructor: ->
+		@id = "scope" + Date.now() + Math.round Math.random() * 10000
+		$("<div class=\"scope\" />")
+			.attr({"id",@id})
+			.css(
+				bottom: "0px"
+				left: "190px"
+				###visibility: "hidden"###)
+			.append("<canvas class=\"surface\" width=\"0\" height=\"0\" />")
+			.append($("<div class=\"balloon\" />")
+				.css(visibility: "hidden")
+				.append("<canvas class=\"blimp\" width=\"0\" height=\"0\" />")
+				.append("<div class=\"text\"/>"))
+			.append($("<style scoped />")
+				.html("##{@id},##{@id} *{position:absolute;border:0px solid red;margin:0px;padding:0px;}"))
+			.appendTo("body")
+		console.log "starting preload..."
+		preLoad(choiceLoad(json["shell"]["master"]["surface"]), -> console.log "preload finished")
+	surface: (str,callback)->
+		surface = $("##{@id} .surface")[0]
+		imgHash = choiceImg(Number str)
+		console.dir imgHash
+		preLoad imgHash, (imgHash)->
+			temp = base imgHash[0]
+			temp =  compose.apply this, [temp].concat i for i in (((val)->
+				[type,name,x,y] = val
+				return [type, imgHash[name], x, y]
+			)(val) for val in [["overlay","surface0061.png",85,100]])
+			setSurface surface, temp
+			$(surface).click (e)->
+				if isHit(surface,e.offsetX,e.offsetY)
+					(((val)->
+						[x,y,_x,_y,id] = val
+						return id if x < e.offsetX < _x and y < e.offsetY < _y
+					)(val) for val in [[80,62,143,95,"Head"]])
+#			setCollisions surface, collisionsObj
+#			setAnimations surface, animationsObj
+			console.log 0
+	blimp: (num,callback)->
+		console.log num
+	a = new Scope
+	a.surface 0
+</script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Shift_JIS" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" />
+<title>如何か</title>
+<script type="text/javascript" src="./jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="./jquery.dimensions.js"></script>
+<script type="text/javascript" src="./ui.mouse.js"></script>
+<script type="text/javascript" src="./ui.draggable.js"></script>
+<script type="text/javascript" src="./ui.draggable.ext.js"></script>
+<script type="text/javascript">
+//========================================================================
+//========================================================================
+//========================================================================
+(function(){
+	jQuery.fn.cleaner = function(config){
+		config = jQuery.extend({},config);
+		this
+		.css("margin","0px")
+		.css("padding","0px")
+		.css("border","0px")
+		.css("left","0px")
+		.css("bottom","0px")
+		.css("width","100%")
+		.css("height","100%")
+		.css("text-align","left")
+		.css("line-height","100%")
+		.css("background-color","transparent")
+		.css("overflow","visible")
+		.css("position","absolute")
+//		.css("visibility","hidden")
+		.css("z-index","-1");
+		return this;
+	};
+})(jQuery);
+//========================================================================
+//========================================================================
+//========================================================================
+Log = function(){
+	$("body").prepend(
+		$("<textarea>")
+		.attr("id","IkagakaLog")
+		.cleaner()
+		.width("400px")
+		.height("500px")
+		.css("z-index","2")
+		.css("border","1px dotted #ff0000")
+	);
+};
+
+Log.prototype.log = function(_){
+	$("#IkagakaLog").append(_+"<br />\n").scrollTop(10000);
+};
+//========================================================================
+function getStrList(_){
+	log.log("getStrList["+_+"]");
+	var Text = jQuery.ajax({url: _,async: false}).responseText;
+	Text = Text.replace(/\r\n/g,"\n");
+	Text = Text.replace(/\r/g,"\n");
+	return Text.split("\n");
+}
+//========================================================================
+//========================================================================
+//========================================================================
+(function(){
+//========================================================================
+this.Ikagaka = function(window){
+	this.parent = window;
+	$("#IkagakaBase").after(
+		$("<div>")
+		.attr("id","Ikagaka")
+		.cleaner()
+		.text("Ikagaka")
+	);
+	this.named = new Array();
+	this.named[0] = new Named(this,0,"./dot_sakura_020/");
+//	this.named[this.nownamed].scriptplayer();
+	return this;
+};
+//========================================================================
+var Named = function(ikagaka,id,url){
+	this.parent = ikagaka;
+	this.id = id
+	this.homeurl = url;
+	$("#Ikagaka").prepend(
+		$("<div>")
+		.addClass("named" + this.id + " named")
+		.text("named" + this.id)
+		.cleaner()
+	);
+//	this.shell = new Array();
+
+//	var filelist = new Array();
+//	var list = this.filelist = getStrList(url + "updates2.dau");
+//	for(var i=0;i<list.length;i++){
+//		list[i] = list[i].split("")[0];
+//		if(list[i].match(/^shell\/master/)){
+//			if(list[i].match(/^shell\/.*\/descript\.txt$/)){
+//				var shellurl = url + list[i].substr(0,list[i].length-12);
+//			}
+//			filelist.push(list[i]);
+//		}
+//	}
+/*
+	this.shell[0] = new Shell(homeurl,filelist);
+	if(this.shell[0]) this.shell[0].load();
+
+	this.nowscope = 0;
+	this.scope = new Array();
+	this.scope[0] = new Scope(this,0);
+	this.scope[1] = new Scope(this,1);
+*/	return this;
+};
+
+Named.prototype.scriptplayer = function(){
+	log.log("a:"+this.nowscript);
+	if(this.nowscript.match(/^\\/)){
+		if(this.nowscript.match(/^\\0/) || this.nowscript.match(/^\\h/)){
+			this.nowscope = 0;
+			if(this.scope[this.nowscope]) ; else{
+				this.scope[this.nowscope] = new Scope(this);
+				this.scope[this.nowscope].load();
+			}
+			this.nowscript = this.nowscript.substr(2);
+		}else if(this.nowscript.match(/^\\1/) || this.nowscript.match(/^\\u/)){
+			this.nowscope = 1;
+			if(this.scope[this.nowscope]) ; else{
+				this.scope[this.nowscope] = new Scope(this);
+				this.scope[this.nowscope].load();
+			}
+			this.nowscript = this.nowscript.substr(2);
+		}else if(this.nowscript.match(/^\\p\[\d+\]/)){
+			this.nowscope = this.nowscript.substr(3).match(/\d+/);
+			if(this.scope[this.nowscope]) ; else{
+				this.scope[this.nowscope] = new Scope(this);
+				this.scope[this.nowscope].load();
+			}
+			this.nowscript = this.nowscript.replace(/^\\p\[\d+\]/,'');
+		}else if(this.nowscript.match(/^\\s[0-9]/)){
+			this.scope[this.nowscope].nowsurface = this.nowscript.substr(2,1);
+			this.scope[this.nowscope].surfaceplayer();
+			this.nowscript = this.nowscript.substr(3);
+		}else if(this.nowscript.match(/^\\s\[-?\d+\]/)){
+			this.scope[this.nowscope].nowsurface = this.nowscript.substr(3).match(/-?\d+/);
+			this.scope[this.nowscope].surfaceplayer();
+			this.nowscript = this.nowscript.replace(/^\\s\[-?\d+\]/,'');
+		}else if(this.nowscript.match(/^\\i\[-?\d+\]/)){
+		}else if(this.nowscript.match(/^\\b\[-?\d+\]/)){
+			this.scope[this.nowscope].nowenvelope = this.nowscript.substr(3).match(/-?\d+/);
+			this.scope[this.nowscope].envelopeplayer();
+			this.nowscript = this.nowscript.replace(/^\\b\[-?\d+\]/,'');
+		}else if(this.nowscript.match(/^\\n/)){
+			this.scope[this.nowscope].addtext("<br />\n");
+			this.nowscript = this.nowscript.substr(2);
+		}else if(this.nowscript.match(/^\\n\[half\]/)){
+		}else if(this.nowscript.match(/^\\c/)){
+			this.scope[this.nowscope].text("");
+			this.nowscript = this.nowscript.substr(2);
+		}else if(this.nowscript.match(/^\\!\[\*\]/)){
+		}else if(this.nowscript.match(/^\\w[1-9]/)){
+			var wait = this.nowscript.substr(2,1)*50;
+			this.nowscript = this.nowscript.substr(3);
+		}else if(this.nowscript.match(/^\\_w\[\d+\]/)){
+			var wait = this.nowscript.substr(4).match(/^\d+/);
+			this.nowscript = this.nowscript.replace(/^\\_w\[\d+\]/,'');
+		}else if(this.nowscript.match(/^\\e/)){
+			this.nowscript = this.nowscript.substr(2);
+		}
+		if(this.nowscript.length>0) this.scriptplayer();
+	}else{
+		this.scope[this.nowscope].addtext(this.nowscript.substr(0,1));
+		this.nowscript = this.nowscript.substr(1);
+		var wait = 50;
+		var _this = this;
+		if(this.nowscript.length>0) this.tid = setTimeout(function(){_this.scriptplayer()},wait);
+	}
+};
+//========================================================================
+
+var Scope = function(named,id){
+	this.parent = named;
+	this.id = url;
+	$("#Ikagaka .named"+this.parent.id).prepend(
+		$("<div>")
+		.addClass("scope" + this.id + " scope")
+		.cleaner()
+		.text("scope"+this.id)
+	);
+	$(".named"+this.parent.id+" .scope"+this.id).prepend(
+		$("<div>")
+		.addClass("surface")
+		.cleaner()
+		.text("surface")
+	);
+	$(".named"+this.parent.id+" .scope"+this.id).prepend(
+		$("<div>")
+		.addClass("envelope")
+		.cleaner()
+		.text("envelope")
+	);
+	$(".scope"+this.id+" .envelope").prepend(
+		$("<div>")
+		.addClass("text")
+		.cleaner()
+		.text("text")
+	);
+	this.nowsurface = 0;
+	this.nowenvelope = 0;
+	return this;
+};
+
+Scope.prototype.surfaceplayer = function(){
+	log.log("Scope.surfaceplayer");
+	var a = this.parent.shell[this.parent.nowshell].surface[this.nowsurface]
+	log.log(a.img.src);
+	log.log(a.img.width);
+	log.log(a.img.height);
+	$(".named"+this.parent.id+" .scope"+this.id)
+		.width(a.img.width+"px")
+		.height(a.img.height+"px")
+	;
+	$(".scope"+this.id+" .surface")
+		.css("background-image","url("+a.img.src+")")
+		.css("filter","Chroma(color=#0000ff)")
+		.width(a.img.width+"px")
+		.height(a.img.height+"px")
+		.css("z-index","20");
+	;
+};
+
+Scope.prototype.addtext = function(_){
+	$(".scope"+this.id+" .surface")
+		.append(_)
+	;
+};
+
+//========================================================================
+
+var Ghost = function(_){};
+
+//========================================================================
+
+var Shiori = function(_){};
+
+//========================================================================
+
+var Shell = function(homeurl,filelist){
+	this.homeurl = homeurl;
+	this.filelist = filelist;
+
+	this.descriptText = getStrList(homeurl + "descript.txt");
+	this.descript = new Descript(this.descriptText);
+
+	for(var i=0;i<filelist.length;i++){
+		if(filelist[i].match(/surface\d+\.png$/i)){
+			var num = filelist[i].match(/surface\d+\.png$/i)[0].match(/\d+/i);
+			this.surface[num] = new Surface(homeurl + this.filelist[i]);
+		}
+	}
+
+	var list = this.surfacesText = getStrList(homeurl + "surfaces.txt");
+	var textlist = new Array();
+
+	for(var i=0;i<list.length;i++){
+		if(list[i].match(/^surface\d+$/i)){
+			var num = list[i].substr(7);
+			textlist.push(list[i]);
+			i++;
+			for(i;i<list.length;i++){
+				if(list[i].match(/^\}$/)){
+					i++;
+					if(this.surface[num]) this.surface[num] = new Surface(this.surface[num].img.src,textlist);
+					else this.surface[num] = new Surface("",textlist);
+					break;
+				}
+				textlist.push(this.surfaces[i]);
+			}
+		}
+	}
+	return this;
+};
+
+//========================================================================
+
+var Surface = function(src,textlist){
+	this.img = new Image();
+	this.img.src = src;
+	this.def = textlist;
+	return this;
+};
+
+//========================================================================
+
+var Balloon = function(_){};
+
+//========================================================================
+
+var Envelope = function(){};
+
+//========================================================================
+
+var Descript() = function(){};
+
+
+})();
+
+//========================================================================
+//========================================================================
+//========================================================================
+</script>
+</head>
+<body>
+<script type="text/javascript" id="IkagakaBase">
+window.onload = function(){
+	log = new Log();
+	log.log("debug log");
+//	ikagaka = new Ikagaka(this);
+	log.log("end");
+};
+</script>
+</body>
+</html>

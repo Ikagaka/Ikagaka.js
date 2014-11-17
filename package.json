@@ -1,0 +1,42 @@
+{
+  "name": "ikagaka.ikagaka.js",
+  "version": "0.0.0",
+  "description": "Ukagaka Web Platform",
+  "url": "https://github.com/ikagaka/Ikagaka.js",
+  "keywords": [
+    "ikagaka",
+    "unstable",
+    "ukagaka"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ikagaka/Ikagaka.js"
+  },
+  "dependencies": {
+    "ikagaka.ghost.js": "",
+    "ikagaka.nar.js": "",
+    "ikagaka.sakurascriptplayer.js": "",
+    "ikagaka.shell.js": "",
+    "shiorijk": "",
+    "miyojs": "",
+    "underscore": "",
+    "parttime": "",
+    "partperiod": "",
+    "miyojs-filter-conditions": "^1.0.0",
+    "miyojs-filter-default_response_headers": "^1.0.0",
+    "miyojs-filter-join": "^2.0.0",
+    "miyojs-filter-no_value": "^1.0.0",
+    "miyojs-filter-property": "^1.2.0",
+    "miyojs-filter-value": "^1.0.0",
+    "miyojs-filter-value_filters": "^1.0.0",
+    "miyojs-filter-variables": "^2.0.1",
+    "miyojs-filter-autotalks": "^1.0.0",
+    "miyojs-filter-talking": "^1.0.0",
+    "miyojs-filter-stash": "^1.0.0",
+    "miyojs-filter-entry_template": "^2.0.0",
+    "miyojs-filter-stash_template": "^1.0.0",
+    "miyojs-filter-child_process": ">= 0.0.1"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}

@@ -1,0 +1,108 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=700" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>如何か</title>
+<!--base href="http://files.dropbox.com/u/265158/" /-->
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script src="./coffee-script.js"></script>
+<script type="text/coffeescript">
+json = {}
+class Ikagaka
+	
+	_isFunction = (fn)-> # bool
+	_isArray = (ary)-> # bool
+	_isObject = (obj)-> # bool
+	_isImage = (img)-> # bool
+	_isCanvas = (cnv)-> # bool
+	_isNumber = (num)-> # bool
+	_transImg = (img,callback=(cnv)->)-> # void
+	_createCnv
+	_copyCnv = (cnv)-> # cnv
+	_overlayCnv = (target,cnv,x=0,y=0)-> # cnv
+	_overlayfastCnv = (target,cnv,x=0,y=0)-> # cnv
+	_drawCnv = (target,cnv)-> # cnv
+	_preloadImg = (urlAry,callback=(imgAry)->)-> # void
+	_composeElements = (imagedElementsAry,callback=->)->
+	_preloadAndComposeElements = (elementsAry,callback)->
+	_setElements = (target,elementsAry,callback)->
+	_isHit = (target,x,y)->
+	#...
+	
+	_curNamed = 0
+	_namedAry = []
+	
+	constructor: ->
+		@named = (n)->
+		@createNamed = (n)->
+		
+		class _Named
+			
+			constructor:(json,option,callback=->)-> # namedObj
+				
+				_namedID = _namedAry.length
+				_namedAry[_namedAry.length] = @
+				_curScope = 0
+				_scopeAry = []
+				_scopeAry[_curScope] = new Scope
+				_scriptTidAry = []
+				_eventHandlerHash = {}
+				
+				@scope = (n)-> # scopeObj
+				@playScript = (script,callback=->)-> # namedObj
+				@breakScript = -> # namedObj
+				@raiseEvent = (e)-> # namedObj
+				@on = (id,handler=(e)->)-> # namedObj
+				@materialize = -> # namedObj
+				@vanish = -> # void
+				
+				class _Scope
+					
+					constructor:()->
+						
+						_scopeID = _curScope
+						_curSurface = 0
+						_curBlimp = 0
+						
+						@focus = -> # scopeObj
+						@surface = (n,callback)-> # scopeObj
+						@blimp = (n,callback)-> # scopeObj
+						@disappear = -> # void
+						
+						class _Blimp
+							
+							constructor:()->
+								
+								@show = -> # blimpObj
+								@hide = -> # blimpObj
+								@talk = (chr="")-> # blimpObj
+								@select = (title="",id="")-> # blimpObj
+								@anchor = (id="")-> # blimpObj
+								@br = -> # blimpObj
+								@clear = -> # blimpObj
+								@disappear = -> # void
+						
+						class _Surface
+							
+							constructor:()->
+								
+								@playAnimation = (n,callback)->
+								@stopAnimation = (n)->
+								@show = ->
+								@hide = ->
+								@disappear = ->
+
+$ ->
+	ku_ = ikagaka.createNamed json,{},->
+		@materialize()
+	ku_.on "boot",(e)-> "\\0HelloWorld\\e"
+	
+</script>
+</head>
+<body>
+</body>
+</html>

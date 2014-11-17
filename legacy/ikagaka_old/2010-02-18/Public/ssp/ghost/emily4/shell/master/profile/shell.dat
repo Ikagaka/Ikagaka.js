@@ -1,0 +1,17 @@
+Charset,UTF-8
+char0.bind.savearray,100=0
+Char1.balloon.isleft,1
+Char4.balloon.isleft,0
+Char0.centery,768
+Char2.centery,768
+Char4.centery,778
+Char0.balloon.isleft,1
+Char3.center,565
+Char3.balloon.isleft,1
+Char4.center,374
+Char2.center,524
+Char0.center,1144
+Char1.centery,342
+Char3.centery,768
+Char1.center,1026
+Char2.balloon.isleft,1

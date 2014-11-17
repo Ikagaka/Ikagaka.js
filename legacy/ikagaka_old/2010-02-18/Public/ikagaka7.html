@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="Shift-JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Shift-JIS" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" /> 
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>如何か。７</title>
+<link rel="INDEX" href="./index.html" />
+<link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon" /> 
+<link rev="made" href="mailto:legokichi0120@yahoo.co.jp" />
+<meta name="robots" content="NOFOLLOW" />
+<meta name="author" content="Legokichi" />
+<meta name="description" content="Kamo&amp;Negis!" />
+
+<script type='text/javascript' src='./jquery-1.3.2.min.js'></script>
+<script type='text/javascript' src='./jquery.dimensions.js'></script>
+<script type='text/javascript' src='./ui.mouse.js'></script>
+<script type='text/javascript' src='./ui.draggable.js'></script>
+<script type='text/javascript' src='./ui.draggable.ext.js'></script>
+<script type='text/javascript' src='./popupmenu.js'></script>
+
+<script type='text/javascript' src='./ikagaka7.js'></script>
+
+<style type="text/css">
+*{
+	border: 1px solid #00FF00;
+}
+textarea{
+	height:300px;
+	width:100%;
+}
+</style>
+</head>
+<body>
+
+<noscript>JavaScriptがオフになっています。</noscript>
+
+<table>
+	<caption>如何か。７</caption>
+	<thead>
+		<tr>
+			<td colspan="3">
+				<input type="input" id="msg" size="100" value="\0テキストボックスにSakuraScriptを入力して実行してください。\w8\e">
+				<button id="msgbtn" onClick="OnBoot()">実行</button>
+			</td>
+		</tr>
+	</thead>
+	<tbody>
+
+		<tr>
+			<td>
+				Suface.txt
+			</td>
+			<td>
+				log
+			</td>
+			<td>
+				デバッグログ
+			</td>
+		</tr>
+		<tr>
+			<td>
+<textarea id="surface" wrap="off">
+surface0
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+0interval,sometimes
+0pattern0,8,5,overlay,0,0
+0pattern1,6,5,overlay,0,0
+0pattern2,8,5,overlay,0,0
+0pattern3,-1,5,overlay,0,0
+}
+
+surface1
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface2
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface3
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface4
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface5
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface6
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface7
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface8
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+0interval,sometimes
+0pattern0,6,5,overlay,0,0
+0pattern1,8,5,overlay,0,0
+0pattern2,6,5,overlay,0,0
+0pattern3,-1,5,overlay,0,0
+}
+
+surface9
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+}
+
+surface51
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface10
+{
+0interval,sometimes
+0pattern0,11,5,base,0,0
+0pattern1,10,5,base,0,0
+0pattern2,11,5,base,0,0
+0pattern3,-1,5,base,0,0
+}
+
+surface11
+{
+
+}
+
+</textarea>
+			</td>
+			<td>
+				<textarea id="log" wrap="off"></textarea>
+			</td>
+			<td>
+				<textarea id="EXAM" wrap="off"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				■DOM構造<br />
+				body<br />
+				└Ikagaka<br />
+				　├Sakura<br />
+				　｜｜└SakuraSuface<br />
+				　｜｜　└SakuraCollision*<br />
+				　｜└SakuraBalloon<br />
+				　｜　└SakuraBalloonText<br />
+				　└Kero<br />
+				　　｜└KeroSuface<br />
+				　　｜　└KeroCollision*<br />
+				　　└KeroBalloon<br />
+				　　　└KeroBalloonText
+			</td>
+			<td>
+				■対応SakuraScript<br />
+				\0<br />
+				\1<br />
+				\h<br />
+				\u<br />
+				\n<br />
+				\c<br />
+				\w*<br />
+				\_w[*]<br />
+				\s[*]<br />
+				\e
+			</td>
+			<td>
+				■使用ライブラリ<br />
+				jquery-1.2.6.min.js<br />
+				popupmenu.js<br />
+				<br />
+				■使用フリーシェル<br />
+				フリーシェル：【黒兄と妹】<br />
+				作った人：【観城はるか】<br />
+				配布元：【向日葵の咲く丘】
+			</td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+			<td colspan="3">
+				■ろぐ<br />
+				２００８年１１月７日：ＤＯＭツリー作った、ＳａｋｕｒａＳｃｒｉｐｔ解析部分作った、当たり判定作った→BETA1<br />
+				２００８年１１月８日：外部ファイル化した、対応スクリプト増やした、当たり判定外した<br />
+				２００８年１１月９日：右クリめにゅーつけた、当たり判定復活→BETA2<br />
+				２００８年０２月９日：jQueryで再実装、当たり判定死滅→BETA3<br />
+				２００９年０６月４日：ＤＯＭツリー、ＣＳＳ再構築。外部ファイルやめた。当たり判定、右クリメニュー復活→BETA4<br />
+				２００９年０６月５日：surface・Balloonのロード、SakuraScript制御部分を再構築。\s[*]でKeroにSakuraのサーフェスを指定しても形が崩れないようになった→BETA5<br />
+				２００９年０６月２４日：欠番→BETA6<br />
+				２００９年０６月２４日：１から作り直し開始→BETA7<br />
+				２００９年０７月０２日：surface.txtロードを実装、→如何か。７<br />
+				２００９年０７月０５日：￥０￥１共にcollision対応<br />
+			</td>
+		</tr>
+	</tfoot>
+</table>
+
+
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8" />
+	<title>如何か</title>
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+</head>
+<body>
+<script>
+(function(global){
+	var makeNamed = (function(){
+		var method = {
+			scope: {value: function(num){
+				if(typeof num === "undefined" || ! isFinite(Number(num))){
+					return this.scopeAry[this.curScope];
+				}
+				num = Number(num);
+				if(typeof this.scopeAry[num] === "undefined"){
+					this.scopeAry[num] = makeScope(this);
+				}
+				this.curScope = num;
+				return this.scopeAry[num];
+			}}
+		};
+		return function(proto){
+			var namedObj = Object.create(
+				Object.create(proto || {}, method),
+				{
+					curScope: {
+						value: 0,
+						writable : true
+					},
+					scopeAry: {value: []}
+				}
+			);
+			namedObj.scope(0).surface(0);
+			namedObj.scope(1).surface(10);
+			return namedObj;
+		};
+	}());
+
+	var makeScope = (function(){
+		var method = {
+			surface: {value: function(id){
+				if(typeof id === "undefined"){
+					return this.surfaceObj;
+				}
+				try{
+					id = Number(this.nar.shell[this.curShell].surface.alias[this.curScope][
+						parseInt(Math.random() * 10,10) % this.nar.shell[this.curShell].surface.alias[this.curScope].length
+					]);
+				}catch(e){
+					id = Number(id);
+				}
+				if(! isFinite(id)){
+					return this.surfaceObj;
+				}
+				this.curSurface = id;
+				this.surfaceObj = makeSurface(this);
+				return this.surfaceObj;
+			}}
+		};
+		return function(proto){
+			var scopeObj = Object.create(
+				Object.create(proto || {}, method),
+				{
+					curSurface: {
+						value: 0,
+						writable : true
+					},
+					surfaceObj: {
+						value: makeSurface(),
+						writable : true
+					}
+				}
+			);
+			return scopeObj;
+		};
+	}());
+
+	var makeSurface = (function(){
+		var method = {
+			playAnimation: {value: function(id){
+			}}
+		};
+		return function(proto){
+			var surfaceObj = Object.create(
+				Object.create(proto || {}, method),
+				{
+					
+				}
+			);
+			return surfaceObj;
+		};
+	}());
+
+	global.makeNamed = makeNamed;
+}(this));
+console.log("named");
+console.log(named = makeNamed({nar:"nar"}));
+console.log("scope");
+console.log(scope = named.scope(11));
+console.log("surface");
+console.log(surface = named.scope(0).surface(0));
+</script>
+</body>
+</html>

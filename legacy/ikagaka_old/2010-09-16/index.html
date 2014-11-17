@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ja" manifest="cache.manifest">
+<head>
+<meta charset="utf-8">
+<link rel="apple-touch-startup-image" href="startup.png">
+<meta name="apple-mobile-web-app-capable">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="viewport" content="width=400; height=528; user-scalable=no;">
+<title>如何か</title>
+<link rel="icon" href="./favicon.ico" type="image/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="./apple-touch-icon-precomposed.png">
+<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./jquery.event.dblTap.js"></script>
+<script type="text/javascript" src="./ui/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.mouse.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.draggable.js"></script> 
+<script type="text/javascript" src="./ikagaka.js"></script>
+<script type="text/javascript" src="./exice_z.js"></script>
+<script type="text/javascript">
+$(function(){
+	var ghost = named();
+	ghost.nar = exice_z;
+	ghost.scope(0).blimp(0);
+	ghost.scope(1).blimp(0);
+	ghost.scope(0).blimp(-1);
+	ghost.scope(1).blimp(-1);
+	(function(){
+		ghost.event.addKey("ID","OnSecondChange");
+		ghost.event.play();
+		setTimeout(arguments.callee,1000);
+	})();
+	setTimeout(function(){
+		ghost.event.addKey("ID","OnBoot");
+		ghost.event.play();
+	},2000);
+//	$("body").append("HelloWorld!").append("<br>");
+});
+</script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>如何か</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script>
+var parseScript = function(script){
+	var taskAry = [];
+	while(script.length > 0){
+		if(script.substr(0,1) === "\\"){
+			script = script.substr(1);
+			switch(script.substr(0,1)){
+				case "0":
+					script = script.substr(1); break;
+				case "1":
+					script = script.substr(1); break;
+				case "w":
+					if(isFinite(script.substr(1,1))){
+						taskAry.push((function(){
+							var arg = script.substr(1,1);
+							return function(callback){
+								(function(){
+									setTimeout($.isFunction(callback) ? callback : function(){},arg * 50)
+								})();
+							};
+						})());
+						script = script.substr(2);
+					}
+					break;
+				case "n":
+					taskAry.push(function(){});
+					script = script.substr(1); break;
+				case "c":
+					if(script.substr(0,7)==="c[char,"){
+						if(script.indexOf("]") === -1) break;
+						var num = script.slice(7,script.indexOf("]"));
+						script = script.substr(script.indexOf("]") + 1);
+					}else if(script.substr(0,7)==="c[line,"){
+						if(script.indexOf("]") === -1) break;
+						var num = script.slice(7,script.indexOf("]"));
+						script = script.substr(script.indexOf("]") + 1);
+					}else{
+						script = script.substr(1);
+					}
+					break;
+				case "e":
+					script = script.substr(1); break;
+				default :
+					switch(script.substr(0,2)){
+						case "s[":
+							if(script.indexOf("]") === -1) break;
+//							taskAry.push((function(){
+//								var arg = script.slice(2,script.indexOf("]"));
+//								return function(callback){
+//									img.onload = $.isFunction(callback) ? callback : function(){};
+//								};
+//							})());
+							script = script.substr(script.indexOf("]") + 1);
+							break;
+						default :
+							switch(script.substr(0,3)){
+								case "_w[":
+									if(script.indexOf("]") === -1) break;
+									if(! isFinite(script.slice(3,script.indexOf("]")))){
+										taskAry.push((function(){
+											var arg = script.slice(3,script.indexOf("]"));
+											return function(callback){
+												(function(){
+													setTimeout($.isFunction(callback) ? callback : function(){},arg)
+												})();
+											};
+										})());
+									}
+									script = script.substr(script.indexOf("]") + 1);
+									break;
+								default :
+									switch(script.substr(0,4)){
+										default : ;
+									}
+							}
+					}
+			}
+		}else{
+			taskAry.push((function(){
+				var arg = script.substr(0,1);
+				return function(callback){
+					(function(){
+						$("body").append(arg);
+						setTimeout(false ? arguments.callee : $.isFunction(callback) ? callback : function(){},50)
+					})();
+				};
+			})());
+			script = script.substr(1);
+		}
+	}
+	(function(){
+		taskAry.shift()(taskAry.length > 0 ? arguments.callee : function(){});
+	})();
+};
+$(function(){
+	parseScript("\\0\\s[0]Hello\\w8World!\\e");
+});
+</script>
+
+<style>
+</style>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>如何か</title>
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="http://webscan.googlecode.com/svn-history/r80/trunk/ui/js/third-party/json2.min.js"></script>
+<script src="./ecoco7.js"></script>
+<script>
+	var transCanvas = function(canvas){
+		try{
+			var ctx = canvas.getContext('2d');
+			var imgdata = ctx.getImageData(0,0,canvas.width,canvas.height);
+			var r = imgdata.data[0];
+			var g = imgdata.data[1];
+			var b = imgdata.data[2];
+			for(var i = 0; i < imgdata.data.length; i++){
+				if(r === imgdata.data[i] && g === imgdata.data[i+1] && b === imgdata.data[i+2]){
+					imgdata.data[i+3] = 0;
+				}
+				i += 3;
+			}
+			ctx.putImageData(imgdata,0,0);
+		}catch(e){
+			//console.log("透明化に失敗。理由→" + e.toString());
+		}
+		return canvas;
+	};
+ecoco("http://dl.dropbox.com/u/265158/ikagaka/ku-/",function(obj){
+	var loading = 0;
+	for(var i in obj.shell){
+		if(obj.shell.hasOwnProperty(i)){
+			for(var j in obj.shell[i].surface){
+				if(obj.shell[i].surface.hasOwnProperty(j)){
+					if(obj.shell[i].surface[j].src){
+						var img = new Image();
+						img.src = obj.homeurl + obj.shell[i].surface[j].src;
+						img.onload = (function(surface){
+							loading += 1;
+							return function(){
+								loading -= 1;
+								var canvas = $("<canvas>").attr("width", this.width).attr("height", this.height)[0],
+									ctx = canvas.getContext("2d");
+								ctx.drawImage(this, 0, 0);
+								surface.src = transCanvas(canvas).toDataURL();
+								if(loading <= 0){
+									$("body").append(JSON.stringify(obj));
+								}
+							};
+						}(obj.shell[i].surface[j]));
+					}
+					if(obj.shell[i].surface[j].pna){
+						var img = new Image();
+						img.src = obj.homeurl + obj.shell[i].surface[j].pna;
+						img.onload = (function(surface){
+							loading += 1;
+							return function(){
+								loading -= 1;
+								var canvas = $("<canvas>").attr("width", this.width).attr("height", this.height)[0],
+									ctx = canvas.getContext("2d");
+								ctx.drawImage(this, 0, 0);
+								surface.pna = transCanvas(canvas).toDataURL();
+								if(loading <= 0){
+									$("body").append(JSON.stringify(obj));
+								}
+							};
+						}(obj.shell[i].surface[j]));
+					}
+					if(obj.shell[i].surface[j].element){
+						for(var k in obj.shell[i].surface[j].element){
+							if(obj.shell[i].surface[j].element.hasOwnProperty(k)){
+								var img = new Image();
+								img.src = obj.homeurl + obj.shell[i].surface[j].element[k][1];
+								img.onload = (function(surface){
+									loading += 1;
+									return function(){
+										loading -= 1;
+										var canvas = $("<canvas>").attr("width", this.width).attr("height", this.height)[0],
+											ctx = canvas.getContext("2d");
+										ctx.drawImage(this, 0, 0);
+										surface[1] = transCanvas(canvas).toDataURL();
+										if(loading <= 0){
+											$("body").append(JSON.stringify(obj));
+										}
+									};
+								}(obj.shell[i].surface[j].element[k]));
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+});
+</script>
+</body>
+</html>

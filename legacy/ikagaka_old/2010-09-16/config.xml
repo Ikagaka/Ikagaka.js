@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<widget>
+  <widgetname>Hello World!</widgetname>
+  <description>Demo widget from the Hello World tutorial.</description>
+  <width>440</width>
+  <height>200</height>
+  <author>
+    <name>John Doe</name>
+    <email>john.doe@example.com</email>
+    <link>http://acme-widget.example.com</link>
+    <organization>Acme Examples, Inc.</organization>
+  </author>
+  <id>
+    <host>example.com</host>
+    <name>HelloWorld</name>
+    <revised>2008-01</revised>
+  </id>
+</widget>

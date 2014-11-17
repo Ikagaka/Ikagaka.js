@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="ja" manifest="cache.manifest">
+<head>
+<meta charset="utf-8">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
+<meta name="viewport" content="width=400; height=500;">
+<title>如何か</title>
+<link rel="icon" href="./favicon.ico" type="image/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="./apple-touch-icon-precomposed.png">
+<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="./ui/jquery.ui.core.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.widget.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.mouse.js"></script> 
+<script type="text/javascript" src="./ui/jquery.ui.draggable.js"></script> 
+<script type="text/javascript" src="./ikagaka.js"></script>
+<script type="text/javascript" src="./exice_z.js"></script>
+<script type="text/javascript">
+$(function(){
+	var ghost = named();
+	ghost.nar = exice_z;
+	ghost.scope(0).surface(0);
+	ghost.scope(1).surface(10)
+	ghost.scope(0).blimp(0).addText("hoge");
+	ghost.scope(1).blimp(0).addText("hoge");
+	ghost.scope(0).surface(42);
+	$("body").append("HelloWorld!").append("<br>");
+
+});
+</script>
+</head>
+<body>
+</body>
+</html>

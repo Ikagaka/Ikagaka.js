@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+	<ModulePrefs
+		title="如何かv0.5"
+		title_url="http://files.dropbox.com/u/265158/index.html" 
+		description="伺か互換環境をGoogleガジェットに移植したもの。"
+		screenshot=""
+		thumbnail=""
+		author="Legokichi" 
+		author_email="legokichi0120@yahoo.co.jp"
+		height="356"
+		width="320"
+	>
+		<Locale lang="ja" country="jp" />
+		<!--/OpenSocial[http://code.google.com/intl/ja/apis/opensocial/docs/0.8/devguide.html]/-->
+		<Require feature="opensocial-0.8" />
+		<!--/キャッシュされないおまじない[http://www.ark-web.jp/sandbox/wiki/3250.html]/-->
+		<Optional feature="content-rewrite">
+			<Param name="include-urls"></Param>
+			<Param name="exclude-urls">.*</Param>
+			<Param name="include-tags"></Param>
+		</Optional>
+	</ModulePrefs>
+	<Content type="html">
+		<![CDATA[
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/jquery-1.4.1.min.js"></script> 
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/ui.core.js"></script>
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/ui.draggable.js"></script>
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/ui.draggable.ext.js"></script>
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/jquery.cleaner.js"></script>
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/ghost.js"></script>
+<script type="text/javascript" src="http://dl.dropbox.com/u/265158/ikagaka/onload.js"></script>
+		]]>
+	</Content>
+</Module>

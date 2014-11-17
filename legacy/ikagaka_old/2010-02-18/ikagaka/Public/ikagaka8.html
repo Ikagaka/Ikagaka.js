@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="Shift-JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Shift-JIS" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" /> 
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>如何か</title>
+<meta name="robots" content="NOFOLLOW" />
+<meta name="author" content="Legokichi" />
+<meta name="description" content="Kamo&amp;Negis!" />
+<script type='text/javascript' src='./jquery-1.3.2.min.js'></script>
+<script type='text/javascript' src='./jquery.dimensions.js'></script>
+<script type='text/javascript' src='./ui.mouse.js'></script>
+<script type='text/javascript' src='./ui.draggable.js'></script>
+<script type='text/javascript' src='./ui.draggable.ext.js'></script>
+<script type='text/javascript' src='./popupmenu.js'></script>
+<style type="text/css">
+*{	margin: 0px;
+	border: 0px;
+	padding: 0px;
+	line-height: 100%;
+	text-align: left;
+	font-size: 12px;
+	font-family: 'ＭＳ ゴシック';
+	position: relative;	
+	border: 0px solid #00FF00;
+}
+li{	margin: 0px 14px;}
+A:lin{	color: #aa66ff; text-decoration: none;}
+A:visited{	color: #aaaaff; text-decoration: none;}
+A:hover{	color: #ff4444; text-decoration: underline;}
+</style>
+</head>
+<body style="text-align:center;">
+	<div style="width:500px;padding-top:80px;">
+		<div style="height:100%;position:relative;">
+			<div style="font-size:40px;font-family:'ＭＳ 明朝';font-weight:bold;">如何か</div>
+			<div style="width:50px;left:85px;font-size:10px;font-family:'ＭＳ 明朝';">ikagaka</div>
+			<div style="margin-top:25px;">
+				<a href="#" onClick="OnSorce()">資料</a>
+				<br /><br />
+				<span style="font-size:10px;font-family:'ＭＳ 明朝';">- Dynamic;</span>
+				<br /><br />
+				<a href="#" onClick="OnBBS()">雑談掲示板</a> / <a href="#">Todo</a> / <a href="#">案</a> / <a href="#">もどき</a>
+				<br /><br />
+				<a href="#" onClick="OnVoice()">声優あそび</a> / <a href="#">ワザあそび</a> / <a href="#">http_referer</a>
+				<br /><br />
+				<span style="font-size:10px;font-family:'ＭＳ 明朝';">- Script;</span>
+				<br /><br />
+				<s><a href="ikagaka9.html">如何か phase9</a></s>
+				<br />
+				<a style="color:#aaaaaa;" href="ikagaka8.html">如何か phase8</a>
+				<br />
+				<a style="color:#bbbbbb;" href="ikagaka7.html">如何か phase7</a>
+				<br />
+				<a style="color:#cccccc;" href="ikagakaBETA6.html">如何か phase6</a>
+				<br />
+				<a style="color:#dddddd;" href="ikagakaBETA5.html">如何か phase5</a>
+				<br />
+				<a style="color:#eeeeee;" href="ikagakaBETA4.html">如何か phase4</a>
+			</div>
+			<div style="margin:50px 0px 90px 0px;text-align:right;font-size:10px;z-index:400;">
+					Painted by <a href="http://himaoka.sakura.ne.jp/">観城はるか</a>
+					<br />
+					Programed by <a href="">Legokichi/ねぎっつぁん</a>
+					<br />
+			</div>
+			<script type="text/javascript" src="ikagaka8.js" id="IkagakaBase"></script>
+			<noscript>ただいまお出かけ中です。永遠にお待ちください。</noscript>
+		</div>
+		<div style="text-align:right;font-size:10px;border-top:1px solid #000000;">
+			<img src="http://ct2.hahaue.com/ll/1299126" alt="カウンター" /> th Visitor.
+		</div>
+		<div id="msgmsg" style="visibility:hidden;">
+			<input type="input" id="msg" size="100" value="\0テキストボックスにSakuraScriptを入力して実行してください。\w8\e">
+			<button id="msgbtn" onClick="OnBoot()">実行</button>
+		</div>
+		<div style="margin-top:30px;text-align:right;font-size:10px;">
+			リンクは必ずドロップボックス　<a stlye="font-size:15;" href="http://files.getdropbox.com/u/265158/index.html">http://files.getdropbox.com/u/265158/index.html</a> へ
+			<br />
+			<a href=""><img src="img/bannar.gif" style="width:200px;height:40px;"></a>
+		</div>
+		<!-- div style="margin-top:30px;">
+			このサイトは " servers " （ <a href="http://servers.ghost.ai/">http://servers.ghost.ai/</a> ）によって運営されています。
+			<br />
+			servers では随時サーバを募集しています。
+		</div -->
+		<ul style="margin-top:30px;">
+			<li>このページはリンクフリーです（リンクにあたって許可を必要としません）。</li>
+			<li>ルートページ以外のhtmlに直リンクしても構いません。</li>
+			<!-- li>SSTP 技術は 2000/12/23 より Web 上で全ての仕様が公開されています。</li -->
+			<!-- li>Direct SSTP 技術は 2001/4/14 より Web 上で全ての仕様が公開されています。</li -->
+			<!-- li>ヘッドラインセンス技術は 2000/11/28 より Web 上で全ての仕様が公開されています。</li -->
+			<!-- li>その他あらゆる仕様は公開されているので今さら自分が考えたと言っても遅い。</li -->
+			<!-- li>SHIORI とか起動中ずっと喋りまくるとか見たくないサイトを無理矢理ジャンプさせて見させるとかおすすめリスト作るとかその程度の発想で特許取れるかどうかは分かりませんが SHIORI については 2000/12/21 より Web 上で全ての仕様が公開されています。<br /><br /></li -->
+			<li>本サイトで配布している全ての著作物は、Legokichiの責任で配布されています。</li>
+			<li>配布についてのお問い合わせは以下へどうぞ。</li>
+		</ul>
+		<div style="margin-top:20px;font-size:10px;">
+			legokichi0120@yahoo.co.jp - <a href="mailto:legokichi0120@yahoo.co.jp">Legokichi</a>
+		</div>
+		<div style="margin-top:20px;font-size:10px;">
+			配布と関係のない、プログラム本体に関する要望、バグの指摘、技術的質問等については回答いたします。
+			ご了承下さい。
+		</div>
+	</div>
+<textarea id="surface" style="visibility:hidden;">
+surface0
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+0interval,sometimes
+0pattern0,8,5,overlay,0,0
+0pattern1,6,5,overlay,0,0
+0pattern2,8,5,overlay,0,0
+0pattern3,-1,5,overlay,0,0
+}
+
+surface1
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface2
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface3
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface4
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface5
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface6
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface7
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface8
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+0interval,sometimes
+0pattern0,6,5,overlay,0,0
+0pattern1,8,5,overlay,0,0
+0pattern2,6,5,overlay,0,0
+0pattern3,-1,5,overlay,0,0
+}
+
+surface9
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+
+}
+
+surface51
+{
+collision0,29,7,126,71,Head
+collision1,46,67,104,115,Face
+collision2,52,148,80,187,Bust
+}
+
+surface10
+{
+0interval,sometimes
+0pattern0,11,5,base,0,0
+0pattern1,10,5,base,0,0
+0pattern2,11,5,base,0,0
+0pattern3,-1,5,base,0,0
+}
+
+surface11
+{
+
+}
+
+</textarea>
+</body>
+</html>

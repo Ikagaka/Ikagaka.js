@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- saved from url=(0053)http://ranka.googlecode.com/hg/ranka/src/areka/i.html -->
+<HTML lang="ja-JP"><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META charset="UTF-8">
+<META name="viewport" content="width = 320">
+<TITLE>あれか？</TITLE>
+<SCRIPT src="./あれか？_files/json2.js"></SCRIPT>
+<SCRIPT src="./あれか？_files/jquery.1.3.2.min.js"></SCRIPT>
+<SCRIPT src="./あれか？_files/jqtouch.min.js"></SCRIPT>
+<SCRIPT src="./あれか？_files/dummyconsole.js"></SCRIPT>
+<SCRIPT>
+$(function(){
+
+var winStage;
+
+var loadFunc = function(ev){
+  winStage = $("#stage")[0].contentWindow;
+}
+window.addEventListener("load", loadFunc, false);
+
+
+var send = function(){
+  var sel = $("#selcommand").val();
+  console.log(sel);
+  var obj ={
+        method: "designTest",
+      }
+  // 送信
+  var send = JSON.stringify(obj);
+  winStage.postMessage(send, "*");
+}
+
+
+var html = document.getElementsByTagName("html")[0]
+html.addEventListener('click',      send, true);
+
+//var screen = $("#screen")[0]
+//screen.addEventListener('click',      send, true);
+
+//===================================================
+});
+
+</SCRIPT>
+<STYLE>
+body{
+  background-color: #88ff88;
+  margin: 0px;
+  padding: 0px;
+  height: 460px;
+}
+iframe{
+  background-image: url(img/samplebg.png);
+  border: 0px;
+  height: 460px;
+  width: 320px;
+  overflow: hidden;
+  position: absolute;
+  top: 0px;
+  z-index: -1;
+}
+#check{
+  position: absolute;
+  top: 250px;
+  width: 100px;
+}
+#send{
+  zoom: 2.0;
+}
+
+</STYLE>
+</HEAD><BODY>
+  <DIV id="screen">
+  <DIV onclick="send();">
+  <IFRAME id="stage" src="./あれか？_files/stage.htm" onclick="send();"></IFRAME>
+  <DIV id="check">
+    <INPUT type="button" id="send" value="Talk!" onclick="send();">
+  </DIV>
+  </DIV>
+
+</DIV></BODY></HTML>

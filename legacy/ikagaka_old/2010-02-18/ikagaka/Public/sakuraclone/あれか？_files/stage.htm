@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)http://ranka.googlecode.com/hg/ranka/src/areka/stage.html -->
+<HTML lang="ja-JP"><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META charset="UTF-8">
+<SCRIPT src="./Stage_files/json2.js"></SCRIPT>
+<SCRIPT src="./Stage_files/jquery.1.3.2.min.js"></SCRIPT>
+<SCRIPT src="./Stage_files/jqtouch.min.js"></SCRIPT>
+<SCRIPT src="./Stage_files/dummyconsole.js"></SCRIPT>
+<SCRIPT>
+$(function(){
+
+//===================================================
+// グローバルオブジェクトの定義
+//===================================================
+var winBallon = $("#ballon")[0].contentWindow;
+var winSakura = $("#sakura")[0].contentWindow;
+var winKero   = $("#kero"  )[0].contentWindow;
+
+var slot = {
+  sakura: winSakura,
+  kero:   winKero,
+};
+
+//===================================================
+// デザイン確認用イベント
+// (そのまますべてのウィンドウに転送)
+//===================================================
+var designTestEvent = function(ev,obj){
+  console.log("[stage::designTestEvent]");
+  winBallon.postMessage(ev.data, "*");
+}
+
+//===================================================
+// ロードイベント
+// (そのまますべてのウィンドウに転送)
+//===================================================
+var loadEvent = function(ev,obj){
+  console.log("[stage::loadEvent]");
+  console.log(ev);
+  if(ev.source == winBallon){
+    console.log("[ballon]初期化")
+    var o ={
+        method: "designTest",
+      }
+    var send = JSON.stringify(o);
+    winBallon.postMessage(send, "*");
+  }
+  if(ev.source == winSakura) console.log("[sakura]初期化")
+  if(ev.source == winKero  ) console.log("[kero]初期化")
+}
+
+//===================================================
+// シェル感情イベント
+//===================================================
+var emoteEvent =  function(ev,obj){
+  var s = slot[obj.slot];
+  if(s == undefined) return;
+  s.postMessage(ev.data, "*");
+}
+
+//===================================================
+// 存在しないメソッドが指定されたときの処理
+//===================================================
+var noneEvent = function(ev,obj){
+  console.log("[stage::noneEvent]");
+
+
+}
+
+//===================================================
+// イベント分岐テーブル
+//===================================================
+var method = {
+  designTest:  designTestEvent,
+  emote: emoteEvent,
+  load: loadEvent,
+  none: noneEvent,
+}
+
+
+
+//===================================================
+// messageの監視
+//===================================================
+var receiveMessage = function(ev){
+  // 本当はev.originの確認が必要
+  var obj = JSON.parse(ev.data);
+  var func = method[obj.method]
+  if( func == undefined ) func = method.none;
+  func(ev,obj);
+}
+window.addEventListener("message", receiveMessage, false);
+
+
+});
+</SCRIPT>
+<STYLE>
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+iframe{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: transparent;
+  border: 0px;
+  height: 100%;
+  width:  100%;
+  overflow: hidden;
+}
+iframe.sakura{
+  width: 210px;
+  left:  110px;
+}
+iframe.kero{
+  width: 210px;
+  left:    0px;
+}
+</STYLE>
+<TITLE>Stage</TITLE>
+</HEAD><BODY>
+  <IFRAME id="ballon" src="./Stage_files/ballon.htm"></IFRAME>
+  <IFRAME id="sakura" class="sakura" src="./Stage_files/actor.htm"></IFRAME>
+  <IFRAME id="kero" class="kero" src="./Stage_files/actor(1).htm"></IFRAME>
+
+</BODY></HTML>

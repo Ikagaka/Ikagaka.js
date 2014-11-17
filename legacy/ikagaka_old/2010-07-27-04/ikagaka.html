@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="utf-8">
+	<title>如何か</title>
+	<script type="text/javascript" src="../jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="./ikagaka.js"></script>
+	<style>	
+	/*仮の値*/
+	
+	#ikagaka>.named0>.scope0{
+		left:100px;
+		bottom:0px;
+	}
+	#ikagaka>.named0>.scope0>.collision0{
+		top:50px;
+		left:60px;
+		width:100px;
+		height:50px;
+	}
+	#ikagaka>.named0>.scope0>.blimp{
+		top:20px;
+		left:150px;
+	}
+	#ikagaka>.named0>.scope0>.blimp>.text{
+		top:10px;
+		left:10px;
+		width:180px;
+		height:80px;
+	}
+	</style>
+</head>
+<body>bodyだよ
+	<div id="ikagaka">
+		<div class="named named0">
+			<div class="scope scope0">
+				<canvas width="1" height="1"></canvas>
+				<div class="collision collision0"></div>
+				<div class="blimp">
+					<canvas width="1" height="1"></canvas>
+					<div class="text">発話内容</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

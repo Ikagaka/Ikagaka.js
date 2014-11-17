@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>hoge</title>
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script src="./jquery-ui.js"></script>
+<script src="./coffee-script.js"></script>
+<script type="text/coffeescript">
+class Named
+	constructor:(@json)->
+		@scope = do =>
+			scopeAry = []
+			curScope = 0
+			scopeAry[curScope] = new Scope curScope,@json
+			return (num)=>
+				unless isFinite Number num then return scopeAry[curScope]
+				curScope = Number num
+				scopeAry[curScope] ?= new Scope curScope,@json
+				return scopeAry[curScope]
+	playScript: (script)->
+		console.log "Named.playScript(\"#{script}\")"
+		scope = @scope
+		playScript = @playScript
+		taskAry = []
+		tidAry = []
+		talkWait = 80
+		map =
+			yy: /^\\\\/
+			yp: /^\\p\[(\d+)\]/
+			ys: /^\\s\[([^\]]+)\]/
+			yi: /^\\i\[(\d+)\]/
+			y_w: /^\\_w\[(\d+)\]/
+			yn: /^\\n/
+			ye: /^\\e/
+		while script
+			switch true
+				when map.yp.test script
+					taskAry.push do ->
+						num = Number map.yp.exec(script)[1]
+						->
+							console.log "scope(#{num})"
+							console.dir scope
+							scope(num)
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.yp,""
+				when map.ys.test script
+					taskAry.push do ->
+						str = map.ys.exec(script)[1]
+						->
+							console.log "scope().surface(\"#{Number str}\")"
+							scope().surface(Number str)
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.ys,""
+				when map.yi.test script
+					taskAry.push do ->
+						num = Number map.yi.exec(script)[1]
+						->
+							console.log "scope().surface().animate(#{num})"
+							tidAry.push setTimeout taskAry.shift(),0
+					script = script.replace map.yi,""
+				when map.y_w.test script
+					taskAry.push do ->
+						num = Number map.y_w.exec(script)[1]
+						->
+							console.log "wait(\"#{num}\")"
+							tidAry.push setTimeout taskAry.shift(),num
+					script = script.replace map.y_w,""
+				when map.yn.test script
+					taskAry.push -> 
+						console.log "\\n"
+						tidAry.push setTimeout taskAry.shift(),0
+					script = script.substr 2
+				when map.ye.test script
+					taskAry.push ->
+						console.log "\\e"
+						tidAry.push setTimeout taskAry.shift(),0
+					script = ""
+				when map.yy.test script
+					taskAry.push ->
+						console.log "scope().talk(\"\\\")"
+						tidAry.push setTimeout taskAry.shift(),talkWait
+					script = script.substr 2
+				else
+					taskAry.push do ->
+						chr = script.substr 0,1
+						->
+							console.log "scope().blimp().talk(\"#{chr}\")"
+							scope().blimp().talk(chr)
+							tidAry.push setTimeout taskAry.shift(),talkWait
+					script = script.substr 1
+		taskAry.push -> tidAry.push setTimeout (-> playScript("\\p[0]\\b[-1]\\c\\p[1]\\b[-1]\\c")),10000
+		setTimeout taskAry.shift(),0
+		return
+json =
+	shell:
+		master:
+			surface:
+				"0":
+					"element":[
+						["base","./exice_z/shell/master/surface0000.png"]]
+					"collision":[
+						[80,62,143,95,"Head"]
+						[91,111,139,142,"Face"]
+						[89,181,140,216,"Bust"]
+						[184,187,211,238,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",61,5,85,100]
+							["overlay",60,5,85,100]
+							["overlay",-1,5]]}]
+				"10":
+					"element":[
+						["base","./exice_z/shell/master/surface0010.png"]]
+				"22":
+					"element":[
+						["base","./exice_z/shell/master/surface0022.png"]]
+					"collision":[
+						[95,67,157,103,"Head"]
+						[104,116,158,143,"Face"]
+						[106,174,155,209,"Bust"]
+						[182,189,209,274,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",63,5,100,105]
+							["overlay",62,5,100,105]
+							["overlay",-1,6]]}]
+				"23":
+					"element":[
+						["base","./exice_z/shell/master/surface0023.png"]]
+					"collision":[
+						[91,62,148,95,"Head"]
+						[97,103,141,143,"Face"]
+						[90,163,138,198,"Bust"]
+						[165,168,195,248,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",65,5,90,100]
+							["overlay",64,5,90,100]
+							["overlay",-1,6]]}]
+				"60":
+					"element":[
+						["base","./exice_z/shell/master/surface0060.png"]]
+				"61":
+					"element":[
+						["base","./exice_z/shell/master/surface0061.png"]]
+				"62":
+					"element":[
+						["base","./exice_z/shell/master/surface0062.png"]]
+				"63":
+					"element":[
+						["base","./exice_z/shell/master/surface0063.png"]]
+				"64":
+					"element":[
+						["base","./exice_z/shell/master/surface0064.png"]]
+				"65":
+					"element":[
+						["base","./exice_z/shell/master/surface0065.png"]]
+hash2Array = (hash)->
+	ary=[]
+	(-> ary[k]=v) k,v for k,v of hash
+	ary
+
+json.shell.master.surface = hash2Array json.shell.master.surface
+
+class Scope
+	preload = do->
+		urlImgHash = {}
+		return (urlAry,callback)->
+			callback?() if urlAry.length is 0
+			i = 0
+			imgAry = urlAry.map (url)->
+				return urlImgHash[url] if Object.prototype.toString.apply(urlImgHash[url]) is "[object HTMLImageElement]"
+				i++
+				urlImgHash[url] = img = new Image
+				img.src = url
+				img.onload = img.onerror = ->
+					i--
+					callback?(imgAry) if i is 0
+				return img
+			return imgAry
+	doPreload = (json)->
+		json.shell.master.surface.forEach (v)->
+			preloadElements v.element
+	preloadElements = (elementsAry,callback)->
+		urlAry = []
+		elementsAry.forEach (v,i)->
+			(urlAry[i] = v[1]) unless Object.prototype.toString.apply(v[1]) is "[object HTMLImageElement]"
+		preload urlAry,(imgAry)->
+			if typeof imgAry is "undefined"
+				callback? elementsAry
+				return
+			elementsAry.forEach (v,i)->
+					elementsAry[i][1] = imgAry[i]
+			callback? elementsAry
+		return elementsAry
+	composeElements = (elementsAry)->
+		canvas = $("<canvas />")
+		elementsAry.forEach (v,i)->
+			[type,img,x,y] = v
+			switch type
+				when "base" then canvas = base transImg img
+				when "overlay" then canvas = overlay canvas,transImg(img),x,y
+				when "overlayfast" then canvas = overlayfast canvas,transImg(img),x,y
+		return canvas
+	transImg = (img)->
+		canvas = $("<canvas />")
+			.attr("width", img.width)
+			.attr("height", img.height)[0]
+		ctx = canvas.getContext '2d'
+		ctx.drawImage img, 0, 0
+		try
+			imgdata = ctx.getImageData 0, 0, img.width, img.height
+			r = imgdata.data[0]
+			g = imgdata.data[1]
+			b = imgdata.data[2]
+			i = 0
+			while i < imgdata.data.length
+				if r is imgdata.data[i] and g is imgdata.data[i+1] and b is imgdata.data[i+2]
+					imgdata.data[i+3] = 0
+				i += 4
+			ctx.putImageData imgdata, 0, 0
+		catch e
+			#console.dir e
+		return canvas
+	copy = (parentCanvas)->
+		childCanvas = $("<canvas />")
+			.attr("width", parentCanvas.width)
+			.attr("height", parentCanvas.height)[0]
+		ctx = childCanvas.getContext '2d'
+		ctx.drawImage parentCanvas, 0, 0
+		return childCanvas
+	base = (canvas)->
+		return copy.apply(@,arguments)
+	overlay = (target, canvas, x, y)->
+		return overlayfast.apply(@,arguments)
+	overlayfast = (target, canvas, x, y)->
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas, x, y
+		return target
+	draw = (target,canvas)->
+		$(target).attr
+			width: canvas.width
+			height: canvas.height
+		unless typeof target.parentNode is "undefined"
+			$(target.parentNode)
+				.width(canvas.width)
+				.height(canvas.height)
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas, 0, 0
+		return target
+	preloadAndComposeElements = (elementsAry,callback)->
+		preloadElements elementsAry,(elementsAry)->
+			callback composeElements(elementsAry)
+	setElements = (target,elementsAry,callback)->
+		preloadAndComposeElements elementsAry,(canvas)->
+			callback draw target,canvas
+	isHit = (canvas,x,y)->
+		ctx = canvas.getContext "2d"
+		try
+			imgdata = ctx.getImageData 0,0,x,y
+			return imgdata.data[--imgdata.data.length] isnt 0
+		catch e
+			#console.dir e
+			return true
+	setCollisions = (target,collisionsAry,curScope)->
+		drag = false
+		$(target.parentNode)
+			.unbind()
+			.click((e)->$(@).appendTo("body") if isHit target,e.offsetX,e.offsetY)
+			.mousedown((e)-> $(@).draggable({disabled:false}) if isHit target,e.offsetX,e.offsetY)
+			.draggable({disabled:true,axis:"x"})
+			.mouseup(-> $(@).draggable({disabled:true}))
+		$(target)
+			.unbind()
+			.dblclick (e)->
+				if isHit target,e.offsetX,e.offsetY
+					event =
+						ID: "OnMouseDoubleClick"
+						Reference0: e.offsetX
+						Reference1: e.offsetY
+						Reference2: 0
+						Reference3: curScope
+						Reference4: ""
+						Reference5: 0
+					unless typeof collisionsAry is "undefined"
+						collisionsAry.forEach (v)->
+							[x,y,_x,_y,name] = v
+							if x < e.offsetX < _x and y < e.offsetY < _y
+								event["Reference4"] = name
+					console.log "#{k} :#{v}" for k,v of event
+	setAnimations = (target,animationsAry,json)->
+		return callback?() if typeof animationsAry is "undefined"
+		animationsAry.forEach (v)->
+			setAnimation target,v,json
+	sometimes = (fn)->
+		random(fn,2)
+	rarely = (fn)->
+		random(fn,4)
+	random = (fn,n)->
+		ms = 1
+		ms++ while Math.round Math.random() * 1000 > 1000/n
+		setTimeout(->
+			fn()
+			sometimes(fn)
+		,ms*1000)
+	always = (fn,callback)->
+		setTimeout(->
+			fn ->
+				callback?()
+				always fn,callback
+		,0)
+	runonce = (fn)->
+		setTimeout(fn,0)
+	setAnimation = (target,animationAry,json,callback)->
+		[timing,n] = /(\w+)(?:,\s*(\d+))?/.exec(animationAry.timing).slice(1)
+		switch timing
+			when "sometimes" then sometimes playAnimation.bind @,target,animationAry.pattern,json,callback
+			when "rarely" then rarely playAnimation.bind @,target,animationAry.pattern,json,callback
+			when "random" then random playAnimation.bind(@,target,animationAry.pattern,json,callback),n
+			when "always" then always playAnimation.bind @,target,animationAry.pattern,json,callback
+			when "runonce" then runonce playAnimation.bind(@,target,animationAry.pattern,json),callback
+			when "talk" then talk playAnimation.bind(@,target,animationAry.pattern,json,callback),n
+	playAnimation = (target,patternAry,json,callback)->
+		i = 0
+		tempBase = copy target
+		play = ->
+			[type,n,delay,x,y] = patternAry[i++]
+			if n < 0
+				draw target,tempBase
+				setTimeout callback,delay*10
+				return
+			elementsAry = json.shell.master.surface[n].element
+			if !!patternAry[i]
+				continuation = -> setTimeout play,delay*10
+			switch type
+				when "base" then preloadAndComposeElements elementsAry,(canvas)->
+					tempBase = base canvas
+					continuation draw target,canvas
+				when "overlay" then preloadAndComposeElements elementsAry,(canvas)->
+					continuation draw target,overlay(copy(tempBase),canvas,x,y)
+				when "overlayfast" then preloadAndComposeElements elementsAry,(canvas)->
+					continuation draw target,overlayfast(copy(tempBase),canvas,x,y)
+		play()
+	constructor:(@curScope,@json)->
+		@id = "scope" + Date.now() + Math.round Math.random() * 10000
+		@curSurface = 0
+		$("<div class=\"scope\" />")
+			.attr({"id",@id})
+			.css(
+				bottom: "0px"
+				right: (curScope*240+80)+"px"
+				visibility: "hidden"
+			)
+			.append("<canvas class=\"surface\" width=\"0\" height=\"0\" />")
+			.append($("<div class=\"balloon\" />")
+				.css(
+					visibility: "hidden"
+					top:"60px"
+					left: "-300px")
+				.append("<canvas class=\"blimp\" width=\"0\" height=\"0\" />")
+				.append("<div class=\"text\" style=\"margin:10px;margin-right:30px;\" />"))
+			.append($("<style scoped />")
+				.html("##{@id},##{@id} *{position:absolute;border:0px solid red;margin:0px;padding:0px;}"))
+			.appendTo("body")
+		doPreload(@json)
+		preload ["./ssp/balloons0.png","./ssp/balloons1.png","./ssp/balloonk0.png","./ssp/balloonk1.png"],(ary)=>
+			$("##{@id} .balloon")
+				.toggle((e)=>
+					$("##{@id} .balloon").css({left: "",right: "-300px"})
+					$("##{@id} .text").css({"margin-left": "20px","margin-right": "10px"})
+					draw $("##{@id} .blimp")[0],transImg(ary[(if @curScope is 0 then 1 else 3)])
+				,(e)=>
+					$("##{@id} .balloon").css({right: "",left: "-300px"})
+					$("##{@id} .text").css({"margin-left": "10px","margin-right": "20px"})
+					draw $("##{@id} .blimp")[0],transImg(ary[(if @curScope is 0 then 0 else 2)]))
+			draw $("##{@id} .blimp")[0],transImg(ary[(if @curScope is 0 then 0 else 2)])
+	surface:(n,callback)->
+		@curSurface = n unless arguments.length is 0
+		surface = @json.shell.master.surface
+		if n is -1
+			$("##{@id}").css visibility: "hidden"
+		else unless typeof surface[n] is "undefined"
+			$("##{@id}").css visibility: "visible"
+			target = $("##{@id} .surface")[0]
+			setElements target,surface[n].element,=>
+				setCollisions target,surface[n].collision,@curScope
+				setAnimations target,surface[n].animation,json,callback
+		return {
+			animate:(n,callback)=>
+				if @json.shell.master.surface[curSurface].animation
+					playAnimation $("##{@id} .surface")[0],@json.shell.master.surface[curSurface].animation[n],@json,callback}
+	blimp:(n,callback)->
+		@curBlimp = n unless arguments.length is 0
+		if n is -1
+			$("##{@id} .balloon").css visibility: "hidden"
+		return {
+			talk:(chr)=>
+				$("##{@id}").appendTo("body")
+				$("##{@id} .balloon").css visibility: "visible"
+				$("##{@id} .text").append(chr)
+			clear:->
+				$("##{@id} .text").html("")}
+$ ->
+	exice_z = new Named json
+	exice_z.playScript "\\p[1]\\s[10]\\p[0]\\s[0]Hello\\_w[300]\\n\\p[1]\\s[10]\\i[0]World!\\e"
+</script>
+</head>
+<body>
+</body>
+</html>

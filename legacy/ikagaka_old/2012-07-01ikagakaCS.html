@@ -1,0 +1,101 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=700" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>如何か</title>
+<link rel="stylesheet" href="./normalize.css" />
+<link rel="stylesheet" href="qunit.css">
+<script src="qunit.js"></script>
+<script src="./jquery-1.7.2.min.js"></script>
+<script type="text/coffeescript" src="2012-07-01-ikagaka.coffee"></script>
+<script type="text/coffeescript">
+json =
+	"shell":
+		"master":
+			"surface":
+				"0":
+					"element":[
+						["base","./ku-/shell/master/surface0.png"]]
+					"collision":[
+						[71,40,168,98,"head"]
+						[97,112,164,158,"face"]
+						[122,216,150,259,"bust"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlayfast",100,5]
+							["overlayfast",101,5]
+							["overlayfast",100,15]
+							["overlay",0,0]]}
+						{"timing":"always"
+						"pattern":[
+							["overlay",203,0,82,6]
+							["overlay",203,15,82,7]
+							["overlay",203,15,82,8]
+							["overlay",203,30,82,9]
+							["overlay",203,15,82,8]
+							["overlay",203,15,82,7]
+							["overlay",203,15,82,6]
+							["overlay",203,15,82,5]
+							["overlay",203,30,82,4]
+							["overlay",203,15,82,5]
+							["overlay",203,15,82,6]]}]
+				"10":
+					"element":[
+						["base","./ku-/shell/master/surface10.png"]]
+					"collision":[
+						[67,28,164,71,"head"]
+						[85,89,141,126,"face"]
+						[88,176,126,198,"bust"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlayfast",10,5]
+							["overlayfast",11,5]
+							["overlayfast",10,15]
+							["overlay",-1,10]]}
+						{"timing":"always"
+						"pattern":[
+							["overlay",19,15,0,0]
+							["overlay",19,15,0,-1]
+							["overlay",19,15,0,-2]
+							["overlay",19,30,0,-1]
+							["overlay",19,15,0,0]
+							["overlay",19,15,0,1]
+							["overlay",19,30,0,2]
+							["overlay",19,15,0,3]
+							["overlay",19,15,0,2]
+							["overlay",19,15,0,1]
+							["overlay",19,30,0,0]]}]
+				"11":
+					"element":[
+						["base","./ku-/shell/master/surface11.png"]]
+				"19":
+					"element":[
+						["base","./ku-/shell/master/surface19.png"]]
+				"100":
+					"element":[
+						["base","./ku-/shell/master/surface100.png"]]
+				"101":
+					"element":[
+						["base","./ku-/shell/master/surface101.png"]]
+				"203":
+					"element":[
+						["base","./ku-/shell/master/surface203.png"]]
+###
+$ ->
+	ku_ = ikagaka.createNamed json,{},->
+		@materialize()
+	ku_.on "boot",(e)-> "\\0HelloWorld\\e"
+###
+</script>
+<script src="./coffee-script.js"></script>
+</head>
+<body>
+	<div id="qunit"></div>
+	<div id="qunit-fixture">test markup</div>
+</body>
+</html>

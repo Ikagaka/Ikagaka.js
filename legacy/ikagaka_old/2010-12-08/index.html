@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>如何か</title>
+<style>
+</style>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+<script src="./makeNamed.js"></script>
+<script src="./ecoco.js"></script>
+<script>
+$(function(){
+	 ecoco("http://dl.dropbox.com/u/265158/ikagaka/dot_sakura_020/",function(narObj){
+		var named = makeNamed();
+		named.nar = narObj;
+		named.playScript("\\0\\s[5000]\\e");
+		named.shiori = (function(){
+			var str = $("script[type='text\/satori']").html();
+			str = $.trim(str.replace(/\r\n?/g,"\n"));
+			console.log(/(^[＊|＠].*?\n[^＊|＠]*)*/g.exec(str).length);
+			//console.log(/^(＊|＠)(.*)?\n([^＊|＠]*)/g.exec(str));
+			return function(e){
+				return "\\0\\s[5000]hoge\\e";
+			};
+		}());
+	});
+});
+</script>
+<script type="text/satori">
+＊OnBoot
+：おはようございます。
+：おはよう。
+
+＊OnClose
+：さよならー
+</script>
+<style>
+</style>
+</head>
+<body>
+</body>
+</html>

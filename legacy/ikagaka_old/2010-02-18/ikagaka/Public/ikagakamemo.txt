@@ -1,0 +1,26 @@
+-Ikagaka
+ -Ikagaka0	\0
+  -Ikagaka0Surface	\s[-1]
+   -Ikagaka0Surface0	\s[0]
+    -Ikagaka0Surface0collision0
+    -Ikagaka0Surface0collision1
+    -Ikagaka0Surface0element0
+    -Ikagaka0Surface0element1
+   +Ikagaka0Surface1	\s[1]
+   +Ikagaka0Surface2	\s[2]
+  -Ikagaka0Balloon	\b[-1]
+   -Ikagaka0Balloon0	\b[0]
+    -Ikagaka0Balloon0Text
+   +Ikagaka0Balloon1	\b[1]
+ +Ikagaka1	\1
+ +Ikagaka2	\p[2]
+
+
+              >ShellLoader  >              >SurfaceManager<->SurfacePlayer                >SurfacePlayer
+IkagakaLoader->BalloonLoader>Ikagakabooter->BalloonManager ->BalloonPlayer                >BalloonPlayer
+              >GhostLoader  >              >TaskManager   <->EventManager ->ScriptPlayer<->ScriptBreaker
+
+
+
+
+

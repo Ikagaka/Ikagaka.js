@@ -1,0 +1,572 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<title>hoge</title>
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script src="./coffee-script.js"></script>
+<script type="text/coffeescript">
+exice_zJson =
+	shell:
+		master:
+			surface:
+				"0":
+					"element":[
+						["base","./exice_z/shell/master/surface0000.png"]]
+					"collision":[
+						[80,62,143,95,"Head"]
+						[91,111,139,142,"Face"]
+						[89,181,140,216,"Bust"]
+						[184,187,211,238,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",61,5,85,100]
+							["overlay",60,5,85,100]
+							["overlay",-1,5]]}]
+				"1":
+					"element":[
+						["base","./exice_z/shell/master/surface0001.png"]]
+				"2":
+					"element":[
+						["base","./exice_z/shell/master/surface0002.png"]]
+				"3":
+					"element":[
+						["base","./exice_z/shell/master/surface0003.png"]]
+				"4":
+					"element":[
+						["base","./exice_z/shell/master/surface0004.png"]]
+				"5":
+					"element":[
+						["base","./exice_z/shell/master/surface0005.png"]]
+				"6":
+					"element":[
+						["base","./exice_z/shell/master/surface0006.png"]]
+				"7":
+					"element":[
+						["base","./exice_z/shell/master/surface0007.png"]]
+				"8":
+					"element":[
+						["base","./exice_z/shell/master/surface0008.png"]]
+				"9":
+					"element":[
+						["base","./exice_z/shell/master/surface0009.png"]]
+				"10":
+					"element":[
+						["base","./exice_z/shell/master/surface0010.png"]]
+				"15":
+					"element":[
+						["base","./exice_z/shell/master/surface0015.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["overlay",16,20,0,0]
+							["overlay",16,14,0,5]
+							["overlay",16,12,0,10]
+							["overlay",16,10,0,15]
+							["overlay",16,8,0,20]
+							["overlay",16,5,0,35]
+							["overlay",16,5,0,40]
+							["overlay",16,5,0,60]
+							["overlay",16,5,0,80]
+							["overlay",16,5,0,100]]}]
+				"16":
+					"element":[
+						["base","./exice_z/shell/master/surface0016.png"]]
+				"18":
+					"element":[
+						["base","./exice_z/shell/master/surface0018.png"]]
+				"19":
+					"element":[
+						["base","./exice_z/shell/master/surface0019.png"]]
+				"22":
+					"element":[
+						["base","./exice_z/shell/master/surface0022.png"]]
+					"collision":[
+						[95,67,157,103,"Head"]
+						[104,116,158,143,"Face"]
+						[106,174,155,209,"Bust"]
+						[182,189,209,274,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",63,5,100,105]
+							["overlay",62,5,100,105]
+							["overlay",-1,6]]}]
+				"23":
+					"element":[
+						["base","./exice_z/shell/master/surface0023.png"]]
+					"collision":[
+						[91,62,148,95,"Head"]
+						[97,103,141,143,"Face"]
+						[90,163,138,198,"Bust"]
+						[165,168,195,248,"LeftST"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlay",65,5,90,100]
+							["overlay",64,5,90,100]
+							["overlay",-1,6]]}]
+				"24":
+					"element":[
+						["base","./exice_z/shell/master/surface0024.png"]]
+				"25":
+					"element":[
+						["base","./exice_z/shell/master/surface0025.png"]]
+				"26":
+					"element":[
+						["base","./exice_z/shell/master/surface0026.png"]]
+				"28":
+					"element":[
+						["base","./exice_z/shell/master/surface0028.png"]]
+				"29":
+					"element":[
+						["base","./exice_z/shell/master/surface0029.png"]]
+				"41":
+					"element":[
+						["base","./exice_z/shell/master/surface0041.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["overlay",48,8]
+							["overlay",47,8]
+							["overlay",46,8]
+							["overlay",45,8]
+							["overlay",43,8]
+							["overlay",-1,8]]}]
+				"42":
+					"element":[
+						["base","./exice_z/shell/master/surface0042.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["base",81,8]
+							["base",82,8]
+							["base",83,8]
+							["base",84,8]
+							["base",85,8]
+							["base",86,8]
+							["base",87,8]
+							["base",88,8]
+							["base",89,8]
+							["base",43,8]]}]
+				"43":
+					"element":[
+						["base","./exice_z/shell/master/surface0043.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["base",89,8]
+							["base",88,8]
+							["base",87,8]
+							["base",86,8]
+							["base",85,8]
+							["base",84,8]
+							["base",83,8]
+							["base",82,8]
+							["base",81,8]
+							["base",42,8]]}]
+				"50":
+					"element":[
+						["base","./exice_z/shell/master/surface0050.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["base",52,6]
+							["base",53,6]
+							["base",54,6]
+							["base",55,6]
+							["base",56,6]
+							["base",57,6]
+							["base",58,6]
+							["base",51,6]]}]
+				"51":
+					"element":[
+						["base","./exice_z/shell/master/surface0051.png"]]
+					"animation":[
+						{"timing":"runonce"
+						"pattern":[
+							["base",58,6]
+							["base",57,6]
+							["base",56,6]
+							["base",55,6]
+							["base",54,6]
+							["base",53,6]
+							["base",52,6]
+							["base",50,6]]}]
+				"60":
+					"element":[
+						["base","./exice_z/shell/master/surface0060.png"]]
+				"61":
+					"element":[
+						["base","./exice_z/shell/master/surface0061.png"]]
+				"62":
+					"element":[
+						["base","./exice_z/shell/master/surface0062.png"]]
+				"63":
+					"element":[
+						["base","./exice_z/shell/master/surface0063.png"]]
+				"64":
+					"element":[
+						["base","./exice_z/shell/master/surface0064.png"]]
+				"65":
+					"element":[
+						["base","./exice_z/shell/master/surface0065.png"]]
+				"70":
+					"element":[
+						["base","./exice_z/shell/master/surface0070.png"]]
+				"71":
+					"element":[
+						["base","./exice_z/shell/master/surface0071.png"]]
+				"72":
+					"element":[
+						["base","./exice_z/shell/master/surface0072.png"]]
+				"73":
+					"element":[
+						["base","./exice_z/shell/master/surface0073.png"]]
+				"74":
+					"element":[
+						["base","./exice_z/shell/master/surface0074.png"]]
+				"75":
+					"element":[
+						["base","./exice_z/shell/master/surface0075.png"]]
+				"76":
+					"element":[
+						["base","./exice_z/shell/master/surface0076.png"]]
+				"77":
+					"element":[
+						["base","./exice_z/shell/master/surface0077.png"]]
+hash2Array = (hash)->
+	ary=[]
+	(-> ary[k]=v) k,v for k,v of hash
+	ary
+
+exice_zJson.shell.master.surface = hash2Array exice_zJson.shell.master.surface
+
+makeNamed = do -># ====================================== tools ====================================== #
+	transImg = (img)->
+		canvas = $("<canvas />").attr({
+			width: img.width,
+			height: img.height})[0]
+		ctx = canvas.getContext '2d'
+		ctx.drawImage img,0,0
+		try
+			imgdata = ctx.getImageData 0,0,img.width,img.height
+			i = 0
+			[r,g,b] = [imgdata.data[0],imgdata.data[1],imgdata.data[2]]
+			while i < imgdata.data.length
+				imgdata.data[i+3] = 0 if r is imgdata.data[i] and g is imgdata.data[i+1] and b is imgdata.data[i+2]
+				i += 4
+			ctx.putImageData imgdata,0,0
+		catch e
+		return canvas
+	copy = (parentCanvas)->
+		childCanvas = $("<canvas />").attr({
+			"width": parentCanvas.width,
+			"height":parentCanvas.height})[0]
+		ctx = childCanvas.getContext '2d'
+		ctx.drawImage parentCanvas,0,0
+		return childCanvas
+	base = (canvas)->
+		return copy.apply(@,arguments)
+	overlay = (target, canvas, x, y)->
+		return overlayfast.apply(@,arguments)
+	overlayfast = (target,canvas,x,y)->
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas,x,y
+		return target
+	draw = (target,canvas)->
+		$(target).attr
+			width: canvas.width
+			height: canvas.height
+		if target.parentNode?
+			$(target.parentNode)
+				.width(canvas.width)
+				.height(canvas.height)
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas,0,0
+		return target
+	isHit = (target,x,y)->
+		ctx = target.getContext "2d"
+		try
+			imgdata = ctx.getImageData 0,0,x,y
+			return imgdata.data[imgdata.data.length-1] isnt 0
+		return true
+	preload = do ->
+		urlImgHash = {}
+		return (urlAry,callback)->
+			if urlAry.length is 0
+				setTimeout callback,0,[] if callback?
+				return []
+			i = 0
+			imgAry = urlAry.map (url)->
+				return urlImgHash[url] if Object.prototype.toString.apply(urlImgHash[url]) is "[object HTMLImageElement]"
+				i++
+				urlImgHash[url] = img = new Image
+				img.src = url
+				img.onload = img.onerror = ->
+					i--
+					callback?(imgAry) if i is 0
+				return img
+			setTimeout callback,0,imgAry if i is 0 and callback?
+			return imgAry
+	doPreload = (json)->
+		json.shell.master.surface.forEach (v)->
+			preloadElements v.element
+	preloadElements = (elementsAry,callback)->
+		urlAry = elementsAry.map (v)-> return v[1]
+		preload urlAry,(imgAry)->
+			imagedElementsAry = elementsAry.map (v,i)->
+					return [v[0],imgAry[i],v[2],v[3]]
+			callback? imagedElementsAry
+	composeElements = (imagedElementsAry)->
+		canvas = $("<canvas />")[0]
+		imagedElementsAry.forEach (v)->
+			[type,img,x,y] = v
+			switch type
+				when "base" then canvas = base transImg img
+				when "overlay" then canvas = overlay canvas,transImg(img),x,y
+				when "overlayfast" then canvas = overlayfast canvas,transImg(img),x,y
+		return canvas
+	preloadAndComposeElements = (elementsAry,callback)->
+		preloadElements elementsAry,(imagedElementsAry)->
+			callback composeElements imagedElementsAry
+	setElements = (target,elementsAry,callback)->
+		return callback?() unless elementsAry?
+		preloadAndComposeElements elementsAry,(canvas)->
+			callback? draw target,canvas
+	setCollisions = (target,collisionsAry,scopeId)->
+		$(target)
+			.unbind()
+			.dblclick (e)->
+				if isHit @,e.offsetX,e.offsetY
+					event =
+						ID: "OnMouseDoubleClick"
+						Reference0: e.offsetX
+						Reference1: e.offsetY
+						Reference2: 0
+						Reference3: scopeId
+						Reference4: null
+						Reference5: 0
+					collisionsAry?.forEach (v)->
+						[x,y,_x,_y,name] = v
+						event["Reference4"] = name if x < e.offsetX < _x and y < e.offsetY < _y
+					console.log "#{k} :#{v}" for k,v of event
+	sometimes = (tidAry,fn)->
+		return random(tidAry,fn,2)
+	rarely = (tidAry,fn)->
+		return random(tidAry,fn,4)
+	random = (tidAry,fn,n)->
+		ms = 1
+		ms++ while Math.round(Math.random() * 1000) > 1000/n
+		return tidAry.push setTimeout(->
+			fn()
+			random(tidAry,fn,n)
+		,ms*1000)
+	runonce = (tidAry,fn)->
+		return tidAry.push setTimeout(fn,0)
+	clearTidAry = (tidAry)->
+		tidAry.forEach (v)->
+			clearTimeout v
+		return []
+# ====================================== animationsObj.. ====================================== #
+	makeAnimations = (target,animationsAry,json,callback)->
+		tidAry = []
+		animationObjAry = []
+		if animationsAry?
+			regExp = /(\w+)(?:,\s*(\d+))?/
+			animationsAry.forEach (v,i)->
+				[timing,n] = regExp.exec(v.timing).slice(1)
+				animationObjAry[i] = makeAnimation(target,v.pattern,json)
+				switch timing
+					when "sometimes" then sometimes tidAry,animationObjAry[i].play
+					when "runonce" then runonce tidAry,animationObjAry[i].play
+				setTimeout callback,0
+			return {
+				stop:()->
+					animationObjAry.forEach (v)-> v.stop()
+					clearTidAry tidAry
+			}
+		else
+			setTimeout callback,0
+			return undefined
+	makeAnimation = (target,patternAry,json)->
+		tidAry = []
+		return {
+			play:(callback)-> 
+				i = 0
+				tempBase = copy target
+				play = ->
+					[type,n,delay,x,y] = patternAry[i++]
+					if n < 0
+						draw target,tempBase
+						return tidAry.push setTimeout callback,delay*10
+					elementsAry = json.shell.master.surface[n].element
+					if patternAry[i]?
+						continuation = -> return tidAry.push setTimeout play,delay*10
+					switch type
+						when "base" then preloadAndComposeElements elementsAry,(canvas)->
+							tempBase = base canvas
+							return continuation? draw target,canvas
+						when "overlay" then preloadAndComposeElements elementsAry,(canvas)->
+							return continuation? draw target,overlay(copy(tempBase),canvas,x,y)
+						when "overlayfast" then preloadAndComposeElements elementsAry,(canvas)->
+							return continuation? draw target,overlayfast(copy(tempBase),canvas,x,y)
+				return play()
+			stop:()-> clearTidAry tidAry
+		}
+# ====================================== surfaceObj.. ====================================== #
+	makeSurface = (namedId,scopeId,json)->
+		curSurface = -1
+		animsObj = null
+		target = $("#named#{namedId}>.scope#{scopeId}>.surface")[0]
+		return (n,callback)->
+			unless n is curSurface
+				curSurface = n unless arguments.length is 0
+				surface = json.shell.master.surface
+				if n is -1
+					$("#named#{namedId}>.scope#{scopeId}").css visibility: "hidden" 
+				else if surface[n]?
+					$("#named#{namedId}>.scope#{scopeId}").css visibility: "visible"
+					animsObj?.stop?()
+					setElements target,surface[n].element,->
+						setCollisions target,surface[n].collision,scopeId
+						animsObj = makeAnimations target,surface[n].animation,json,callback
+				console.log "named(#{namedId}).scope(#{scopeId}).surface(#{curSurface})" if n?
+			return {
+				animate:(n,callback)->
+					setTimeout callback,0
+					console.log "named(#{namedId}).scope(#{scopeId}).surface(#{curSurface}).animate(#{n})" if n?
+					return {
+						stop:->}}# ====================================== blimpObj.. ====================================== #
+	makeBlimp = (namedId,scopeId,json)->
+		curBlimp = -1
+		preload ["./ssp/balloons0.png","./ssp/balloons1.png","./ssp/balloonk0.png","./ssp/balloonk1.png"],(ary)=>
+			draw $("#named#{namedId}>.scope#{scopeId}>.balloon>.blimp")[0],transImg(ary[(if scopeId is 0 then 0 else 2)])
+		return (n,callback)->
+			curBlimp = n unless arguments.length is 0
+			$("#named#{namedId}>.scope#{scopeId}>.balloon").css visibility: "hidden" if n is -1
+			return {
+				talk:(chr)->
+					$("#named#{namedId}>.scope#{scopeId}>.balloon").css visibility: "visible"
+					$("#named#{namedId}>.scope#{scopeId}>.balloon>.text").append chr
+					console.log "named(#{namedId}).scope(#{scopeId}).talk(\"#{chr}\")"
+				br:->
+					$("#named#{namedId}>.scope#{scopeId}>.balloon>.text").append "<br />"
+					console.log "named(#{namedId}).scope(#{scopeId}).br()"
+				clear:->
+					$("#named#{namedId}>.scope#{scopeId}>.balloon>.text").html ""
+					console.log "named(#{namedId}).scope(#{scopeId}).clear()"}# ====================================== scopeObj.. ====================================== #
+	makeScope = (namedId,scopeId,json)->
+		$("<div class=\"scope\" />")
+			.addClass("scope#{scopeId}")
+			.css(
+				bottom: "0px"
+				right: (scopeId*240+80)+"px"
+				visibility: "hidden")
+			.append("<canvas class=\"surface\" width=\"0\" height=\"0\" />")
+			.append($("<div class=\"balloon\" />")
+				.css(
+					visibility: "hidden"
+					top:"60px"
+					left: "-300px")
+				.append("<canvas class=\"blimp\" width=\"0\" height=\"0\" />")
+				.append("<div class=\"text\" style=\"margin:10px;margin-right:30px;\" />"))
+			.appendTo("#named#{namedId}")
+		doPreload(json)
+		return {
+			surface:makeSurface(namedId,scopeId,json)
+			blimp:makeBlimp(namedId,scopeId,json)}
+# ====================================== namedObj.. ====================================== #
+	playScript = (namedId,scope,tidAry,script="",callback=->)->
+		console.log "named(#{namedId}).playScript(\"#{script}\")"
+		regExpHash =
+			yy: /^\\\\/
+			yp: /^\\p\[(\d+)\]/
+			ys: /^\\s\[([^\]]+)\]/
+			yi: /^\\i\[(\d+)\]/
+			y_w: /^\\_w\[(\d+)\]/
+			yn: /^\\n/
+			ye: /^\\e/
+		isCallcc = false
+		callcc = (rescript,talkWait)->
+			isCallcc = true
+			return -> 
+				isCallcc = false
+				tidAry.push setTimeout playingScript,talkWait,rescript
+		playingScript = (script)->
+			if script.length is 0
+				callback?(tidAry) 
+				return
+			talkWait = 0
+			switch true
+				when regExpHash.yp.test script
+					num = Number regExpHash.yp.exec(script)[1]
+					rescript = script.replace regExpHash.yp,""
+					scope(num)
+				when regExpHash.ys.test script
+					num = Number regExpHash.ys.exec(script)[1]
+					rescript = script.replace regExpHash.ys,""
+					scope().surface(num,callcc(rescript,talkWait))
+				when regExpHash.yi.test script
+					num = Number regExpHash.yi.exec(script)[1]
+					rescript = script.replace regExpHash.yi,""
+					scope().surface().animate(num,callcc(rescript,talkWait))
+				when regExpHash.y_w.test script
+					talkWait = Number regExpHash.y_w.exec(script)[1]
+					rescript = script.replace regExpHash.y_w,""
+					console.log "named(#{namedId}).wait?(\"#{talkWait}\")"
+				when regExpHash.yn.test script
+					rescript = script.substr 2
+					scope().blimp().br()
+				when regExpHash.ye.test script
+					rescript = ""
+					console.log "\\e"
+				when regExpHash.yy.test script
+					rescript = script.substr 2
+					scope().talk("\\")
+				else
+					chr = script.substr 0,1
+					rescript = script.substr 1
+					scope().blimp().talk(chr)
+					talkWait = 80
+			tidAry.push setTimeout playingScript,talkWait,rescript unless isCallcc
+			return tidAry
+		return playingScript(script)
+	namedIndex = 0
+	makeNamed = (json)->
+		namedId = namedIndex++
+		scriptTidAry = []
+		scopeAry = []
+		curScope = 0
+		scope = (num)->
+			return scopeAry[curScope] unless isFinite Number num
+			curScope = Number num
+			console.log "named(#{namedId}).scope(#{curScope})"
+			scopeAry[curScope] ?= makeScope namedId,curScope,json
+			return scopeAry[curScope]
+		$("<div />")
+			.attr({id:"named"+namedId})
+			.addClass("named")
+			.append($("<style scoped />")
+				.html("#named#{namedId} *{position:absolute;border:none;margin:0px;padding:0px;}"))
+			.appendTo("body")
+		return {
+			scope:scope
+			playScript:(script,callback)->
+				scriptTidAry = playScript namedId,scope,scriptTidAry,script,callback
+			breakScript:->
+				scopeAry.forEach (v,i)->
+					scope(i).blimp(-1).clear()
+				scriptTidAry = clearTidAry(scriptTidAry)}
+	return makeNamed$ ->
+	exice_z = makeNamed exice_zJson
+	a = exice_z.playScript "\\p[1]\\s[10]\\p[0]\\s[42]Hello\\_w[1000]World!",->
+		setTimeout (->exice_z.breakScript()),3000
+		
+</script>
+</head>
+<body>
+</body>
+</html>

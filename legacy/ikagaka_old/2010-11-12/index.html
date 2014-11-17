@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>如何か</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+<script src="exice_z.js"></script>
+<script>
+var named = (function(){
+	var namedObj = {};
+	namedObj.nar = {};
+	var loadSurface = function(alias,callback){
+		var shellObj = namedObj.nar.shell["master"];
+		try{
+			var num = shellObj["sakura.surface.alias"][alias][parseInt(Math.random() * 10) % shellObj["sakura.surface.alias"][alias].length];
+		}catch(e){
+			var num = alias;
+		}try{
+			if(toString.call(shellObj.surface[num].canvas) === "[object HTMLCanvasElement]" || toString.call(shellObj.surface[num].canvas) === "[object HTMLImageElement]"){
+				setTimeout(callback,0);
+				return num;
+			}
+			shellObj.surface[num].canvas = new Image();
+			shellObj.surface[num].canvas.src = namedObj.nar.homeurl + shellObj.surface[num].src;
+			shellObj.surface[num].canvas.onload = (function(){
+				var surfaceObj = shellObj.surface[num];
+				var back = callback;
+				return function(){
+					var canvas = $("<canvas>").attr("width",this.width).attr("height",this.height)[0];
+					canvas.getContext("2d").drawImage(this,0,0);
+					surfaceObj.canvas = canvas;
+					back();
+				};
+			})();
+			return num;
+		}catch(e){
+			return false;
+		}
+	};
+	namedObj.playScript = function(script){
+		if(typeof script !== "string"){
+			return;
+		}
+		var loading = 0;
+		var play = function(){
+			if(taskAry.length > 0){
+				taskAry.shift()();
+			}
+		};
+		var taskAry = [];
+		while(script.length > 0){
+			if(script.substr(0,1) === "\\"){
+				switch(script.substr(0,2)){
+					case "\\0":
+						taskAry.push((function(){
+							return function(){
+//								scope(0);
+								if(taskAry.length > 0){
+									setTimeout(taskAry.shift(),0);
+								}
+							};
+						})());
+						script = script.substr(2);
+						break;
+					case "\\w":
+						if(isFinite(script.substr(2,1))){
+							taskAry.push((function(){
+								var wait = script.substr(2,1);
+								return function(){
+									setTimeout(taskAry.shift(),wait * 50)
+								};
+							})());
+							script = script.substr(3);
+						}else{
+							script = script.substr(1);
+						}
+						break;
+					case "\\e":
+						script = "";
+						break;
+					default :
+						if(script.length < 3){
+							script = script.substr(1);
+							break;
+						}
+						switch(script.substr(0,3)){
+							case "\\s[":
+								if(script.indexOf("]") === -1){
+									script = script.substr(1);
+									break;
+								}
+								taskAry.push((function(){
+									loading += 1;
+									var num = loadSurface(script.slice(3,script.indexOf("]")),function(){
+										loading -= 1;
+										if(loading < 1){
+											play();
+										}
+									});
+									return function(){
+//										scope().surface(num,taskAry.shift());
+setTimeout(taskAry.shift(),0);
+									};
+								})());
+								script = script.substr(script.indexOf("]") + 1);
+								break;
+							default : script = script.substr(1);
+						}
+				}
+			}else{
+				taskAry.push((function(){
+					var str = script.substr(0,1);
+					return function(){
+$("body").append(str);
+						if(taskAry.length > 0){
+							setTimeout(taskAry.shift(),50)
+						}
+					};
+				})());
+				script = script.substr(1);
+			}
+		}
+	};
+	return namedObj;
+})();
+
+$(function(){
+	named.nar = exice_z;
+	named.playScript("\\0\\s[10]\\s[10]\\s[10]\\s[0]\\s[10]Hello\\w8World!\\e");
+});
+
+</script>
+<style>
+</style>
+</head>
+<body>
+</body>
+</html>

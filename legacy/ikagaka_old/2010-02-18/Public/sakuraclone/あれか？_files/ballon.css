@@ -1,0 +1,109 @@
+/* バルーン用css */
+
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+div.screen{
+  width: 100%;
+  -webkit-transition-property: top;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+
+  position: fixed;
+}
+
+div.ballon{
+  margin: 0px 3px 3px 0px;
+  padding: 4px;
+  border: 2px;
+  border-style: solid;
+  border-color: #423021;
+  background-color: #F7EFEF;
+
+
+
+  border-radius:         8px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius:    8px;
+
+  box-shadow:         2px 2px 2px #888;
+  -webkit-box-shadow: 2px 2px 2px #888;
+  -moz-box-shadow:    2px 2px 2px #888;
+/*
+  font-family:"ＭＳ Ｐゴシック",Osaka;
+  font-size: 9pt;
+*/
+  text-align: left;
+  line-break: strict;
+  word-break: break-all;
+  line-height: 120%;
+
+  -webkit-transition-property: opacity, max-height, -webkit-transform;
+  -webkit-transition-duration: 0.2s;
+  -webkit-transition-timing-function: ease;
+  height: auto;
+  opacity: 1;
+}
+div.ballon.sakura{
+  margin-left:   1px;
+  margin-right: 34px;
+  -webkit-transform-origin: 150% 10px;
+}
+div.ballon.kero{
+  margin-left:  32px;
+  margin-right:  3px;
+  -webkit-transform-origin: 50% 10px;
+}
+
+div.face{
+
+
+}
+div.sakura div.face{
+
+
+}
+div.kero div.face{
+
+
+}
+
+
+i{
+  font-style: normal;
+  display: inline-block;
+  -webkit-animation-name: char-effect;
+  -webkit-animation-duration: 2s;
+  -webkit-animation-iteration-count: 1;
+}
+
+i[m]{
+  display: none;
+}
+
+div.ballon[m]{
+  visibility: hidden;
+  height: 0px;
+  min-height: 0px;
+  opacity: 0;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  width: 50%;
+}
+
+div.ballon.sakura[m]{
+  -webkit-transform: translate( 30px, 30px) rotate(-10deg) ;
+}
+div.ballon.kero[m]{
+  -webkit-transform: translate(-30px, 50px) rotate(10deg);
+}
+
+div.ballon img{
+  display: block;
+}
+

@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="Shift-JIS"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ja" lang="ja">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=Shift-JIS" />
+<meta http-equiv="content-style-type" content="text/css" />
+<meta http-equiv="content-script-type" content="text/javascript" /> 
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>Kamo&amp;Negis! ThirdEdition</title>
+<!-- base href="http://legokichi.dyndns.org/" /-->
+<link rel="INDEX" href="./index.html" />
+<link rel="shortcut icon" href="./favicon.ico" type="image/vnd.microsoft.icon" /> 
+<link rel="icon" href="./favicon.ico" type="image/vnd.microsoft.icon" /> 
+<link rev="made" href="mailto:legokichi0120@yahoo.co.jp" />
+<meta name="robots" content="NOFOLLOW" />
+<meta name="author" content="Legokichi" />
+<meta name="description" content="Kamo&amp;Negis!" />
+<meta name="keywords" content="Scallion,すかりおん,すがり,スガリ,似非魔法少女" />
+<script type='text/javascript' src='./jquery-1.2.6.min.js'></script>
+<script type='text/javascript' src='./jquery.dimensions.js'></script>
+<script type='text/javascript' src='./ui.mouse.js'></script>
+<script type='text/javascript' src='./ui.draggable.js'></script>
+<script type='text/javascript' src='./ui.draggable.ext.js'></script>
+<script type='text/javascript' src='./popupmenu.js'></script>
+<script type='text/javascript'>
+window.onerror = function(mes,file,num){ alert([ "file : " + file, "line : " + num, "message : " + mes ].join("\n")); return true; }
+var Balloon = new Array();
+	Balloon["s"] = new Array();
+	Balloon["s"]["L"] = new Array();
+	Balloon["s"]["R"] = new Array();
+	Balloon["s"]["L"][0] = new Image();
+	Balloon["s"]["L"][0].src = "./img/balloons0.png";
+	Balloon["s"]["R"][0] = new Image();
+	Balloon["s"]["R"][0].src = "./img/balloons1.png";
+	Balloon["s"]["L"][2] = new Image();
+	Balloon["s"]["L"][2].src = "./img/balloons2.png";
+	Balloon["s"]["R"][2] = new Image();
+	Balloon["s"]["R"][2].src = "./img/balloons3.png";
+	Balloon["k"] = new Array();
+	Balloon["k"]["L"] = new Array();
+	Balloon["k"]["R"] = new Array();
+	Balloon["k"]["L"][0] = new Image();
+	Balloon["k"]["L"][0].src = "./img/balloonk0.png";
+	Balloon["k"]["R"][0] = new Image();
+	Balloon["k"]["R"][0].src = "./img/balloonk1.png";
+	Balloon["k"]["L"][2] = new Image();
+	Balloon["k"]["L"][2].src = "./img/balloonk2.png";
+	Balloon["k"]["R"][2] = new Image();
+	Balloon["k"]["R"][2].src = "./img/balloonk3.png";
+var Surface = new Array();
+for(i=0;i<10;i++){
+	Surface[i] = new Array();
+	Surface[i]["Image"] = new Image();
+	Surface[i]["Image"].src = "./img/surface"+i+".png"
+	Surface[i]["Collision"] = new Array();
+	Surface[i]["Collision"][0] = [29,7,126,71,"Head"]
+	Surface[i]["Collision"][1] = [46,67,104,115,"Face"]
+	Surface[i]["Collision"][2] = [52,148,80,187,"Bust"]
+}
+for(i=10;i<12;i++){
+	Surface[i] = new Array();
+	Surface[i]["Image"] = new Image();
+	Surface[i]["Image"].src = "./img/surface"+i+".png"
+}
+var Scope = new Number(0);
+var NowSurface = new Array();
+	NowSurface[0] = Surface[0];
+	NowSurface[1] = Surface[10];
+var NowBalloon = new Array();
+	NowBalloon[0] = Balloon.s.L[0];
+	NowBalloon[1] = Balloon.k.R[0];
+var NowBalloonText = new Array();
+	NowBalloonText[0] = new String();
+	NowBalloonText[1] = new String();
+var SakuraScript = new String();
+var RemainScript = new String();
+var AddScript = new String();
+var Wait = new Number(0);
+var Tid = new Number(0);
+
+window.onload = ikgkLoad;
+function ikgkLoad(){
+	$("#Sakura").draggable({opacity:1,cursor:'move',axis:'x'});
+	$("#Kero").draggable({opacity:1,cursor:'move',axis:'x'});
+	$("#Sakura").dblclick(function(){OnMouseDoubleClick()});
+	$("#Kero").dblclick(function(){OnMouseDoubleClick("Kero")});
+	$("#SakuraCollision0").dblclick(function(){OnMouseDoubleClick("Head")});
+	$("#SakuraCollision1").dblclick(function(){OnMouseDoubleClick("Face")});
+	$("#SakuraCollision2").dblclick(function(){OnMouseDoubleClick("Bust")});
+
+	var popup = new PopupMenu();
+	popup.bind(document.getElementById("Sakura"));
+	popup.add('あんいんすとーる', function(){Player("\\0\\s[0]\\1そんなことをすれば海が汚染されるぞ\\w8\\0\\s[3]されないされない。\\e")});
+	popup.addSeparator();
+	popup.add('終了', function(){Player("\\0\\s[5]窓を閉じてください。\\e")});
+
+	SakuraScript = "\\0テキストボックスにSakuraScriptを入力して実行してください。\\w8\\e";
+	Player(SakuraScript);
+}
+
+function OnClose(){	//バルーン非表示
+	clearTimeout(Tid);
+	NowBalloonText[0] = "";
+	NowBalloonText[1] = "";
+	$("#SakuraBalloon").css("visibility","hidden");
+	$("#SakuraBalloonText").val(new String());
+	$("#KeroBalloon").css("visibility","hidden");
+	$("#KeroBalloonText").val(new String());
+}
+
+function Player(_){
+	clearTimeout(Tid);
+	NowBalloonText[0] = "";
+	NowBalloonText[1] = "";
+	$("#SakuraBalloon").css("visibility","hidden");
+	$("#SakuraBalloonText").val(new String());
+	$("#KeroBalloon").css("visibility","hidden");
+	$("#KeroBalloonText").val(new String());
+	Analyzer(_);
+}
+
+function Analyzer(_){
+	RemainScript = _;
+	AddScript = "";
+//状態変更
+	if(RemainScript.match(/^\\0/) || RemainScript.match(/^\\h/)){	//さくら
+		Scope = 0;
+		RemainScript = RemainScript.substr(2);
+	}else if(RemainScript.match(/^\\1/) || RemainScript.match(/^\\u/)){	//うにゅう
+		Scope = 1;
+		RemainScript = RemainScript.substr(2);
+	}else if(RemainScript.match(/^\\n/)){	//改行
+		AddScript = "\n";
+		RemainScript = RemainScript.substr(2);
+	}else if(RemainScript.match(/^\\c/)){	//バルーンクリア
+		NowBalloonText[Scope] = "";
+		RemainScript = RemainScript.substr(2);
+	}else if(RemainScript.match(/^\\w[1-9]/)){	//ウエイト
+		Wait = RemainScript.substr(2,1)*50;
+		RemainScript = RemainScript.substr(3);
+	}else if(RemainScript.match(/^\\_w\[\d+\]/)){	//精密ウエイト
+		Wait = RemainScript.substr(4).match(/^\d+/);
+		RemainScript = RemainScript.replace(/^\\_w\[\d+\]/,'');
+	}else if(RemainScript.match(/^\\s\[\d+\]/)){	//サーフェス切り替え
+		NowSurface[Scope] = Surface[RemainScript.substr(3).match(/^\d+/)];
+		RemainScript = RemainScript.replace(/^\\s\[\d+\]/,'');
+	}else if(RemainScript.match(/^\\e/)){	//えんいー
+		Tid = setTimeout("OnClose()",5000);
+	}else{
+		AddScript = RemainScript.substr(0,1);
+		RemainScript = RemainScript.substr(1);
+	}
+//サーフェス
+	if(Scope){
+		$("#Kero").css("background-image","url("+NowSurface[Scope].Image.src+")")
+			.width(NowSurface[Scope].Image.width+"px")
+			.height(NowSurface[Scope].Image.height+"px");
+	}else{
+		$("#Sakura").css("background-image","url("+NowSurface[Scope].Image.src+")")
+			.width(NowSurface[Scope].Image.width+"px")
+			.height(NowSurface[Scope].Image.height+"px");
+	}
+//バルーン
+	NowBalloonText[Scope] += AddScript;
+	if(Scope){
+		$("#KeroBalloon").css("visibility","visible");
+		$("#KeroBalloonText").val(NowBalloonText[Scope]);
+	}else{
+		$("#SakuraBalloon").css("visibility","visible");
+		$("#SakuraBalloonText").val(NowBalloonText[Scope]);
+	}
+//制御
+	if(RemainScript.length>0){
+		Tid = setTimeout("Analyzer(RemainScript)",50);
+	}else{
+		Tid = setTimeout("OnClose()",5000);
+	}
+}
+
+function OnBoot(){	//フォームからSakuraScuript入力
+	SakuraScript = new String($("#msg").val());
+	Player(SakuraScript);
+}
+
+function OnMouseDoubleClick(_){	//触り反応
+	a = new String(_);
+	if(a.match(/^Head/)){
+		SakuraScript = new String("\\0\\s[1]撫で機能は付いていません。\\w8\\1\\s[10]つつくな危険。\\e");
+	}else if(a.match(/^Face/)){
+		SakuraScript = new String("\\0\\s[6]目に入りますやめてください。\\w8\\1\\s[10]おぉ痛そう。\\e");
+	}else if(a.match(/^Bust/)){
+		SakuraScript = new String("\\0\\s[2]きゃっ\\w8\\n\\s[1]サイテーな人です。\\w8\\e");
+	}else if(a.match(/^Kero/)){
+		SakuraScript = new String("\\1あー\\w8\\w8\\nワイを突っついても無駄やで。\\w8\\w8\\0\\s[5]バケネコだもんね。\\w8\\e");
+	}else{
+		SakuraScript = new String("\\0\\s[6]めにゅーとかはありません。\\w8\\n\\1\\s[11]バルーンがテキストエリアなのでタグとか仕込めません。\\w8\\n\\0\\s[2]スクロールさせるだけなら素直にＣＳＳ使えばッ！\\1\\s[10]また今度な。\\w8\\e");
+	}
+	Player(SakuraScript);
+}
+
+</script>
+<style type="text/css">
+.ikagaka{
+	background-repeat: no-repeat;
+	margin: 0px;
+	padding: 0px;
+	border: 0px;
+	overflow: visible;
+	line-height: 100%;
+	text-align: left;
+	position: absolute;
+	visibility: visible;
+	border: 1px solid #00FF00;}
+#Ikagaka{
+	background-color: transparent;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	bottom: 0px;
+	visibility: hidden;}
+#Sakura{
+	background-image: url(./img/surface0.png);
+/*	filter: Chroma(color=#0000ff);*/
+	width: 161px;
+	height: 369px;
+	left: 60%;
+	bottom: 0px;
+	z-index: 100;}
+#SakuraCollision0{
+	background-color: transparent;
+	width: 97px;
+	height: 64px;
+	left: 29px;
+	top: 7px;
+	cursor: pointer;
+	z-index: 150;
+	visibility: inherit;}
+#SakuraCollision1{
+	background-color: transparent;
+	width: 28px;
+	height: 39px;
+	left: 46px;
+	top: 67px;
+	cursor: pointer;
+	z-index: 150;
+	visibility: inherit;}
+#SakuraCollision2{
+	background-color: transparent;
+	width: 97px;
+	height: 64px;
+	left: 52px;
+	top: 148px;
+	cursor: pointer;
+	z-index: 150;
+	visibility: inherit;}
+#SakuraBalloon{
+	background-image: url(./img/balloons0.png);
+/*	filter: chroma(color=#dccdab);*/
+	width: 326px;
+	height: 169px;
+	left: -326px;
+	top: 0px;
+	z-index: 120;}
+#SakuraBalloonText{
+	background-color: transparent;
+	width: 296px;
+	height: 149px;
+	top: 10px;
+	left: 10px;
+	overflow: scroll;
+	z-index: 150;
+	visibility: inherit;}
+#Kero{
+	background-image: url(./img/surface10.png);
+/*	filter: chroma(color=#0000ff);*/
+	width: 102px;
+	height: 125px;
+	left: 20%;
+	bottom: 0px;
+	z-index: 100;}
+#KeroBalloon{
+	background-image: url(./img/balloonk1.png);
+/*	filter: chroma(color=#dccdab);*/
+	width: 326px;
+	height: 96px;
+	right: -326px;
+	top: 0px;
+	z-index: 120;}
+#KeroBalloonText{
+	background-color: transparent;
+	width: 296px;
+	height: 79px;
+	top: 10px;
+	right: 10px;
+	overflow: scroll;
+	z-index: 150;
+	visibility: inherit;}
+</style>
+</head>
+<body>
+<div id="Ikagaka" class="ikagaka">
+	<div id="Sakura" class="ikagaka">
+		<div id="SakuraCollision0" class="ikagaka"></div>
+		<div id="SakuraCollision1" class="ikagaka"></div>
+		<div id="SakuraCollision2" class="ikagaka"></div>
+		<div id="SakuraBalloon" class="ikagaka">
+			<textarea id="SakuraBalloonText" class="ikagaka"></textarea>
+		</div>
+	</div>
+	<div id="Kero" class="ikagaka">
+		<div id="KeroBalloon" class="ikagaka">
+			<textarea id="KeroBalloonText" class="ikagaka"></textarea>
+		</div>
+	</div>
+</div>
+<noscript>あなたはGENOウイルスを知っている。</noscript>
+<h1>如何か。BETA5</h1>
+<p>BETAってかどう見てもα版だけどさ。</	p>
+<form>
+<input type="input" id="msg" value="\0テキストボックスにSakuraScriptを入力して実行してください。\w8\e">
+<input type="button" value="人柱専用" onClick="OnBoot()" >
+</form>
+<p>
+■対応SakuraScript<br />
+\0<br />
+\1<br />
+\h<br />
+\u<br />
+\n<br />
+\c<br />
+\w*<br />
+\_w[*]<br />
+\s[*]<br />
+\e</p>
+<p>■ろぐ<br />
+２００８年１１月７日：ＤＯＭツリー作った、ＳａｋｕｒａＳｃｒｉｐｔ解析部分作った、当たり判定作った→BETA1<br />
+２００８年１１月８日：外部ファイル化した、対応スクリプト増やした、当たり判定外した<br />
+２００８年１１月９日：右クリめにゅーつけた、当たり判定復活→BETA2<br />
+２００８年２月９日：jQueryで再実装、当たり判定死滅→BETA3<br />
+２００９年６月４日：ＤＯＭツリー、ＣＳＳ再構築。外部ファイルやめた。当たり判定、右クリメニュー復活→BETA4<br />
+２００９年６月５日：surface・Balloonのロード、SakuraScript制御部分を再構築。\s[*]でKeroにSakuraのサーフェスを指定しても形が崩れないようになった→BETA5</p>
+<p>■使用ライブラリ<br />
+jquery-1.2.6.min.js<br />
+popupmenu.js</p>
+<p>■使用フリーシェル<br />
+フリーシェル：【黒兄と妹】<br />
+作った人：【観城はるか】<br />
+配布元：【向日葵の咲く丘】</p>
+</body>
+</html>

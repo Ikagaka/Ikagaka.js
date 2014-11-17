@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>如何か</title>
+<meta name="viewport" content="width=device-width">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script type="text/javascript" src="./jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var surface = function(i){
+		if(i<10){
+			$("div#face").css("background-position",(i * -48)+"px 0px");
+		}else if(i<20){
+			$("div#face").css("background-position",((((i<15)? i + 5 : i) - 10) * -48)+"px -64px");
+		}else{
+			$("div#face").css("background-position","0px 0px");
+		}
+	}
+	$("div#face").bind("touchstart",{},(function(){
+		var j = 0;
+		return function(){
+			event.preventDefault();
+			surface(j);
+			j++;
+		};
+	})());
+});
+</script>
+<style>
+*{
+	-webkit-box-sizing: border-box;
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
+}
+div#face{
+    width: 48px;
+    height: 64px;
+	-webkit-transform-origin: 0px 0px;
+	-webkit-transform: scale(16);
+    background-image: url(./mobilemaster.png);
+    background-repeat: no-repeat;
+	background-position: 0px 0px;
+}
+div#balloon{
+    width: 48px;
+    height: 20px;
+	position: relative;
+	top: 44px;
+	border: 1px white solid;
+	-webkit-border-radius: 5px; 
+	background-color: rgba(0,0,255,0.5);
+	-webkit-transform-origin: 0px 0px;
+	font-size: 3px;
+	color: white;
+	padding: 1px;
+}
+</style>
+</head>
+<body>
+<div id="face">
+	<div id="balloon">おはよう世界！</div>
+</div>
+</body>
+</html>

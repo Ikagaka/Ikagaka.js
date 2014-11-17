@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<!-- saved from url=(0063)http://ranka.googlecode.com/hg/ranka/src/areka/actor.html#s0010 -->
+<HTML lang="ja-JP"><HEAD><META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META charset="UTF-8">
+<TITLE>Actor</TITLE>
+<SCRIPT src="./json2.js"></SCRIPT>
+<SCRIPT src="./jquery.1.3.2.min.js"></SCRIPT>
+<SCRIPT src="./jqtouch.min.js"></SCRIPT>
+<SCRIPT src="./dummyconsole.js"></SCRIPT>
+<SCRIPT>
+$(function(){
+
+//===================================================
+// �摜�����ւ��֐�
+//===================================================
+var getSfUrl = function(sfID){
+  return "ghost/sakura/shell/master/" + sfID +".png";
+}
+
+var elImage = $("#image")[0];
+
+var changeImage = function(sfID){
+  elImage.src = getSfUrl(sfID);
+}
+
+//===================================================
+// �摜�̃L���b�V�����Ă���
+//===================================================
+var preload = function(imgs){
+ for(var i = 0; i < imgs.length; i++){
+   var imgObj = new Image();
+   imgObj.src = imgs[i];
+ }
+}
+
+var preloadSurface = function(){
+  var i;
+  var f = function(num){
+    var text = "0000"+num
+    text = text.substr( text.length -4 , 4 )
+    preload(getSfUrl(text))
+  }
+  for(i= 0; i<= 8; i++) f(i)
+  for(i=10; i<=11; i++) f(i)
+}
+
+
+//===================================================
+// urlTAG�ɉ����ăV�F����؂�ւ�
+//===================================================
+changeImage( location.hash.substring(1) );
+
+
+//===================================================
+// �V�F������C�x���g
+//===================================================
+var emoteEvent =  function(ev,obj){
+  console.log("[actor::changeEmoteEvent]");
+  console.log(obj);
+  changeImage("s"+obj.emote);
+}
+
+//===================================================
+// ���݂��Ȃ����\�b�h���w�肳�ꂽ�Ƃ��̏���
+//===================================================
+var noneEvent = function(ev,obj){
+  console.log("[stage::noneEvent]");
+
+
+}
+
+//===================================================
+// �C�x���g����e�[�u��
+//===================================================
+var method = {
+  emote: emoteEvent,
+  none: noneEvent,
+}
+
+//===================================================
+// message�̊Ď�
+//===================================================
+var receiveMessage = function(ev){
+  // �{����ev.origin�̊m�F���K�v
+  var obj = JSON.parse(ev.data);
+  var func = method[obj.method]
+  if( func == undefined ) func = method.none;
+  func(ev,obj);
+}
+window.addEventListener("message", receiveMessage, false);
+
+
+});
+</SCRIPT>
+<STYLE>
+body{
+  margin: 0px;
+  padding: 0px;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+div.actor{
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  position: absolute;
+  width: 100%;
+  bottom: 0px;
+  line-height: 100%;
+  text-align: center;
+}
+div.actor img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0px;
+  padding: 0px;
+}
+
+</STYLE>
+</HEAD><BODY>
+<DIV class="actor">
+  <IMG id="image" src="./s0010.png">
+</DIV>
+
+</BODY></HTML>

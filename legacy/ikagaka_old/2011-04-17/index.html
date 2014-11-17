@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>如何か</title>
+</head>
+<body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="http://webscan.googlecode.com/svn-history/r80/trunk/ui/js/third-party/json2.min.js"></script>
+<script src="./ecoco6.js"></script>
+<script>
+ecoco("http://dl.dropbox.com/u/265158/ikagaka/emily4/",function(obj){
+	console.log(obj);
+	$("body").append(JSON.stringify(obj));
+});
+</script>
+</body>
+</html>

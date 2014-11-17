@@ -1,0 +1,732 @@
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=700" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<title>如何か</title>
+<!--base href="http://files.dropbox.com/u/265158/" /-->
+<link rel="stylesheet" href="./normalize.css" />
+<script src="./jquery-1.7.1.min.js"></script>
+<script src="./coffee-script.js"></script>
+<script type="text/javascript">
+if (!Function.prototype.bind) {  
+  Function.prototype.bind = function (oThis) {  
+    if (typeof this !== "function") {  
+      // closest thing possible to the ECMAScript 5 internal IsCallable function  
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable");  
+    }  
+  
+    var aArgs = Array.prototype.slice.call(arguments, 1),   
+        fToBind = this,   
+        fNOP = function () {},  
+        fBound = function () {  
+          return fToBind.apply(this instanceof fNOP  
+                                 ? this  
+                                 : oThis || window,  
+                               aArgs.concat(Array.prototype.slice.call(arguments)));  
+        };  
+  
+    fNOP.prototype = this.prototype;  
+    fBound.prototype = new fNOP();  
+  
+    return fBound;  
+  };  
+}  
+</script>
+<script type="text/coffeescript">
+json =
+	"shell":
+		"master":
+			"surface":
+				"0":
+					"element":[
+						["base","./ku-/shell/master/surface0.png"]]
+					"collision":[
+						[71,40,168,98,"head"]
+						[97,112,164,158,"face"]
+						[122,216,150,259,"bust"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlayfast",100,5]
+							["overlayfast",101,5]
+							["overlayfast",100,15]
+							["overlay",0,0]]}
+						{"timing":"always"
+						"pattern":[
+							["overlay",203,0,82,6]
+							["overlay",203,15,82,7]
+							["overlay",203,15,82,8]
+							["overlay",203,30,82,9]
+							["overlay",203,15,82,8]
+							["overlay",203,15,82,7]
+							["overlay",203,15,82,6]
+							["overlay",203,15,82,5]
+							["overlay",203,30,82,4]
+							["overlay",203,15,82,5]
+							["overlay",203,15,82,6]]}]
+				"10":
+					"element":[
+						["base","./ku-/shell/master/surface10.png"]]
+					"collision":[
+						[67,28,164,71,"head"]
+						[85,89,141,126,"face"]
+						[88,176,126,198,"bust"]]
+					"animation":[
+						{"timing":"sometimes"
+						"pattern":[
+							["overlayfast",10,5]
+							["overlayfast",11,5]
+							["overlayfast",10,15]
+							["overlay",-1,10]]}
+						{"timing":"always"
+						"pattern":[
+							["overlay",19,15,0,0]
+							["overlay",19,15,0,-1]
+							["overlay",19,15,0,-2]
+							["overlay",19,30,0,-1]
+							["overlay",19,15,0,0]
+							["overlay",19,15,0,1]
+							["overlay",19,30,0,2]
+							["overlay",19,15,0,3]
+							["overlay",19,15,0,2]
+							["overlay",19,15,0,1]
+							["overlay",19,30,0,0]]}]
+				"11":
+					"element":[
+						["base","./ku-/shell/master/surface11.png"]]
+				"19":
+					"element":[
+						["base","./ku-/shell/master/surface19.png"]]
+				"100":
+					"element":[
+						["base","./ku-/shell/master/surface100.png"]]
+				"101":
+					"element":[
+						["base","./ku-/shell/master/surface101.png"]]
+				"203":
+					"element":[
+						["base","./ku-/shell/master/surface203.png"]]
+hash2Array = (hash)->
+	ary=[]
+	(-> ary[k]=v) k,v for k,v of hash
+	ary
+json.shell.master.surface = hash2Array json.shell.master.surface
+
+ikagaka = do ->
+	isFunction = (fn)-> Object.prototype.toString.apply(fn) is "[object Function]"
+	isArray = (ary)-> Object.prototype.toString.apply(ary) is "[object Array]"
+	isObject = (o)-> Object.prototype.toString.apply(o) is "[object Object]"
+	isImage = (img)-> Object.prototype.toString.apply(img) is "[object HTMLImageElement]"
+	isCanvas = (cnv)-> Object.prototype.toString.apply(cnv) is "[object HTMLCanvasElement]"
+	isNumber = (n)-> isFinite Number n
+	transImg = do ->
+		#try worker = new Worker "./ikagaka.transImg.worker.js"
+		return (img,callback)->
+			canvas = $("<canvas />").attr({
+				"width": img.width,
+				"height": img.height})[0]
+			ctx = canvas.getContext '2d'
+			ctx.drawImage img,0,0
+			try
+				imgdata = ctx.getImageData 0,0,img.width,img.height
+				if imgdata.data[3] is 0
+					setTimeout ->
+						#console.log "cache"
+						ctx.putImageData imgdata,0,0
+						callback canvas
+				#else if worker?
+					#worker.onerror = (e)-> callback canvas
+					#worker.onmessage = (e)->
+						#console.log "worker"
+						#ctx.putImageData e.data,0,0
+						#callback canvas
+					#try worker.postMessage imgdata
+				else
+					i = 0
+					[r,g,b] = [imgdata.data[0],imgdata.data[1],imgdata.data[2]]
+					while i < imgdata.data.length
+						imgdata.data[i+3] = 0 if r is imgdata.data[i] and g is imgdata.data[i+1] and b is imgdata.data[i+2]
+						i += 4
+					setTimeout ->
+						#console.log "nonWorker"
+						ctx.putImageData imgdata,0,0
+						callback canvas
+			catch e
+				setTimeout ->
+					#console.log "nonTransImg"
+					callback canvas
+			return canvas
+	copy = (parent)->
+		child = $("<canvas />").attr({
+			"width": parent.width,
+			"height": parent.height})[0]
+		ctx = child.getContext '2d'
+		ctx.drawImage parent,0,0
+		return child
+	overlayfast = (target,canvas,x=0,y=0)->
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas,x,y
+		return target
+	overlay = overlayfast
+	draw = (target,canvas)->
+		$(target).attr
+			"width": canvas.width
+			"height": canvas.height
+		if target.parentNode?
+			$(target.parentNode)
+				.width(canvas.width)
+				.height(canvas.height)
+		ctx = target.getContext '2d'
+		ctx.drawImage canvas,0,0
+		return target
+	preload = do ->
+		urlImgHash = {}
+		return (urlAry,callback)->
+			i = 0
+			imgAry = urlAry.map (url)->
+				return urlImgHash[url] if isCanvas(urlImgHash[url]) and urlImgHash[url].width isnt 0
+				i++
+				img = new Image()
+				try schema = localStorage[url]
+				img.src = schema or url
+				img.onload = img.onerror = ->
+					i--
+					transImg img,(canvas)->
+						urlImgHash[url] = canvas
+						try localStorage[url] = canvas.toDataURL() unless localStorage[url]?
+					callback?(imgAry) if i is 0
+				return img
+			setTimeout (->callback?(imgAry)),0 if i is 0
+			return imgAry
+	doPreload = (json)->
+		json.shell.master.surface.forEach (v)->
+			preloadElements v.element
+		return
+	preloadElements = (elementsAry,callback)->
+		urlAry = elementsAry.map (v)-> v[1]
+		return preload urlAry,(imgAry)->
+			imagedElementsAry = elementsAry.map (v,i)-> [v[0],imgAry[i],v[2],v[3]]
+			callback? imagedElementsAry
+	composeElements = (imagedElementsAry,callback)->
+		target = $("<canvas />")[0]
+		i = 0
+		compose = (target,ary)->
+			[type,img,x,y] = ary[i++]
+			transImg img,(canvas)->
+				target = switch type
+					when "base" then copy canvas
+					when "overlay" then overlay target,canvas,x,y
+					when "overlayfast" then overlayfast target,canvas,x,y
+				if ary[i]? then compose target,ary
+				else callback(target)
+		compose target,imagedElementsAry if imagedElementsAry.length >0
+		return target
+	preloadAndComposeElements = (elementsAry,callback)->
+		return preloadElements elementsAry,(imagedElementsAry)->
+			composeElements imagedElementsAry,callback
+	setElements = (target,elementsAry,callback)->
+		unless elementsAry?
+			setTimeout (->callback?(target))
+			return []
+		return preloadAndComposeElements elementsAry,(canvas)->
+			callback? draw target,canvas
+	isHit = (target,x,y)->
+		ctx = target.getContext "2d"
+		try
+			imgdata = ctx.getImageData 0,0,x,y
+			return imgdata.data[imgdata.data.length-1] isnt 0
+		return true
+	mouseEvent = (id,e,target,collisionsAry,scopeId,handler)->
+		offsetX = e.offsetX or e.originalEvent.layerX
+		offsetY = e.offsetY or e.originalEvent.layerY
+		if isHit target,offsetX,offsetY
+			e.preventDefault()
+			event =
+				"ID": id
+				"Reference0": offsetX
+				"Reference1": offsetY
+				"Reference2": 0
+				"Reference3": scopeId
+				"Reference4": ""
+				"Reference5": 0
+			delete event.Reference5 if id is "OnMouseMove"
+			hit = false
+			collisionsAry?.forEach (v)->
+				[x,y,_x,_y,name] = v
+				if (x < offsetX < _x and y < offsetY < _y) or (_x < offsetX < x and _y < offsetY < y)
+					event.Reference4 = name
+					hit = true
+			if hit then $(target).css "cursor","pointer"
+			else $(target).css "cursor","default"
+			handler(event)
+		return target
+	setCollisions = (target,collisionsAry,scopeId,handler)->
+		$(target)
+			.unbind()
+			.click((e)-> mouseEvent "OnMouseClick",e,target,collisionsAry,scopeId,handler)
+			.dblclick((e)-> mouseEvent "OnMouseDoubleClick",e,target,collisionsAry,scopeId,handler)
+			.mousedown((e)->)
+			.mousemove((e)-> mouseEvent "OnMouseMove",e,target,collisionsAry,scopeId,handler)
+			.mouseup((e)->)
+			.bind("touchstart",do ()->
+				b = false
+				(e)->
+					if b
+						mouseEvent "OnMouseDoubleClick",e,target,collisionsAry,scopeId,handler
+						b = false
+					else b = true
+					setTimeout (->b=false),500)
+			.bind("touchmove",(e)-> mouseEvent "OnMouseMove",e,@,collisionsAry,scopeId,handler)
+			.bind("touchend",(e)->)
+			.bind("touchcancel",(e)->)
+		return target
+	drawCollisions = (target,collisionsAry)->
+		ctx = target.getContext "2d"
+		collisionsAry?.forEach (v)->
+			[x,y,_x,_y,name] = v
+			ctx.strokeStyle = "rgb(200, 0, 0)"
+			ctx.strokeRect x,y,Math.abs(_x-x),Math.abs(_y-y)
+		return target
+	sometimes = (tidAry,fn)-> random(tidAry,fn,2)
+	rarely = (tidAry,fn)-> random(tidAry,fn,4)
+	random = (tidAry,fn,n)->
+		ms = 1
+		ms++ while Math.round(Math.random() * 1000) > 1000/n
+		return tidAry.push setTimeout(->
+			fn()
+			random(tidAry,fn,n)
+		,ms*1000)
+	runonce = (tidAry,fn)-> tidAry.push setTimeout(fn,0)
+	always = (tidAry,fn)->
+		tidAry.push setTimeout(->
+			fn()
+			always(tidAry,fn)
+		,0)
+	class Surface
+		constructor:(@_,callback)->
+			@_surfaceId = @_._curSurface
+			@_surfaceAry = @_._._json.shell.master.surface
+			@_surfaceHash = surfaceHash = @_surfaceAry[@_surfaceId]
+			@_timingTidAry = timingTidAry = []
+			@_playingTidAryAry = playingTidAryAry = []
+			@_playingPatternElementsAryAry = []
+			target = @_._surfaceCanvas
+			raiseEvent = @_._.raiseEvent.bind @_._
+			playAnimation = @playAnimation.bind @
+			setElements target,surfaceHash.element,=>
+				drawCollisions target,surfaceHash.collision if @_._._showCollision
+				callback?()
+			setCollisions target,surfaceHash.collision,@_._scopeId,raiseEvent
+			regExp = /(\w+)(?:,\s*(\d+))?/
+			surfaceHash.animation?.forEach (v,i)->
+				playingTidAryAry[i] = []
+				[timing,n] = regExp.exec(v.timing).slice(1)
+				switch timing
+					when "sometimes" then sometimes timingTidAry,->playAnimation i
+					when "rarely" then rarely timingTidAry,->playAnimation i
+					when "random" then random timingTidAry,(->playAnimation i),n
+					when "runonce" then runonce timingTidAry,->playAnimation i
+					when "always" then always timingTidAry,->playAnimation i
+		playAnimation:(n,callback)->
+			if n?
+				console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").animation("+n+")" if @_._._apiLogging
+				patternAry = @_surfaceHash.animation[n].pattern
+				elmAryAry = @_playingPatternElementsAryAry
+				target = @_._surfaceCanvas
+				surfaceHash = @_surfaceHash
+				i = 0
+				playPattern = =>
+					[type,id,delay,x,y] = patternAry[i++]
+					x ?= 0
+					y ?= 0
+					if @_surfaceAry[id]?
+						elmAryAry[n] = @_surfaceAry[id].element.map (v)->
+							[_type,url,_x,_y] = v
+							_x ?= 0
+							_y ?= 0
+							[type,url,_x+x,_y+y]
+					else if id is -1
+						elmAryAry[n] = []
+					setElements target,(surfaceHash.element.concat elmAryAry.reduce (tmp,v)-> tmp.concat v),=>
+						drawCollisions target,surfaceHash.collision if @_._._showCollision
+					if patternAry[i]?
+						@_playingTidAryAry[n].push setTimeout playPattern,delay*10
+					else setTimeout (->callback?()),0
+				setTimeout playPattern,0
+			return
+		stopAnimation:(n)->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").stopAnimation()" if @_._._apiLogging
+			if n?
+				clearTimeout @_playingTidAryAry[n]
+				clearTimeout @_timingTidAry[n]
+			else
+				@_playingTidAryAry.forEach (v)-> v?.forEach (v)-> clearTimeout v
+				@_timingTidAry.forEach (v)-> clearTimeout v
+			return
+		show:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").show()" if @_._._apiLogging
+			$(@_._surfaceCanvas).css visibility: "visible"
+			return
+		hide:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").hide()" if @_._._apiLogging
+			$(@_._surfaceCanvas).css visibility: "hidden"
+			return
+		unload:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").unload()" if @_._._apiLogging
+			$(@_._surfaceCanvas).unbind()
+			@stopAnimation()
+			return
+		disappear:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").surface("+@_surfaceId+").disappear()" if @_._._apiLogging
+			@unload()
+			$(@_._surfaceCanvas).attr({width:0,height:0})
+			return
+	class Blimp
+		constructor:(@_,callback)->
+			@_blimpId = @_._curBlimp
+			@_anchor = false
+			preload ["./ssp/balloons0.png","./ssp/balloons1.png","./ssp/balloonk0.png","./ssp/balloonk1.png"],(ary)=>
+				transImg ary[(if @_._scopeId is 0 then 0 else 2)],(canvas)=>
+					target = draw @_._blimpCanvas,canvas
+					$(@_._textDiv).width(target.width-30).height(target.height-20)
+					callback?()
+		show:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").show()" if @_._._apiLogging
+			$(@_._balloonDiv).css display: "block"
+			return
+		hide:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").hide()" if @_._._apiLogging
+			$(@_._balloonDiv).css display: "none"
+			return
+		talk:(chr)->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").talk(\""+chr+"\")" if @_._._apiLogging
+			@show()
+			@_._textDiv.scrollTop = 999
+			if @_anchor then $(@_._textDiv).children(".anchor:last-child").append chr
+			else $(@_._textDiv).append chr
+			return
+		select:(title="",id="")->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").select(\""+title+"\",\""+id+"\")" if @_._._apiLogging
+			$(@_._textDiv)
+				.append("<span class='select' style='position:static;color:blue;'>"+title+"</a>")
+				.unbind()
+				.click (e)=>
+					event =
+						"ID": "OnChoiceSelect"
+						"Reference0": id
+					@_._.raiseEvent event
+		anchor:(id="")->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").anchor(\""+id+"\")" if @_._._apiLogging
+			if @_anchor then @_anchor = false
+			else
+				@_anchor = true
+				$(@_._textDiv)
+					.append("<span class='anchor' style='position:static;' />")
+					.unbind()
+					.click (e)=>
+						event =
+							"ID": "OnAnchorSelect"
+							"Reference0": id
+						@_._.raiseEvent event
+			return
+		br:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").br()" if @_._._apiLogging
+			$(@_._textDiv).append "<br />"
+			return
+		clear:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").clear()" if @_._._apiLogging
+			$(@_._textDiv).html ""
+			return
+		unload:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").unload()" if @_._._apiLogging
+			@clear()
+			return
+		disappear:->
+			console.log "named("+@_._._namedId+").scope("+@_._scopeId+").blimp("+@_blimpId+").disappear()" if @_._._apiLogging
+			@unload()
+			$(@_._blimpCanvas).attr({width:0,height:0})
+			@_._blimpObj = undefined
+			return
+	class Scope
+		constructor:(@_)->
+			@_scopeId = @_._curScope
+			@_curSurface = 0
+			@_curBlimp = 0
+			@_surfaceCanvas = $("<canvas class=\"surface\" width=\"0\" height=\"0\" />")[0]
+			@_balloonDiv = $("<div class=\"balloon\" />")[0]
+			@_blimpCanvas = $("<canvas class=\"blimp\" width=\"0\" height=\"0\" />")[0]
+			@_textDiv = $("<div class=\"text\" style=\"margin:10px;margin-right:30px;overflow-y:scroll;white-space:pre;white-space:pre-wrap;white-space:pre-line;word-wrap:break-word;\" />")[0]
+			@_scopeDiv = $("<div class=\"scope\" />")
+				.addClass("scope"+@_scopeId)
+				.css(
+					bottom: "0px"
+					right: (@_scopeId*240)+"px")
+				.append(@_surfaceCanvas)
+				.append($(@_balloonDiv)
+					.css(
+						top:"60px"
+						left: "-300px")
+					.append(@_blimpCanvas)
+					.append(@_textDiv))
+				.click(=> @focus())
+				.appendTo(@_._namedDiv)
+			@_surfaceObj = new Surface @
+			@_blimpObj = new Blimp @
+			@_surfaceObj.hide()
+			@_blimpObj.hide()
+		focus:->
+			$(@_scopeDiv).appendTo(@_._namedDiv)
+			return
+		surface:(n,callback)->
+			if n?
+				if n is -1
+					@_surfaceObj.hide()
+				else if @_._json.shell.master.surface[n]?
+					@_curSurface = Number n if isNumber n
+					@_surfaceObj?.unload()
+					@_surfaceObj = new Surface @,callback
+					@_surfaceObj.show()
+				console.log "named("+@_._namedId+").scope("+@_scopeId+").surface("+n+")" if @_._apiLogging
+			return @_surfaceObj
+		blimp:(n,callback)->
+			if n?
+				if n is -1
+					@_blimpObj.hide()
+				else if isNumber n
+					@_curBlimp = Number n
+					@_blimpObj?.unload()
+					@_blimpObj = new Blimp @,callback
+					@_blimpObj.show()
+				console.log "named("+@_._namedId+").scope("+@_scopeId+").blimp("+n+")" if @_._apiLogging
+			return @_blimpObj
+		disappear:->
+			console.log "named("+@_._namedId+").scope("+@_scopeId+").disappear()" if @_._apiLogging
+			@_surfaceObj.disappear()
+			@_blimpObj.disappear()
+			$(@_scopeDiv).remove()
+			@_._scopeAry[@_scopeId] = undefined
+			return
+	namedIndex = 0
+	namedAry = []
+	class Named
+		constructor:(args)->
+			@_json = args[0]
+			if isObject args[1]
+				@_apiLogging = if args[1].apiLogging? then args[1].apiLogging else false
+				@_eventLogging = if args[1].eventLogging? then args[1].eventLogging else false
+				@_secondChangeLogging = if args[1].secondChangeLogging? then args[1].secondChangeLogging else false
+				@_mouseMoveLogging = if args[1].mouseMoveLogging? then args[1].mouseMoveLogging else false
+				@_preload = if args[1].preload? then args[1].preload else false
+				@_showCollision = if args[1].showCollision? then args[1].showCollision else false
+			callback = args[args.length-1] if isFunction args[args.length-1]
+			@_namedId = namedIndex
+			namedAry[namedIndex++] = @
+			console.log "named("+@_namedId+")" if @_apiLogging
+			@_namedDiv = $("<div />")
+				.attr({id:"named"+@_namedId})
+				.addClass("named")
+				.append($("<style scoped />")
+					.html("#named"+@_namedId+" *{position:absolute;border:none;margin:0px;padding:0px;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;} .anchor,.select{color:red;cursor:pointer;} .anchor:hover,.select:hover{background-color:violet;}"))
+				.appendTo("body")[0]
+			@_curScope = 0
+			@_scopeAry = []
+			@_scopeAry[@_curScope] = new Scope @
+			@_scriptTidAry = []
+			@_talking = false
+			@_eventHandlerHash = {}
+			doPreload @_json if @_preload
+			setTimeout (=>callback?.call(@,@)),0
+		scope:(n)->
+			return @_scopeAry[@_curScope] unless isNumber n
+			@_curScope = Number n
+			console.log "named("+@_namedId+").scope("+@_curScope+")" if @_apiLogging
+			@_scopeAry[@_curScope] ?= new Scope @
+			@_scopeAry[@_curScope].focus()
+			return @_scopeAry[@_curScope]
+		playScript:(script,callback)->
+			console.log "named("+@_namedId+").playScript(\""+script+"\")" if @_apiLogging
+			@breakScript()
+			@_talking = true
+			tidAry = @_scriptTidAry
+			script ?= ""
+			regExpHash =
+				yy: /^\\\\/
+				y0: /^\\0/
+				y1: /^\\1/
+				yp: /^\\p\[(\d+)\]/
+				ys: /^\\s\[([^\]]+)\]/
+				yb: /^\\b\[([^\]]+)\]/
+				yi: /^\\i\[(\d+)\]/
+				ywN: /^\\w(\d+)/
+				y_w: /^\\_w\[(\d+)\]/
+				yq: /^\\q\[([^\]]+)\]/
+				y_aS: /^\\_a\[([^\]]+)\]/
+				y_aE: /^\\_a/
+				yc: /^\\c/
+				yn: /^\\n/
+				ynhalf: /^\\n\[half\]/
+				ye: /^\\e/
+			isCallcc = false
+			callcc = (rescript,talkWait)->
+				isCallcc = true
+				return -> 
+					isCallcc = false
+					tidAry.push setTimeout playingScript,talkWait,rescript
+			playingScript = (script)=>
+				return tidAry.push setTimeout (=>
+					@breakScript()
+					@_talking = false
+					callback?(tidAry)),10000 if script.length is 0
+				talkWait = 0
+				switch true
+					when regExpHash.y0.test script
+						rescript = script.substr 2
+						@scope(0)
+					when regExpHash.y1.test script
+						rescript = script.substr 2
+						@scope(1)
+					when regExpHash.yp.test script
+						n = Number regExpHash.yp.exec(script)[1]
+						rescript = script.replace regExpHash.yp,""
+						@scope(n)
+					when regExpHash.ys.test script
+						n = Number regExpHash.ys.exec(script)[1]
+						rescript = script.replace regExpHash.ys,""
+						@scope().surface(n,callcc(rescript,talkWait))
+					when regExpHash.yb.test script
+						n = Number regExpHash.yb.exec(script)[1]
+						rescript = script.replace regExpHash.yb,""
+						@scope().blimp(n,callcc(rescript,talkWait))
+					when regExpHash.yi.test script
+						n = Number regExpHash.yi.exec(script)[1]
+						rescript = script.replace regExpHash.yi,""
+						@scope().surface().animation(n,callcc(rescript,talkWait))
+					when regExpHash.ywN.test script
+						talkWait = Number regExpHash.ywN.exec(script)[1]*100
+						rescript = script.substr 3
+						console.log "named("+@_namedId+").wait(\""+talkWait+"\")" if @_apiLogging
+					when regExpHash.y_w.test script
+						talkWait = Number regExpHash.y_w.exec(script)[1]
+						rescript = script.replace regExpHash.y_w,""
+						console.log "named("+@_namedId+").wait(\""+talkWait+"\")" if @_apiLogging
+					when regExpHash.yq.test script
+						[title,id] = regExpHash.yq.exec(script)[1].split ",",2
+						rescript = script.replace regExpHash.yq,""
+						@scope().blimp().select(title,id)
+					when regExpHash.y_aS.test script
+						id = regExpHash.y_aS.exec(script)[1]
+						rescript = script.replace regExpHash.y_aS,""
+						@scope().blimp().anchor(id)
+					when regExpHash.y_aE.test script
+						rescript = script.substr 3
+						@scope().blimp().anchor()
+					when regExpHash.yc.test script
+						rescript = script.substr 2
+						@scope().blimp().clear()
+					when regExpHash.ynhalf.test script
+						rescript = script.substr 8
+						@scope().blimp().br()
+					when regExpHash.yn.test script
+						rescript = script.substr 2
+						@scope().blimp().br()
+					when regExpHash.ye.test script
+						rescript = ""
+						console.log "named("+@namedId+").yen-e()" if @_apiLogging
+					when regExpHash.yy.test script
+						rescript = script.substr 2
+						@scope().blimp().talk("\\")
+					else
+						chr = script.substr 0,1
+						rescript = script.substr 1
+						@scope().blimp().talk(chr)
+						talkWait = 80
+				return tidAry.push setTimeout playingScript,talkWait,rescript unless isCallcc
+			playingScript(script)
+			return
+		breakScript:->
+			console.log "named("+@_namedId+").breakScript()" if @_apiLogging
+			@_scriptTidAry.forEach (v)-> clearTimeout v
+			@_scopeAry.forEach (v)-> v.blimp().clear()
+			@_talking = false
+			return
+		raiseEvent:(e)->
+			if @_apiLogging and ((if e.ID is "OnSecondChange" then @_secondChengeLogging else true) and (if e.ID is "OnMouseMove" then @_mouseMoveLogging else true))
+				console.log "named("+@_namedId+").raiseEvent("+e.ID+")"
+			if @_eventLogging and ((if e.ID is "OnSecondChange" then @_secondChengeLogging else true) and (if e.ID is "OnMouseMove" then @_mouseMoveLogging else true))
+				console.log "--- Request ---"
+				console.log "GET SHIORI/3.0"
+				console.log "Charset: UTF-8"
+				console.log "#{k} :#{v}" for k,v of e
+				console.log "--- Operation ---"
+			script = @_shiori?(e)
+			script = @_eventHandlerHash[e.ID]?(e)
+			if @_eventLogging and ((if e.ID is "OnSecondChange" then @_secondChengeLogging else true) and (if e.ID is "OnMouseMove" then @_mouseMoveLogging else true))
+				if script?
+					console.log "status code : 200"
+					console.log "--- Response ---"
+					console.log "value="+script
+				else
+					console.log "status code : 204"
+					console.log "--- Response ---"
+				console.log ""
+			if script?
+				@breakScript()
+				setTimeout (=>@playScript script),0
+			return
+		setShiori:(handler)->
+			console.log "named("+@_namedId+").setShiori()" if @_apiLogging
+			@_shiori = handler
+			return
+		on:(id,handler)->
+			if @_apiLogging
+				console.log "named("+@_namedId+").on(\""+id+"\")"
+			@_eventHandlerHash[id] = handler
+			return
+		materialize:->
+			console.log "named("+@_namedId+").materialize()" if @_apiLogging
+			@_secondChangeTid = setInterval (=>
+				@raiseEvent {
+					"ID": "OnSecondChange"
+					"Reference0": 0
+					"Reference1": 0
+					"Reference2": 0
+					"Reference3": 0}),1000
+			setTimeout (=>
+				@raiseEvent {
+					ID: "OnBoot"
+					"Reference0": "master"}),0
+			return
+		vanish:->
+			console.log "named("+@_namedId+").vanish()" if @_apiLogging
+			@breakScript()
+			clearTimeout @_secondChangeTid
+			@_scopeAry.forEach (v)-> v.disappear()
+			$(@_namedDiv).remove()
+			namedAry[@_namedId] = undefined
+			return
+	return {
+		"named":(n)-> namedAry[n]
+		"createNamed":-> new Named arguments
+	}
+
+
+$ ->
+	
+	ku_ = ikagaka.createNamed json,{apiLogging:false,eventLogging:false,secondChangeLogging:false,mouseMoveLogging:false,showCollision:true},(ku_)->
+		ku_.materialize()
+	choiceByAry = (ary)-> ary[Math.round(Math.random()*(ary.length-1))]
+	ku_.on "OnBoot",(e)->
+		"\\0\\s[0]\\1\\s[10]\\e"
+	$('#sakurafield').submit ->
+		ikagaka.named(0).playScript $('#sakurascript').val()
+</script>
+</head>
+<body>
+<form action="#sakurafield" id="sakurafield" style="margin:20px;margin-top:60px">
+	<label>Send: <input id="sakurascript" value="" type="text" /></label><input type="submit" />
+</form>
+</body>
+</html>

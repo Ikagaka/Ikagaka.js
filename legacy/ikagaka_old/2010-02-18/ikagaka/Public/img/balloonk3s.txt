@@ -1,0 +1,13 @@
+origin.x,24
+origin.y,14
+
+windowposition.x,0
+windowposition.y,0
+
+wordwrappoint.x,-20
+wordwrappoint.y,0
+
+arrow0.x,314
+arrow0.y,8
+arrow1.x,314
+arrow1.y,-18
