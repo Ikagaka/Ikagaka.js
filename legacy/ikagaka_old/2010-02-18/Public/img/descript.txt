@@ -1,7 +1,0 @@
-name,master
-type,shell
-
-sakura.balloon.offsetx,-5
-sakura.balloon.offsety,15
-kero.balloon.offsetx,-10
-kero.balloon.offsety,20

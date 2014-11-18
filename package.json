@@ -13,13 +13,21 @@
     "url": "https://github.com/ikagaka/Ikagaka.js"
   },
   "dependencies": {
-    "ikagaka.ghost.js": "",
+    "es6-shim": "",
+    "encoding-japanese": "",
+    "ikagaka.wmdescript.js": "",
+    "jszip": "",
+    "uupaa.xhrproxy.js": "",
     "ikagaka.nar.js": "",
-    "ikagaka.sakurascriptplayer.js": "",
+    "surfaces_txt2yaml": "",
+    "underscore": "",
+    "zepto": "",
     "ikagaka.shell.js": "",
+    "ikagaka.named.js": "",
+    "ikagaka.balloon.js": "",
+    "ikagaka.sakurascriptplayer.js": "",
     "shiorijk": "",
     "miyojs": "",
-    "underscore": "",
     "parttime": "",
     "partperiod": "",
     "miyojs-filter-conditions": "^1.0.0",
@@ -35,7 +43,8 @@
     "miyojs-filter-stash": "^1.0.0",
     "miyojs-filter-entry_template": "^2.0.0",
     "miyojs-filter-stash_template": "^1.0.0",
-    "miyojs-filter-child_process": ">= 0.0.1"
+    "miyojs-filter-child_process": ">= 0.0.1",
+    "ikagaka.ghost.js": ""
   },
   "devDependencies": {},
   "license": "MIT"
