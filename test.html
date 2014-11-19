@@ -6,17 +6,34 @@
 <script src="./node_modules/ikagaka.nar.js/Nar.js"></script>
 <script src="./node_modules/surfaces_txt2yaml/lib/surfaces_txt2yaml.js"></script>
 <script src="./node_modules/underscore/underscore-min.js"></script>
-<script src="./node_modules/zepto/zepto.min.js"></script>
+<script src="./node_modules/ikagaka.named.js/node_modules/jquery/dist/jquery.min.js"></script>
 <script src="./node_modules/ikagaka.shell.js/SurfaceUtil.js"></script>
 <script src="./node_modules/ikagaka.shell.js/Surface.js"></script>
 <script src="./node_modules/ikagaka.shell.js/Shell.js"></script>
 <script src="./node_modules/ikagaka.balloon.js/BalloonSurface.js"></script>
 <script src="./node_modules/ikagaka.balloon.js/Balloon.js"></script>
+<script src="./node_modules/ikagaka.named.js/vender/jquery-ui/core.js"></script>
+<script src="./node_modules/ikagaka.named.js/vender/jquery-ui/widget.js"></script>
+<script src="./node_modules/ikagaka.named.js/vender/jquery-ui/mouse.js"></script>
+<script src="./node_modules/ikagaka.named.js/vender/jquery-ui/draggable.js"></script>
+<script src="./node_modules/ikagaka.named.js/vender/jquery.ui.touch-punch.min.js"></script>
 <script src="./node_modules/ikagaka.named.js/Scope.js"></script>
 <script src="./node_modules/ikagaka.named.js/Named.js"></script>
 <script src="./node_modules/ikagaka.sakurascriptplayer.js/SakuraScriptPlayer.js"></script>
 <script src="./node_modules/ikagaka.ghost.js/Ghost.js"></script>
 <script src="./node_modules/shiorijk/lib/shiorijk.js"></script>
+<style>
+.surfaceCanvas {
+  animation: breathing 6s linear 0s infinite normal;
+}
+@keyframes breathing {
+  0% { transform: scale(1.0, 1.0); }
+  20% { transform: scale(1.01, 1.02); }
+  50% { transform: scale(1.05, 1.05); }
+  80% { transform: scale(1.01, 1.02); }
+  100% { transform: scale(1.0, 1.0); }
+}
+</style>
 <script>
 Promise.all([
   new Promise(function(resolve, reject){
@@ -57,7 +74,9 @@ Promise.all([
   var ssp = new SakuraScriptPlayer(named);
 
   $(named.element)
-    .on("IkagakaSurfaceEvent", function(ev){ requestSender(ev.detail); })
+    .on("IkagakaSurfaceEvent", function(ev){
+      requestSender(ev.detail);
+    })
     .appendTo("body");
 
   requestSender({
@@ -84,7 +103,8 @@ Promise.all([
     request.request_line.method = "GET";
     request.request_line.protocol = "SHIORI";
     request.request_line.version = "3.0";
-    console.log(ev);
+    request.headers.header["Sender"] = "embryo";
+    request.headers.header["Charset"] = "Shift_JIS";
     Object.keys(ev).forEach(function(key){
       request.headers.header[key] = ""+ev[key];
     });
