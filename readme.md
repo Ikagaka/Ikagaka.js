@@ -9,13 +9,13 @@
 
 # How to build
 
-`bash
+```bash
 git clone https://github.com/Ikagaka/Ikagaka.js.git
 cd Ikagaka.js
 npm install
 npm run build
 open test.html
-`
+```
 
 # Dependence
 
