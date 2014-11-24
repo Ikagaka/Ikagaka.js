@@ -8,6 +8,13 @@
     "unstable",
     "ukagaka"
   ],
+  "scripts": {
+    "copy": "cp ./node_modules/ikagaka.ghost.js/*Worker.js ./",
+    "watch": "coffee -cwb ./*.coffee",
+    "build": "coffee -cb ./*.coffee; npm run browserify",
+    "browserify": "browserify Ikagaka.js > ./dist/ikagaka.js",
+    "minify": "uglifyjs ./dist/ikagaka.js > ./dist/ikagaka.min.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ikagaka/Ikagaka.js"
@@ -46,6 +53,12 @@
     "miyojs-filter-child_process": ">= 0.0.1",
     "ikagaka.ghost.js": ""
   },
-  "devDependencies": {},
-  "license": "MIT"
+  "devDependencies": {
+    "uupaa.watch.js": "",
+    "uglify-js": ""
+  },
+  "main":           "./Ikagaka.js",
+  "author":         "duxca",
+  "license":        "MIT",
+  "contributors":   []
 }
