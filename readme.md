@@ -1,30 +1,42 @@
-Ikagaka.js
-======================
+# Ikagaka.js
+
 [Ukagaka](http://usada.sakura.vg/)  on Web Browser.
 
-Demo
-------
+![screenshot](https://raw.githubusercontent.com/Ikagaka/Ikagaka.js/master/screenshot.png )
 
-Features
-----------------
++ [Demo](https://ikagaka.github.io/)
++ [wiki](https://github.com/Ikagaka/Ikagaka.js/wiki/)
 
-Dependence
-----------
-* https://github.com/jashkenas/coffee-script
-* https://github.com/edvakf/MMD.js
-* http://www6.atwiki.jp/vpvpwiki/pages/204.html
+# How to build
 
-License
-----------
-Creative Commons [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/)
+`bash
+git clone https://github.com/Ikagaka/Ikagaka.js.git
+cd Ikagaka.js
+npm install
+npm run build
+open test.html
+`
 
-Copyright &copy; 2012 Legokichi Duckscallion
+# Dependence
 
-Acknowledgements
-----------
++ [es6-shim](https://github.com/paulmillr/es6-shim/)
++ [encoding-japanese](https://github.com/polygonplanet/encoding.js)
++ [jszip](https://github.com/Stuk/jszip)
++ [uupaa.xhrproxy.js](https://github.com/uupaa/XHRProxy.js/tree/master)
++ [surfaces_txt2yaml](https://github.com/Narazaka/surfaces_txt2yaml)
++ [shiorijk](https://github.com/Narazaka/shiorijk)
++ [underscore](https://github.com/jashkenas/underscore)
++ [jquery](https://github.com/jquery/jquery)
++ [jquery-ui](https://github.com/jquery/jquery-ui)
++ [ikagaka.wmdescript.js](https://github.com/Ikagaka/WMDescript.js)
++ [ikagaka.nar.js](https://github.com/Ikagaka/Nar.js)
++ [ikagaka.shell.js](https://github.com/Ikagaka/Shell.js)
++ [ikagaka.named.js](https://github.com/Ikagaka/Named.js)
++ [ikagaka.balloon.js](https://github.com/Ikagaka/Balloon.js)
++ [ikagaka.sakurascriptplayer.js](https://github.com/Ikagaka/SakuraScriptPlayer.js)
++ [ikagaka.ghost.js](https://github.com/Ikagaka/Ghost.js)
+
+
+# Acknowledgements
 * ls for developing the original Ukagaka software &lt;usada.sakura.vg/&gt;
 * SSP project &lt;ssp.shillest.net/&gt; for high quality Ukagaka clones. (I did not use their code, but studied them extensively)
-
-Author
-----------
-Legokichi Duckscallion

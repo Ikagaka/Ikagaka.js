@@ -1,6 +1,6 @@
 {
   "name": "ikagaka.ikagaka.js",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "description": "Ukagaka Web Platform",
   "url": "https://github.com/ikagaka/Ikagaka.js",
   "keywords": [
@@ -9,10 +9,9 @@
     "ukagaka"
   ],
   "scripts": {
-    "copy": "cp ./node_modules/ikagaka.ghost.js/*Worker.js ./",
     "watch": "coffee -cwb ./*.coffee",
-    "build": "coffee -cb ./*.coffee; npm run browserify",
-    "browserify": "browserify Ikagaka.js > ./dist/ikagaka.js",
+    "build": "coffee -cb ./*.coffee; npm run browserify; npm run minify",
+    "browserify": "browserify --standalone Ikagaka Ikagaka.js > ./dist/ikagaka.js",
     "minify": "uglifyjs ./dist/ikagaka.js > ./dist/ikagaka.min.js"
   },
   "repository": {
@@ -34,31 +33,13 @@
     "ikagaka.balloon.js": "",
     "ikagaka.sakurascriptplayer.js": "",
     "shiorijk": "",
-    "miyojs": "",
-    "parttime": "",
-    "partperiod": "",
-    "miyojs-filter-conditions": "^1.0.0",
-    "miyojs-filter-default_response_headers": "^1.0.0",
-    "miyojs-filter-join": "^2.0.0",
-    "miyojs-filter-no_value": "^1.0.0",
-    "miyojs-filter-property": "^1.2.0",
-    "miyojs-filter-value": "^1.0.0",
-    "miyojs-filter-value_filters": "^1.0.0",
-    "miyojs-filter-variables": "^2.0.1",
-    "miyojs-filter-autotalks": "^1.0.0",
-    "miyojs-filter-talking": "^1.0.0",
-    "miyojs-filter-stash": "^1.0.0",
-    "miyojs-filter-entry_template": "^2.0.0",
-    "miyojs-filter-stash_template": "^1.0.0",
-    "miyojs-filter-child_process": ">= 0.0.1",
     "ikagaka.ghost.js": ""
   },
   "devDependencies": {
-    "uupaa.watch.js": "",
     "uglify-js": ""
   },
   "main":           "./Ikagaka.js",
   "author":         "duxca",
   "license":        "MIT",
-  "contributors":   []
+  "contributors":   ["narazaka"]
 }

@@ -1,8 +1,11 @@
 
 class Ikagaka
-
   constructor: ->
     hoge = 0
+
+if module?.exports?
+  module.exports = Ikagaka
+
 
 window["Ikagaka"] = Ikagaka
 
