@@ -39,7 +39,7 @@
     "uglify-js": ""
   },
   "main":           "./Ikagaka.js",
-  "author":         "duxca",
+  "author":         "Ikagaka",
   "license":        "MIT",
-  "contributors":   ["narazaka"]
+  "contributors":   ["legokichi", "narazaka"]
 }
