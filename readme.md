@@ -28,7 +28,6 @@ open test.html
 + [shiorijk](https://github.com/Narazaka/shiorijk)
 + [underscore](https://github.com/jashkenas/underscore)
 + [jquery](https://github.com/jquery/jquery)
-+ [jquery-ui](https://github.com/jquery/jquery-ui)
 + [ikagaka.wmdescript.js](https://github.com/Ikagaka/WMDescript.js)
 + [ikagaka.nar.js](https://github.com/Ikagaka/Nar.js)
 + [ikagaka.shell.js](https://github.com/Ikagaka/Shell.js)
@@ -36,7 +35,6 @@ open test.html
 + [ikagaka.balloon.js](https://github.com/Ikagaka/Balloon.js)
 + [ikagaka.sakurascriptplayer.js](https://github.com/Ikagaka/SakuraScriptPlayer.js)
 + [ikagaka.ghost.js](https://github.com/Ikagaka/Ghost.js)
-
 
 ## Acknowledgements
 * ls for developing the original Ukagaka software &lt;usada.sakura.vg/&gt;

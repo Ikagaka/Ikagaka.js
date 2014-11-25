@@ -518,38 +518,173 @@ if (window["Ikagaka"] != null) {
 var Named;
 
 Named = (function() {
-  var $, Scope;
+  var $, Scope, prompt, _ref;
 
   $ = window["jQuery"];
 
-  Scope = window["Scope"] || window["Ikagaka"]["Scope"] || require("./Scope.js");
+  Scope = window["Scope"] || ((_ref = window["Ikagaka"]) != null ? _ref["Scope"] : void 0) || require("./Scope.js");
+
+  prompt = window["prompt"];
 
   function Named(shell, balloon) {
-    var $namedStyle;
     this.shell = shell;
     this.balloon = balloon;
     this.$named = $("<div />").addClass("named");
-    $namedStyle = $("<style scoped />").html("");
-    this.$named.append($namedStyle);
     this.element = this.$named[0];
     this.scopes = [];
-    this.currentScope = null;
+    this.scopes[0] = new Scope(0, this.shell, this.balloon);
+    this.currentScope = this.scopes[0];
+    this.destructors = [];
+    (function(_this) {
+      return (function() {
+        var $body, $target, onmousedown, onmousemove, onmouseup, relLeft, relTop;
+        $target = null;
+        relLeft = relTop = 0;
+        onmouseup = function(ev) {
+          if (!!$target) {
+            if ($(ev.target).hasClass("blimpText") || $(ev.target).hasClass("blimpCanvas")) {
+              if ($target[0] === $(ev.target).parent()[0]) {
+                return $target = null;
+              }
+            } else if ($(ev.target).hasClass("surfaceCanvas")) {
+              if ($target[0] === $(ev.target).parent().parent()[0]) {
+                return $target = null;
+              }
+            }
+          }
+        };
+        onmousedown = function(ev) {
+          var left, offsetX, offsetY, top, _ref1, _ref2, _target;
+          if ($(ev.target).hasClass("blimpText") || $(ev.target).hasClass("blimpCanvas")) {
+            $target = $(ev.target).parent();
+            _ref1 = $target.offset(), top = _ref1.top, left = _ref1.left;
+            offsetY = parseInt($target.css("left"), 10);
+            offsetX = parseInt($target.css("top"), 10);
+            relLeft = ev.pageX - offsetY;
+            relTop = ev.pageY - offsetX;
+          }
+          if ($(ev.target).hasClass("surfaceCanvas")) {
+            _target = $target = $(ev.target).parent().parent();
+            _ref2 = $target.offset(), top = _ref2.top, left = _ref2.left;
+            relLeft = ev.pageX - left;
+            relTop = ev.pageY - top;
+            return setTimeout((function() {
+              return _this.$named.append(_target);
+            }), 100);
+          }
+        };
+        onmousemove = function(ev) {
+          if (!!$target) {
+            return $target.css({
+              left: ev.pageX - relLeft,
+              top: ev.pageY - relTop
+            });
+          }
+        };
+        $body = $("body");
+        $body.on("mouseup", onmouseup);
+        $body.on("mousedown", onmousedown);
+        $body.on("mousemove", onmousemove);
+        return _this.destructors.push(function() {
+          $body.off("mouseup", onmouseup);
+          $body.off("mousedown", onmousedown);
+          return $body.off("mousemove", onmousemove);
+        });
+      });
+    })(this)();
+    (function(_this) {
+      return (function() {
+        var onblimpclick;
+        onblimpclick = function(ev) {};
+        _this.$named.on("click", ".blimp", onblimpclick);
+        return _this.destructors.push(function() {
+          return _this.$named.off("click", ".blimp", onblimpclick);
+        });
+      });
+    })(this)();
+    (function(_this) {
+      return (function() {
+        var onanchorclick, onchoiceclick;
+        onanchorclick = function(ev) {
+          var detail;
+          detail = {
+            "ID": "OnChoiceSelect",
+            "Reference0": ev.target.dataset["choiceid"]
+          };
+          return _this.$named.trigger($.Event("IkagakaSurfaceEvent", {
+            detail: detail
+          }));
+        };
+        onchoiceclick = function(ev) {
+          var detail;
+          detail = {
+            "ID": "OnAnchorSelect",
+            "Reference0": ev.target.dataset["anchorid"]
+          };
+          return _this.$named.trigger($.Event("IkagakaSurfaceEvent", {
+            detail: detail
+          }));
+        };
+        _this.$named.on("click", ".ikagaka-choice", onanchorclick);
+        _this.$named.on("click", ".ikagaka-anchor", onchoiceclick);
+        return _this.destructors.push(function() {
+          _this.$named.off("click", ".ikagaka-choice", onanchorclick);
+          return _this.$named.off("click", ".ikagaka-anchor", onchoiceclick);
+        });
+      });
+    })(this)();
   }
 
+  Named.prototype.destructor = function() {
+    this.scopes.forEach(function(scope) {
+      return $(scope.element).remove();
+    });
+    this.destructors.forEach(function(destructor) {
+      return destructor();
+    });
+    return this.$named.remove();
+  };
+
   Named.prototype.scope = function(scopeId) {
-    if (scopeId !== void 0) {
-      if (!this.scopes[scopeId]) {
-        this.scopes[scopeId] = new Scope(scopeId, this.shell, this.balloon);
-        this.scopes[scopeId].$scope.on("click", (function(_this) {
-          return function(ev) {
-            return _this.$named.append(_this.scopes[scopeId].$scope);
-          };
-        })(this));
-      }
-      this.currentScope = this.scopes[scopeId];
-      $(this.element).append(this.scopes[scopeId].element);
+    if (!isFinite(scopeId)) {
+      return this.currentScope;
     }
+    if (!this.scopes[scopeId]) {
+      this.scopes[scopeId] = new Scope(scopeId, this.shell, this.balloon);
+    }
+    this.currentScope = this.scopes[scopeId];
+    this.$named.append(this.scopes[scopeId].element);
     return this.currentScope;
+  };
+
+  Named.prototype.openInputBox = function(id, text) {
+    var detail;
+    if (text == null) {
+      text = "";
+    }
+    detail = {
+      "ID": "OnUserInput",
+      "Reference1": id,
+      "Reference1": "" + prompt("UserInput", text)
+    };
+    return this.$named.trigger($.Event("IkagakaSurfaceEvent", {
+      detail: detail
+    }));
+  };
+
+  Named.prototype.openCommunicateBox = function(text) {
+    var detail;
+    if (text == null) {
+      text = "";
+    }
+    detail = {
+      "ID": "OnCommunicate",
+      "Reference0": "user",
+      "Reference1": "" + prompt("Communicate", text)
+    };
+    return this.$named.trigger($.Event("IkagakaSurfaceEvent", {
+      detail: detail
+    }));
   };
 
   return Named;
@@ -574,62 +709,34 @@ Scope = (function() {
   $ = window["jQuery"];
 
   function Scope(scopeId, shell, balloon) {
-    var $blimpStyle, $scopeStyle;
+    var $style;
     this.scopeId = scopeId;
     this.shell = shell;
     this.balloon = balloon;
-    this.$scope = $("<div />").addClass("scope").css({
-      "position": "absolute",
-      "bottom": "0px",
-      "right": (this.scopeId * 240) + "px"
-    }).draggable({});
-    $scopeStyle = $("<style scoped />").html(".scope {\n  display: inline-block;\n  position: absolute;\n  -webkit-user-select: none;\n  user-select: none;\n  -webkit-tap-highlight-color: transparent;\n  tap-highlight-color: transparent;\n}\n.surfaceCanvas {\n  display: inline-block;\n}");
+    this.$scope = $("<div />").addClass("scope");
+    $style = $("<style scoped />").html(this.style);
+    this.$surface = $("<div />").addClass("surface");
     this.$surfaceCanvas = $("<canvas />").addClass("surfaceCanvas");
-    this.$surface = $("<div />").addClass("surface").append(this.$surfaceCanvas);
+    this.$blimp = $("<div />").addClass("blimp");
     this.$blimpCanvas = $("<canvas width='0' height='0' />").addClass("blimpCanvas");
-    $blimpStyle = $("<style scoped />").html(".blimp {\n  display: inline-block;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n}\n.blimpCanvas {\n  display: inline-block;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n}\n.blimpText {\n  display: inline-block;\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  overflow-y: scroll;\n  white-space: pre;\n  white-space: pre-wrap;\n  white-space: pre-line;\n  word-wrap: break-word;\n  /*pointer-events: none;*/\n}\n.blimpText a {\n  text-decoration: underline;\n}\n.blimpText .ikagaka-choice {\n  color: blue;\n  cursor: pointer;\n}\n.blimpText .ikagaka-anchor {\n  color: red;\n  cursor: pointer;\n}\n.blimpText .ikagaka-choice:hover,\n.blimpText .ikagaka-anchor:hover{\n  background-color: yellow;\n}\n");
     this.$blimpText = $("<div />").addClass("blimpText");
-    this.$blimp = $("<div />").addClass("blimp").append($blimpStyle).append(this.$blimpCanvas).append(this.$blimpText).css({
-      "position": "absolute"
-    }).draggable().click((function(_this) {
-      return function(ev) {};
-    })(this));
-    this.$scope.append($scopeStyle).append(this.$surface).append(this.$blimp).delegate(".ikagaka-choice", "click", (function(_this) {
-      return function(ev) {
-        var detail;
-        detail = {
-          "ID": "OnChoiceSelect",
-          "Reference0": ev.target.dataset["choiceid"]
-        };
-        return _this.$scope.trigger($.Event("IkagakaSurfaceEvent", {
-          detail: detail
-        }));
-      };
-    })(this)).delegate(".ikagaka-anchor", "click", (function(_this) {
-      return function(ev) {
-        var detail;
-        detail = {
-          "ID": "OnAnchorSelect",
-          "Reference0": ev.target.dataset["anchorid"]
-        };
-        return _this.$scope.trigger($.Event("IkagakaSurfaceEvent", {
-          detail: detail
-        }));
-      };
-    })(this));
+    this.$surface.append(this.$surfaceCanvas);
+    this.$blimp.append(this.$blimpCanvas);
+    this.$blimp.append(this.$blimpText);
+    this.$scope.append($style);
+    this.$scope.append(this.$surface);
+    this.$scope.append(this.$blimp);
     this.element = this.$scope[0];
+    this.destructors = [];
     this.currentSurface = null;
     this.currentBalloon = null;
-    this.leftFlag = true;
+    this.isBalloonLeft = true;
+    this.talkInsertPointStack = [this.$blimpText];
     this.insertPoint = this.$blimpText;
-
-    /*
-    @$blimp.on "click", (ev)=>
-      @leftFlag = !@leftFlag
-      if @leftFlag
-      then @blimp(0)
-      else @blimp(1)
-     */
+    this.$scope.css({
+      "bottom": "0px",
+      "right": (this.scopeId * 240) + "px"
+    });
   }
 
   Scope.prototype.surface = function(surfaceId, callback) {
@@ -652,6 +759,8 @@ Scope = (function() {
         this.currentSurface.destructor();
       }
       this.currentSurface = this.shell.attachSurface(this.$surfaceCanvas[0], this.scopeId, surfaceId, callback);
+      this.$scope.width(this.$surfaceCanvas.width());
+      this.$scope.height(this.$surfaceCanvas.height());
     }
     return this.currentSurface;
   };
@@ -678,7 +787,7 @@ Scope = (function() {
           "width": this.$blimpCanvas.width(),
           "height": this.$blimpCanvas.height()
         });
-        if (this.leftFlag) {
+        if (this.isBalloonLeft) {
           this.$blimp.css({
             "top": Number(this.shell.descript["" + type + ".balloon.offsety"] || 0),
             "left": Number(this.shell.descript["" + type + ".balloon.offsetx"] || 0) + -1 * this.$blimpCanvas.width()
@@ -765,6 +874,8 @@ Scope = (function() {
     };
   };
 
+  Scope.prototype.style = ".scope {\n  position: absolute;\n  pointer-events: none;\n  user-select: none;\n  -webkit-tap-highlight-color: transparent;\n}\n.surface {}\n.surfaceCanvas {\n  pointer-events: auto;\n}\n.blimp {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  pointer-events: auto;\n}\n.blimpCanvas {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n}\n.blimpText {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  overflow-y: scroll;\n  white-space: pre;\n  white-space: pre-wrap;\n  white-space: pre-line;\n  word-wrap: break-word;\n}\n.blimpText a {\n  text-decoration: underline;\n  cursor: pointer;\n}\n.blimpText a:hover { background-color: yellow; }\n.blimpText a.ikagaka-choice { color: blue; }\n.blimpText a.ikagaka-anchor { color: red; }";
+
   return Scope;
 
 })();
@@ -830,11 +941,13 @@ SakuraScriptPlayer = (function() {
       "Yn": /^\\n/,
       "Yc": /^\\c/,
       "Ye": /^\\e/,
-      "YY": /^\\\\/
+      "YY": /^\\\\/,
+      "Ycom": /^\\\!\[open\,communicatebox\]/,
+      "Yinp": /^\\\!\[open\,inputbox\,([^\,]+)\,(\d+)\,([^\,]+)\]/
     };
     (recur = (function(_this) {
       return function() {
-        var id, title, _ref, _script;
+        var id, text, time, title, _ref, _ref1, _script;
         if (script.length === 0) {
           _this.playing = false;
           _this.breakTid = setTimeout((function() {
@@ -936,6 +1049,19 @@ SakuraScriptPlayer = (function() {
           case reg["YY"].test(script):
             _script = script.replace(reg["YY"], "");
             _this.named.scope().blimp().talk("\\");
+            break;
+          case reg["Ycom"].test(script):
+            _script = script.replace(reg["Ycom"], "");
+            setTimeout((function() {
+              return _this.named.openCommunicateBox();
+            }), 2000);
+            break;
+          case reg["Yinp"].test(script):
+            _script = script.replace(reg["Yinp"], "");
+            _ref1 = reg["Yinp"].exec(script), id = _ref1[0], time = _ref1[1], text = _ref1[2];
+            setTimeout((function() {
+              return _this.named.openInputBox(id, text);
+            }), 2000);
             break;
           default:
             _script = script.slice(1);
@@ -1211,7 +1337,7 @@ if (window["Ikagaka"] != null) {
   window["Ikagaka"]["Shell"] = Shell;
 }
 
-},{"./Surface.js":11,"./SurfaceUtil.js":12,"ikagaka.nar.js":13}],11:[function(require,module,exports){
+},{"./Surface.js":11,"./SurfaceUtil.js":12,"ikagaka.nar.js":8}],11:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 var Surface;
 
@@ -1245,58 +1371,60 @@ Surface = (function() {
     this.destructed = false;
     this.talkCount = 0;
     this.talkCounts = {};
+    this.isPointerEventsShimed = false;
+    this.lastEventType = "";
     $(this.element).on("contextmenu", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseClick", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseClick", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("click", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseClick", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseClick", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("dblclick", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseDoubleClick", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseDoubleClick", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("mousedown", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseDown", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseDown", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("mousemove", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseMove", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseMove", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("mouseup", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseUp", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseUp", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("touchmove", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseMove", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseMove", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
     })(this));
     $(this.element).on("touchend", (function(_this) {
       return function(ev) {
-        return Surface.processMouseEvent(ev, _this.scopeId, _this.regions, "OnMouseUp", function($ev) {
+        return _this.processMouseEvent(ev, "OnMouseUp", function($ev) {
           return $(_this.element).trigger($ev);
         });
       };
@@ -1583,68 +1711,76 @@ Surface = (function() {
     return void 0;
   };
 
-  Surface.processMouseEvent = function(ev, scopeId, regions, eventName, callback) {
-    var detail, left, offsetX, offsetY, top, _ref1;
-    _ref1 = $(ev.target).offset(), left = _ref1.left, top = _ref1.top;
-    if (/^touch/.test(ev.type)) {
-      offsetX = ev.originalEvent.changedTouches[0].pageX - left;
-      offsetY = ev.originalEvent.changedTouches[0].pageY - top;
-    } else {
-      offsetX = ev.pageX - left;
-      offsetY = ev.pageY - top;
-    }
+  Surface.prototype.processMouseEvent = function(ev, eventName, callback) {
+    var detail, elm, hits, left, offsetX, offsetY, pageX, pageY, top, _ref1, _ref2;
+    ev.originalEvent.preventDefault();
     $(ev.target).css({
       "cursor": "default"
     });
+    if (this.isPointerEventsShimed && ev.type === this.lastEventType) {
+      this.lastEventType = "";
+      this.isPointerEventsShimed = false;
+      ev.originalEvent.stopPropagation();
+      return;
+    }
+    if (/^touch/.test(ev.type)) {
+      _ref1 = ev.originalEvent.changedTouches[0], pageX = _ref1.pageX, pageY = _ref1.pageY;
+    } else {
+      pageX = ev.pageX, pageY = ev.pageY;
+    }
+    _ref2 = $(ev.target).offset(), left = _ref2.left, top = _ref2.top;
+    offsetX = pageX - left;
+    offsetY = pageY - top;
     if (Surface.isHit(ev.target, offsetX, offsetY)) {
-      ev.preventDefault();
-      detail = Surface.createMouseEvent(eventName, scopeId, regions, offsetX, offsetY);
-      if (!!detail["Reference4"]) {
+      detail = {
+        "ID": eventName,
+        "Reference0": offsetX | 0,
+        "Reference1": offsetY | 0,
+        "Reference2": 0,
+        "Reference3": this.scopeId,
+        "Reference4": "",
+        "Reference5": (ev.button === 2 ? 1 : 0)
+      };
+      hits = Object.keys(this.regions).sort(function(a, b) {
+        if (a.is > b.is) {
+          return 1;
+        } else {
+          return -1;
+        }
+      }).filter((function(_this) {
+        return function(name) {
+          var bottom, right, _ref3;
+          _ref3 = _this.regions[name], name = _ref3.name, left = _ref3.left, top = _ref3.top, right = _ref3.right, bottom = _ref3.bottom;
+          return ((left < offsetX && offsetX < right) && (top < offsetY && offsetY < bottom)) || ((right < offsetX && offsetX < left) && (bottom < offsetY && offsetY < top));
+        };
+      })(this));
+      if (hits.length !== 0) {
+        detail["Reference4"] = this.regions[hits[hits.length - 1]].name;
         $(ev.target).css({
           "cursor": "pointer"
         });
-      } else {
-        $(ev.target).css({
-          "cursor": "default"
-        });
-      }
-      if (ev.button === 2) {
-        detail["Reference5"] = 1;
       }
       callback($.Event('IkagakaSurfaceEvent', {
         detail: detail,
         bubbles: true
       }));
+    } else {
+      ev.originalEvent.stopPropagation();
+      this.isPointerEventsShimed = true;
+      this.lastEventType = ev.type;
+      $(ev.target).css({
+        display: 'none'
+      });
+      elm = document.elementFromPoint(pageX, pageY);
+      $(ev.target).css({
+        display: 'inline-block'
+      });
+      delete ev.target;
+      delete ev.offsetX;
+      delete ev.offsetY;
+      $(elm).trigger(ev);
     }
     return void 0;
-  };
-
-  Surface.createMouseEvent = function(eventName, scopeId, regions, offsetX, offsetY) {
-    var event, hits;
-    event = {
-      "ID": eventName,
-      "Reference0": offsetX | 0,
-      "Reference1": offsetY | 0,
-      "Reference2": 0,
-      "Reference3": scopeId,
-      "Reference4": "",
-      "Reference5": 0
-    };
-    hits = Object.keys(regions).slice().sort(function(a, b) {
-      if (a.is > b.is) {
-        return 1;
-      } else {
-        return -1;
-      }
-    }).filter(function(name) {
-      var bottom, left, right, top, _ref1;
-      _ref1 = regions[name], name = _ref1.name, left = _ref1.left, top = _ref1.top, right = _ref1.right, bottom = _ref1.bottom;
-      return ((left < offsetX && offsetX < right) && (top < offsetY && offsetY < bottom)) || ((right < offsetX && offsetX < left) && (bottom < offsetY && offsetY < top));
-    });
-    if (hits.length !== 0) {
-      event["Reference4"] = regions[hits[hits.length - 1]].name;
-    }
-    return event;
   };
 
   Surface.random = function(callback, n) {
@@ -1842,7 +1978,5 @@ if (window["Ikagaka"] != null) {
   window["Ikagaka"]["SurfaceUtil"] = SurfaceUtil;
 }
 
-},{}],13:[function(require,module,exports){
-module.exports=require(4)
-},{"/Users/yohsukeino/GitHub/Ikagaka/Ikagaka.js/node_modules/ikagaka.balloon.js/node_modules/ikagaka.nar.js/Nar.js":4}]},{},[1])(1)
+},{}]},{},[1])(1)
 });
