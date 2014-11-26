@@ -1,6 +1,6 @@
 {
   "name": "ikagaka.ikagaka.js",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Ukagaka Web Platform",
   "url": "https://github.com/ikagaka/Ikagaka.js",
   "keywords": [
@@ -27,7 +27,7 @@
     "ikagaka.nar.js": "",
     "surfaces_txt2yaml": "",
     "underscore": "",
-    "jquery": "",
+    "zepto": "",
     "ikagaka.shell.js": "",
     "ikagaka.named.js": "",
     "ikagaka.balloon.js": "",

@@ -35,15 +35,15 @@ require("ikagaka.ghost.js");
 var Balloon;
 
 Balloon = (function() {
-  var $, BalloonSurface, Nar, SurfaceUtil, URL;
+  var $, BalloonSurface, Nar, SurfaceUtil, URL, _ref, _ref1, _ref2;
 
-  $ = window["jQuery"];
+  $ = window["Zepto"];
 
-  Nar = window["Nar"] || window["Ikagaka"]["Nar"] || require("ikagaka.nar.js");
+  Nar = window["Nar"] || ((_ref = window["Ikagaka"]) != null ? _ref["Nar"] : void 0) || require("ikagaka.nar.js");
 
-  SurfaceUtil = window["SurfaceUtil"] || window["Ikagaka"]["SurfaceUtil"];
+  SurfaceUtil = window["SurfaceUtil"] || ((_ref1 = window["Ikagaka"]) != null ? _ref1["SurfaceUtil"] : void 0);
 
-  BalloonSurface = window["BalloonSurface"] || window["Ikagaka"]["BalloonSurface"] || require("./BalloonSurface.js");
+  BalloonSurface = window["BalloonSurface"] || ((_ref2 = window["Ikagaka"]) != null ? _ref2["BalloonSurface"] : void 0) || require("./BalloonSurface.js");
 
   URL = window["URL"];
 
@@ -89,10 +89,10 @@ Balloon = (function() {
     Object.keys(directory).filter(function(filepath) {
       return /balloon([sk])(\d+)s\.txt$/.test(filepath);
     }).forEach(function(filepath) {
-      var buffer, n, type, __, _descript, _ref;
+      var buffer, n, type, __, _descript, _ref3;
       buffer = directory[filepath].asArrayBuffer();
       _descript = Nar.parseDescript(Nar.convert(buffer));
-      _ref = /balloon([sk])(\d+)s\.txt$/.exec(filepath), __ = _ref[0], type = _ref[1], n = _ref[2];
+      _ref3 = /balloon([sk])(\d+)s\.txt$/.exec(filepath), __ = _ref3[0], type = _ref3[1], n = _ref3[2];
       switch (type) {
         case "s":
           return balloons["sakura"][Number(n)].descript = $.extend(true, _descript, descript);
@@ -115,13 +115,13 @@ Balloon = (function() {
           type: "image/png"
         }));
         return SurfaceUtil.loadImage(url, function(err, img) {
-          var n, type, __, _ref, _ref1, _ref2;
+          var n, type, __, _ref3, _ref4, _ref5;
           URL.revokeObjectURL(url);
           if (!!err) {
             return reject(err);
           }
           if (/^balloon([ksc])(\d+)\.png$/.test(filepath)) {
-            _ref = /^balloon([ksc])(\d+)\.png$/.exec(filepath), __ = _ref[0], type = _ref[1], n = _ref[2];
+            _ref3 = /^balloon([ksc])(\d+)\.png$/.exec(filepath), __ = _ref3[0], type = _ref3[1], n = _ref3[2];
             switch (type) {
               case "s":
                 balloons["sakura"][Number(n)] = {
@@ -139,12 +139,12 @@ Balloon = (function() {
                 };
             }
           } else if (/^online(\d+)\.png$/.test(filepath)) {
-            _ref1 = /^online(\d+)\.png$/.exec(filepath), __ = _ref1[0], n = _ref1[1];
+            _ref4 = /^online(\d+)\.png$/.exec(filepath), __ = _ref4[0], n = _ref4[1];
             balloons["online"][Number(n)] = {
               canvas: SurfaceUtil.transImage(img)
             };
           } else if (/^arrow(\d+)\.png$/.test(filepath)) {
-            _ref2 = /^arrow(\d+)\.png$/.exec(filepath), __ = _ref2[0], n = _ref2[1];
+            _ref5 = /^arrow(\d+)\.png$/.exec(filepath), __ = _ref5[0], n = _ref5[1];
             balloons["arrow"][Number(n)] = {
               canvas: SurfaceUtil.transImage(img)
             };
@@ -187,9 +187,9 @@ if (window["Ikagaka"] != null) {
 var BalloonSurface;
 
 BalloonSurface = (function() {
-  var SurfaceUtil;
+  var SurfaceUtil, _ref;
 
-  SurfaceUtil = window["SurfaceUtil"] || window["Ikagaka"]["SurfaceUtil"];
+  SurfaceUtil = window["SurfaceUtil"] || ((_ref = window["Ikagaka"]) != null ? _ref["SurfaceUtil"] : void 0);
 
   function BalloonSurface(element, scopeId, balloonConf, balloons) {
     this.element = element;
@@ -398,7 +398,7 @@ var Named;
 Named = (function() {
   var $, Scope, prompt, _ref;
 
-  $ = window["jQuery"];
+  $ = window["Zepto"];
 
   Scope = window["Scope"] || ((_ref = window["Ikagaka"]) != null ? _ref["Scope"] : void 0) || require("./Scope.js");
 
@@ -588,7 +588,7 @@ var Scope;
 Scope = (function() {
   var $;
 
-  $ = window["jQuery"];
+  $ = window["Zepto"];
 
   function Scope(scopeId, shell, balloon) {
     var $style;
@@ -1108,7 +1108,7 @@ Shell = (function() {
 
   _ = window["_"];
 
-  $ = window["jQuery"];
+  $ = window["Zepto"];
 
   SurfacesTxt2Yaml = window["SurfacesTxt2Yaml"];
 
@@ -1163,13 +1163,13 @@ Shell = (function() {
     }
     type = scopeId === 0 ? "sakura" : "kero";
     if (Array.isArray((_ref3 = this.surfaces.aliases) != null ? (_ref4 = _ref3[type]) != null ? _ref4[surfaceId] : void 0 : void 0)) {
-      _surfaceId = Number(SurfaceUtil.choice(this.surfaces.aliases[type][surfaceId]));
+      _surfaceId = SurfaceUtil.choice(this.surfaces.aliases[type][surfaceId]);
     } else {
       _surfaceId = surfaceId;
     }
     srfs = this.surfaces.surfaces;
     hits = Object.keys(srfs).filter(function(name) {
-      return Number(srfs[name].is) === _surfaceId;
+      return srfs[name].is === _surfaceId;
     });
     if (hits.length === 0) {
       return null;
@@ -1182,7 +1182,12 @@ Shell = (function() {
     srfs = surfaces.surfaces;
     Object.keys(srfs).forEach(function(name) {
       var baseSurface, cnv, elms, sortedElms, srfutil;
-      srfs[name].is = srfs[name].is;
+      if (!srfs[name].baseSurface) {
+        cnv = document.createElement("canvas");
+        cnv.width = 0;
+        cnv.height = 0;
+        srfs[name].baseSurface = cnv;
+      }
       cnv = srfs[name].baseSurface;
       if (!srfs[name].elements) {
         return srfs[name].baseSurface = cnv;
@@ -1190,9 +1195,9 @@ Shell = (function() {
         elms = srfs[name].elements;
         sortedElms = Object.keys(elms).map(function(key) {
           return {
-            is: Number(elms[key].is),
-            x: Number(elms[key].x),
-            y: Number(elms[key].y),
+            is: elms[key].is,
+            x: elms[key].x,
+            y: elms[key].y,
             canvas: elms[key].canvas,
             type: elms[key].type
           };
@@ -1290,36 +1295,44 @@ Shell = (function() {
   };
 
   Shell.mergeSurfacesAndSurfacesFiles = function(surfaces, directory) {
+    var srfs;
+    srfs = surfaces.surfaces;
     return Object.keys(directory).filter(function(filename) {
       return /^surface\d+\.png$/i.test(filename);
     }).map(function(filename) {
       return [Number((/^surface(\d+)\.png$/i.exec(filename) || ["", "-1"])[1]), directory[filename]];
     }).reduce((function(surfaces, _arg) {
-      var file, n, name, srfs;
+      var cnv, file, n, name;
       n = _arg[0], file = _arg[1];
       name = "surface" + n;
-      srfs = surfaces.surfaces;
       if (!srfs[name]) {
         srfs[name] = {
-          is: "" + n
+          is: n
         };
       }
       srfs[name].file = file;
-      srfs[name].baseSurface = null;
+      cnv = document.createElement("canvas");
+      cnv.width = 0;
+      cnv.height = 0;
+      srfs[name].baseSurface = cnv;
       return surfaces;
     }), surfaces);
   };
 
   Shell.parseSurfaces = function(text) {
     var data;
-    data = SurfacesTxt2Yaml.txt_to_data(text);
+    data = SurfacesTxt2Yaml.txt_to_data(text, {
+      compatible: 'ssp-lazy'
+    });
+    console.dir(data);
+    data = $.extend(true, {}, data);
     data.surfaces = Object.keys(data.surfaces).reduce((function(obj, name) {
-      if (typeof data.surfaces[name].is === "string") {
+      if (typeof data.surfaces[name].is !== "undefined") {
         obj[name] = data.surfaces[name];
       }
       if (Array.isArray(data.surfaces[name].base)) {
         data.surfaces[name].base.forEach(function(key) {
-          return data.surfaces[name] = $.extend(true, data.surfaces[name], data.surfaces[key]);
+          return $.extend(true, data.surfaces[name], data.surfaces[key]);
         });
       }
       return obj;
@@ -1339,14 +1352,14 @@ if (window["Ikagaka"] != null) {
   window["Ikagaka"]["Shell"] = Shell;
 }
 
-},{"./Surface.js":10,"./SurfaceUtil.js":11,"ikagaka.nar.js":12}],10:[function(require,module,exports){
+},{"./Surface.js":10,"./SurfaceUtil.js":11,"ikagaka.nar.js":7}],10:[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
 var Surface;
 
 Surface = (function() {
   var $, Promise, SurfaceUtil, _, _ref;
 
-  $ = window["jQuery"];
+  $ = window["Zepto"];
 
   _ = window["_"];
 
@@ -1452,7 +1465,7 @@ Surface = (function() {
       return function(name) {
         var animationId, interval, n, pattern, tmp, _is, _ref1;
         _ref1 = _this.animations[name], _is = _ref1.is, interval = _ref1.interval, pattern = _ref1.pattern;
-        animationId = Number(_is);
+        animationId = _is;
         interval = interval || "";
         tmp = interval.split(",");
         interval = tmp[0];
@@ -1524,7 +1537,7 @@ Surface = (function() {
       };
     })(this)).forEach((function(_this) {
       return function(name) {
-        return _this.play(Number(_this.animations[name].is));
+        return _this.play(_this.animations[name].is);
       };
     })(this));
   };
@@ -1537,7 +1550,7 @@ Surface = (function() {
       };
     })(this)).forEach((function(_this) {
       return function(name) {
-        return _this.play(Number(_this.animations[name].is));
+        return _this.play(_this.animations[name].is);
       };
     })(this));
   };
@@ -1559,7 +1572,7 @@ Surface = (function() {
       return function(arr, pat) {
         var hits, surface, type, x, y;
         surface = pat.surface, type = pat.type, x = pat.x, y = pat.y;
-        if (surface === "-1") {
+        if (surface === -1) {
           return arr;
         }
         hits = Object.keys(srfs).filter(function(key) {
@@ -1570,8 +1583,8 @@ Surface = (function() {
         }
         return arr.concat({
           type: type,
-          x: Number(x),
-          y: Number(y),
+          x: x,
+          y: y,
           canvas: srfs[hits[hits.length - 1]].baseSurface
         });
       };
@@ -1597,7 +1610,7 @@ Surface = (function() {
     }
     hits = Object.keys(this.animations).filter((function(_this) {
       return function(name) {
-        return Number(_this.animations[name].is) === animationId;
+        return _this.animations[name].is === animationId;
       };
     })(this));
     if (hits.length === 0) {
@@ -1649,7 +1662,7 @@ Surface = (function() {
             _this.layers[anim.is] = pattern;
             _this.render();
             _ref3 = /(\d+)(?:\-(\d+))?/.exec(wait), __ = _ref3[0], a = _ref3[1], b = _ref3[2];
-            if (b != null) {
+            if (!!b) {
               wait = _.random(Number(a), Number(b));
             }
             return setTimeout((function() {
@@ -1683,7 +1696,7 @@ Surface = (function() {
     var anim, animIds, hits, interval, pattern;
     hits = Object.keys(this.animations).filter((function(_this) {
       return function(name) {
-        return Number(_this.animations[name].is) === animationId;
+        return _this.animations[name].is === animationId;
       };
     })(this));
     if (hits.length === 0) {
@@ -1714,19 +1727,19 @@ Surface = (function() {
   };
 
   Surface.prototype.processMouseEvent = function(ev, eventName, callback) {
-    var detail, elm, hits, left, offsetX, offsetY, pageX, pageY, top, _ref1, _ref2;
-    ev.originalEvent.preventDefault();
+    var detail, elm, hits, left, offsetX, offsetY, pageX, pageY, top, _ev, _ref1, _ref2;
+    ev.preventDefault();
     $(ev.target).css({
       "cursor": "default"
     });
     if (this.isPointerEventsShimed && ev.type === this.lastEventType) {
       this.lastEventType = "";
       this.isPointerEventsShimed = false;
-      ev.originalEvent.stopPropagation();
+      ev.stopPropagation();
       return;
     }
     if (/^touch/.test(ev.type)) {
-      _ref1 = ev.originalEvent.changedTouches[0], pageX = _ref1.pageX, pageY = _ref1.pageY;
+      _ref1 = ev.changedTouches[0], pageX = _ref1.pageX, pageY = _ref1.pageY;
     } else {
       pageX = ev.pageX, pageY = ev.pageY;
     }
@@ -1767,7 +1780,7 @@ Surface = (function() {
         bubbles: true
       }));
     } else {
-      ev.originalEvent.stopPropagation();
+      ev.stopPropagation();
       this.isPointerEventsShimed = true;
       this.lastEventType = ev.type;
       $(ev.target).css({
@@ -1777,10 +1790,9 @@ Surface = (function() {
       $(ev.target).css({
         display: 'inline-block'
       });
-      delete ev.target;
-      delete ev.offsetX;
-      delete ev.offsetY;
-      $(elm).trigger(ev);
+      _ev = $.Event(ev.type);
+      _ev.initMouseEvent(ev.type, ev.bubbles, ev.cancelable, ev.view, ev.detail, ev.screenX, ev.screenY, ev.clientX, ev.clientY, ev.ctrlKey, ev.altKey, ev.shiftKey, ev.metaKey, ev.button, ev.relatedTarget);
+      $(elm).trigger(_ev);
     }
     return void 0;
   };
@@ -1980,7 +1992,5 @@ if (window["Ikagaka"] != null) {
   window["Ikagaka"]["SurfaceUtil"] = SurfaceUtil;
 }
 
-},{}],12:[function(require,module,exports){
-module.exports=require(7)
-},{"/Users/yohsukeino/GitHub/Ikagaka/Ikagaka.js/node_modules/ikagaka.nar.js/Nar.js":7}]},{},[1])(1)
+},{}]},{},[1])(1)
 });

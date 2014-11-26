@@ -27,7 +27,7 @@ open test.html
 + [surfaces_txt2yaml](https://github.com/Narazaka/surfaces_txt2yaml)
 + [shiorijk](https://github.com/Narazaka/shiorijk)
 + [underscore](https://github.com/jashkenas/underscore)
-+ [jquery](https://github.com/jquery/jquery)
++ [zepto](https://github.com/madrobby/zepto)
 + [ikagaka.wmdescript.js](https://github.com/Ikagaka/WMDescript.js)
 + [ikagaka.nar.js](https://github.com/Ikagaka/Nar.js)
 + [ikagaka.shell.js](https://github.com/Ikagaka/Shell.js)
