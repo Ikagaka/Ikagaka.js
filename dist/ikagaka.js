@@ -419,38 +419,42 @@ Named = (function() {
         $target = null;
         relLeft = relTop = 0;
         onmouseup = function(ev) {
+          var _ref1, _ref2;
           if (!!$target) {
             if ($(ev.target).hasClass("blimpText") || $(ev.target).hasClass("blimpCanvas")) {
-              if ($target[0] === $(ev.target).parent()[0]) {
+              if ($target[0] === ((_ref1 = $(ev.target).parent()) != null ? _ref1[0] : void 0)) {
                 return $target = null;
               }
             } else if ($(ev.target).hasClass("surfaceCanvas")) {
-              if ($target[0] === $(ev.target).parent().parent()[0]) {
+              if ($target[0] === ((_ref2 = $(ev.target).parent().parent()) != null ? _ref2[0] : void 0)) {
                 return $target = null;
               }
             }
           }
         };
         onmousedown = function(ev) {
-          var left, offsetX, offsetY, top, _ref1, _ref2, _target;
+          var $scope, left, offsetX, offsetY, top, _ref1, _ref2, _ref3, _ref4;
           if ($(ev.target).hasClass("blimpText") || $(ev.target).hasClass("blimpCanvas")) {
-            if ($(ev.target).parent().parent()[0] === _this.element) {
+            if (((_ref1 = $(ev.target).parent().parent().parent()) != null ? _ref1[0] : void 0) === _this.element) {
               $target = $(ev.target).parent();
-              _ref1 = $target.offset(), top = _ref1.top, left = _ref1.left;
+              $scope = $target.parent();
+              _ref2 = $target.offset(), top = _ref2.top, left = _ref2.left;
               offsetY = parseInt($target.css("left"), 10);
               offsetX = parseInt($target.css("top"), 10);
               relLeft = ev.pageX - offsetY;
               relTop = ev.pageY - offsetX;
+              return setTimeout((function() {
+                return _this.$named.append($scope);
+              }), 100);
             }
-          }
-          if ($(ev.target).hasClass("surfaceCanvas")) {
-            if ($(ev.target).parent().parent().parent()[0] === _this.element) {
-              _target = $target = $(ev.target).parent().parent();
-              _ref2 = $target.offset(), top = _ref2.top, left = _ref2.left;
+          } else if ($(ev.target).hasClass("surfaceCanvas")) {
+            if (((_ref3 = $(ev.target).parent().parent().parent()) != null ? _ref3[0] : void 0) === _this.element) {
+              $scope = $target = $(ev.target).parent().parent();
+              _ref4 = $target.offset(), top = _ref4.top, left = _ref4.left;
               relLeft = ev.pageX - left;
               relTop = ev.pageY - top;
               return setTimeout((function() {
-                return _this.$named.append(_target);
+                return _this.$named.append($scope);
               }), 100);
             }
           }
@@ -546,7 +550,7 @@ Named = (function() {
     }
     detail = {
       "ID": "OnUserInput",
-      "Reference1": id,
+      "Reference0": id,
       "Reference1": "" + prompt("UserInput", text)
     };
     return this.$named.trigger($.Event("IkagakaSurfaceEvent", {
@@ -945,11 +949,11 @@ SakuraScriptPlayer = (function() {
       "Ye": /^\\e/,
       "YY": /^\\\\/,
       "Ycom": /^\\\!\[\s*open\s*\,\s*communicatebox\s*\]/,
-      "Yinp": /^\\\!\[\s*open\s*\,\s*inputbox\s*\,([^\,]+)(?:\,([^\,]+)\,([^\,]+))?\]/
+      "Yinp": /^\\\!\[\s*open\s*\,\s*inputbox\s*\,([^\]]+)\]/
     };
     (recur = (function(_this) {
       return function() {
-        var id, text, time, title, _ref, _ref1, _script;
+        var id, title, _ref, _script;
         if (script.length === 0) {
           _this.playing = false;
           _this.breakTid = setTimeout((function() {
@@ -1060,9 +1064,9 @@ SakuraScriptPlayer = (function() {
             break;
           case reg["Yinp"].test(script):
             _script = script.replace(reg["Yinp"], "");
-            _ref1 = reg["Yinp"].exec(script), id = _ref1[0], time = _ref1[1], text = _ref1[2];
+            id = reg["Yinp"].exec(script)[1].split(/\s*\,\s*/)[0];
             setTimeout((function() {
-              return _this.named.openInputBox(id, text);
+              return _this.named.openInputBox(id);
             }), 2000);
             break;
           default:
@@ -1324,8 +1328,6 @@ Shell = (function() {
     data = SurfacesTxt2Yaml.txt_to_data(text, {
       compatible: 'ssp-lazy'
     });
-    console.dir(data);
-    data = $.extend(true, {}, data);
     data.surfaces = Object.keys(data.surfaces).reduce((function(obj, name) {
       if (typeof data.surfaces[name].is !== "undefined") {
         obj[name] = data.surfaces[name];
@@ -1790,9 +1792,11 @@ Surface = (function() {
       $(ev.target).css({
         display: 'inline-block'
       });
-      _ev = $.Event(ev.type);
-      _ev.initMouseEvent(ev.type, ev.bubbles, ev.cancelable, ev.view, ev.detail, ev.screenX, ev.screenY, ev.clientX, ev.clientY, ev.ctrlKey, ev.altKey, ev.shiftKey, ev.metaKey, ev.button, ev.relatedTarget);
-      $(elm).trigger(_ev);
+      _ev = document.createEvent(ev.constructor.name);
+      if (typeof _ev.initMouseEvent === "function") {
+        _ev.initMouseEvent(ev.type, ev.bubbles, ev.cancelable, ev.view, ev.detail, ev.screenX, ev.screenY, ev.clientX, ev.clientY, ev.ctrlKey, ev.altKey, ev.shiftKey, ev.metaKey, ev.button, ev.relatedTarget);
+      }
+      elm.dispatchEvent(_ev);
     }
     return void 0;
   };
