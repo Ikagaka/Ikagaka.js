@@ -4,7 +4,7 @@
 
 ![screenshot](https://raw.githubusercontent.com/Ikagaka/Ikagaka.js/master/screenshot.png )
 
-+ [demo](http://ikagaka.github.io/Ikagaka.demo/node_modules/ikagaka.ikagaka.js/test.html)
++ [demo](http://ikagaka.github.io/Ikagaka.demo/)
 + [wiki](https://github.com/Ikagaka/Ikagaka.js/wiki/)
 + [bbs](http://uka.jpn.org/test/read.cgi/unyu/1416718339/)
 
