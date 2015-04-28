@@ -1,7 +1,7 @@
 {
   "name": "ikagaka.ikagaka.js",
-  "version": "0.1.7",
-  "description": "Ukagaka Web Platform",
+  "version": "0.2.0",
+  "description": "ukagaka web platform",
   "url": "https://github.com/ikagaka/Ikagaka.js",
   "keywords": [
     "ikagaka",
@@ -9,34 +9,14 @@
     "ukagaka"
   ],
   "scripts": {
-    "watch": "coffee -cwb ./*.coffee",
-    "build": "coffee -cb ./*.coffee; npm run browserify; npm run minify",
-    "browserify": "browserify --standalone Ikagaka Ikagaka.js > ./dist/ikagaka.js",
-    "minify": "uglifyjs ./dist/ikagaka.js > ./dist/ikagaka.min.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/ikagaka/Ikagaka.js"
   },
   "dependencies": {
-    "es6-shim": "",
-    "encoding-japanese": "",
-    "ikagaka.wmdescript.js": "",
-    "jszip": "",
-    "uupaa.xhrproxy.js": "",
-    "ikagaka.nar.js": "",
-    "surfaces_txt2yaml": "",
-    "underscore": "",
-    "zepto": "",
-    "ikagaka.shell.js": "",
-    "ikagaka.named.js": "",
-    "ikagaka.balloon.js": "",
-    "ikagaka.sakurascriptplayer.js": "",
-    "shiorijk": "",
-    "ikagaka.ghost.js": ""
   },
   "devDependencies": {
-    "uglify-js": ""
   },
   "main":           "./Ikagaka.js",
   "author":         "Ikagaka",
